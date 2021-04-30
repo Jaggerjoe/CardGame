@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83a857f5a1b9c2343ad15e1293421193, type: 3}
+  m_Name: VIIII.THE HERMIT (9)
+  m_EditorClassIdentifier: 
+  m_CardNames: VIIII.THE HERMIT (9)
+  m_EffectCard: "Change le signe de la carte combo cibl\xE9e"
+  m_PointsCard: 2
+  m_Sign: Pas De Signe
+  m_PointCombo: 0
+  m_Zone: 0
+  m_CardZone: 21

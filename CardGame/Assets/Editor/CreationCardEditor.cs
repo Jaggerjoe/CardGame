@@ -10,7 +10,6 @@ public class CreationCardEditor : Editor
     public const string SHEET_RANGE = "A2:G23";
     public static void CreateAssetCard()
     {
-        Debug.Log("je suis la ");
         SO_CardData l_Asset = ScriptableObject.CreateInstance<SO_CardData>();
 
         string l_Name = UnityEditor.AssetDatabase.GenerateUniqueAssetPath("Assets/Gregoire/Card/NewCard.asset");
@@ -28,7 +27,6 @@ public class CreationCardEditor : Editor
         while (!request.isDone)
         {
             Debug.Log(request.isDone);
-            Debug.Log("je sais ap");
             if (request.isDone)
             {
                 Debug.Log(request.downloadHandler.text);
