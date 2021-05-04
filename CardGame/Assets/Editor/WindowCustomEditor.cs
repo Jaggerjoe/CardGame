@@ -61,7 +61,7 @@ public class WindowCustomEditor : EditorWindow
                 switch(p_Zones)
                 {
                     //On veut que l'enum de la zone correspondent à la zone sur la carte sur le excel
-                    //pipe |
+                    //pype |
                     case 1:
                         l_Asset.m_CardZone |= CardZones.Zone1;
                         break;
@@ -76,6 +76,10 @@ public class WindowCustomEditor : EditorWindow
                         break;
                     case 5:
                         l_Asset.m_CardZone |= CardZones.Zone5;
+                        break;
+                    case 0:
+                        l_Asset.m_CardZone = CardZones.Zone0;
+
                         break;
                     default:
                         break;
@@ -124,10 +128,10 @@ public class WindowCustomEditor : EditorWindow
             Request();
         }
 
-        if(GUILayout.Button("Create"))
-        {
-            CreateAssetCard();
-        }
+        //if(GUILayout.Button("Create"))
+        //{
+        //    CreateAssetCard();
+        //}
 
         if(GUILayout.Button("Clear"))
         {
