@@ -16,7 +16,6 @@ public class DeckCard : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(m_Hand.transform.childCount);
         CreateStartHand();
     }
 
@@ -34,5 +33,11 @@ public class DeckCard : MonoBehaviour
             l_CardAsset.GetComponent<DataCard>().Card = m_MyDeck[l_Index];
             m_MyDeck.RemoveAt(l_Index);
         }
+    }
+
+    public List<SO_CardData> CardList
+    {
+        get { return m_MyDeck; }
+        set { m_MyDeck = value; }
     }
 }
