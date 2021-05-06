@@ -27,5 +27,7 @@ public enum CardZones
     Zone2 = 2,
     Zone3 = 4,
     Zone4 = 8,
-    Zone5 = 16
+    Zone5 = 16,
+    Zone0 = 32
+
 }

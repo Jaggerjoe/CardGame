@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.Networking;
-using System;
+using System.IO;
+using System.Collections;
 
 public class WindowCustomEditor : EditorWindow
 {
@@ -10,7 +11,8 @@ public class WindowCustomEditor : EditorWindow
     public const string SHEET_NAME = "DataCardAnglais";
     public const string SHEET_RANGE = "A2:F23";
     string m_Name = "patrick";
-    int Number; 
+    int Number;
+    DeckCard l_Deck = null;
 
     public void CreateAssetCard()
     {
@@ -18,7 +20,7 @@ public class WindowCustomEditor : EditorWindow
         for (int i = 0; i < asset.Length; i++)
         {
             SO_CardData l_Asset = ScriptableObject.CreateInstance<SO_CardData>();
-            
+
             string p_Name = NacifyText(asset[i]);
             m_Name = p_Name;
             l_Asset.m_CardNames = p_Name;
@@ -61,7 +63,7 @@ public class WindowCustomEditor : EditorWindow
                 switch(p_Zones)
                 {
                     //On veut que l'enum de la zone correspondent à la zone sur la carte sur le excel
-                    //pipe |
+                    //pype |
                     case 1:
                         l_Asset.m_CardZone |= CardZones.Zone1;
                         break;
@@ -77,13 +79,39 @@ public class WindowCustomEditor : EditorWindow
                     case 5:
                         l_Asset.m_CardZone |= CardZones.Zone5;
                         break;
+                    case 0:
+                        l_Asset.m_CardZone = CardZones.Zone0;
+                        break;
                     default:
                         break;
                 }
             }
-            string l_Name = UnityEditor.AssetDatabase.GenerateUniqueAssetPath($"Assets/Gregoire/Card/{m_Name}.asset");
-            AssetDatabase.CreateAsset(l_Asset, l_Name);
-            AssetDatabase.SaveAssets();
+
+          
+
+            string[] unusedFolder = { "Assets/Gregoire/Card" };
+            string[] Asset = AssetDatabase.FindAssets(p_Name, unusedFolder);
+            foreach (var item in Asset)
+            {
+                Debug.Log("je suis une petite patate");
+            }
+            if(Asset == null)
+            {
+                string l_Name = UnityEditor.AssetDatabase.GenerateUniqueAssetPath($"Assets/Gregoire/Card/{m_Name}.asset");
+                AssetDatabase.CreateAsset(l_Asset, l_Name);
+                AssetDatabase.SaveAssets();
+            }
+            
+            
+            //if (l_Deck == null)
+            //{
+            //    l_Deck = FindObjectOfType<DeckCard>();
+            //    l_Deck.CardList.Add(l_Asset);
+            //}
+            //else
+            //{
+            //    l_Deck.CardList.Add(l_Asset);
+            //}
         }
     }
 
@@ -101,12 +129,11 @@ public class WindowCustomEditor : EditorWindow
         {
             if (request.isDone)
             {
-                Debug.Log(request.downloadHandler.text);
                 CreateAssetCard();
             }
         }
     }
-
+  
     public void ClearFolderCard()
     {
         string[] unusedFolder = { "Assets/Gregoire/Card" };
@@ -114,6 +141,16 @@ public class WindowCustomEditor : EditorWindow
         {
             var path = AssetDatabase.GUIDToAssetPath(asset);
             AssetDatabase.DeleteAsset(path);
+        }
+
+        if(l_Deck == null)
+        {
+            l_Deck = FindObjectOfType<DeckCard>();
+            l_Deck.CardList.Clear();
+        }
+        else
+        {
+            l_Deck.CardList.Clear();
         }
     }
 
@@ -124,10 +161,10 @@ public class WindowCustomEditor : EditorWindow
             Request();
         }
 
-        if(GUILayout.Button("Create"))
-        {
-            CreateAssetCard();
-        }
+        //if(GUILayout.Button("Create"))
+        //{
+        //    CreateAssetCard();
+        //}
 
         if(GUILayout.Button("Clear"))
         {
