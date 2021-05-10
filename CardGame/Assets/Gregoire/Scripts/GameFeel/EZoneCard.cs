@@ -13,6 +13,5 @@ public class EZoneCard : MonoBehaviour
         Zone4 = 8,
         Zone5 = 16,
         Zone0 = 32
-
     }
 }

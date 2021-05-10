@@ -41,10 +41,6 @@ public class DragCard : MonoBehaviour
         m_Zcoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
     }
 
-    private void OnMouseOver()
-    {
-       
-    }
     private void OnMouseDrag()
     {
         this.transform.position = GetMouseWorldPos() + m_Offset;
@@ -65,9 +61,11 @@ public class DragCard : MonoBehaviour
             {
                 m_Card.transform.SetParent(m_Zone.transform);
                 m_Card.transform.position = m_Zone.transform.position;
+                m_Zone.CheckCardZone();
             }
         }
     }
+
     public EZoneCard.CardZones CardZone => m_CardZone;
 }
 

@@ -234,6 +234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Card: {fileID: 0}
   m_Parent: {fileID: 0}
+  m_CardZone: 21
 --- !u!1 &626308214
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,7 +377,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9138a78b58d5ab4e9dc82e2ffc34e05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ZoneCard: 1
+  m_CardZone: 34
+  m_EventDrop:
+    m_DropInRightZone:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: ea101be671fb7af48aa2e811a55a6bb2, type: 2}
+          m_TargetAssemblyTypeName: DebugAsset, Assembly-CSharp
+          m_MethodName: DebugLog
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    m_DropInWrongZone:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: fc6da6201260b6c408ac3a04134a9932, type: 2}
+          m_TargetAssemblyTypeName: DebugAsset, Assembly-CSharp
+          m_MethodName: DebugLog
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!64 &842249770
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -573,7 +605,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9138a78b58d5ab4e9dc82e2ffc34e05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ZoneCard: 0
+  m_CardZone: 33
+  m_EventDrop:
+    m_DropInRightZone:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: ea101be671fb7af48aa2e811a55a6bb2, type: 2}
+          m_TargetAssemblyTypeName: DebugAsset, Assembly-CSharp
+          m_MethodName: DebugLog
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    m_DropInWrongZone:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: fc6da6201260b6c408ac3a04134a9932, type: 2}
+          m_TargetAssemblyTypeName: DebugAsset, Assembly-CSharp
+          m_MethodName: DebugLog
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!64 &1057024353
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -697,7 +760,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9138a78b58d5ab4e9dc82e2ffc34e05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ZoneCard: 2
+  m_CardZone: 36
+  m_EventDrop:
+    m_DropInRightZone:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: ea101be671fb7af48aa2e811a55a6bb2, type: 2}
+          m_TargetAssemblyTypeName: DebugAsset, Assembly-CSharp
+          m_MethodName: DebugLog
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    m_DropInWrongZone:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: fc6da6201260b6c408ac3a04134a9932, type: 2}
+          m_TargetAssemblyTypeName: DebugAsset, Assembly-CSharp
+          m_MethodName: DebugLog
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!64 &1147562042
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1016,7 +1110,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9138a78b58d5ab4e9dc82e2ffc34e05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ZoneCard: 3
+  m_CardZone: 40
+  m_EventDrop:
+    m_DropInRightZone:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: ea101be671fb7af48aa2e811a55a6bb2, type: 2}
+          m_TargetAssemblyTypeName: DebugAsset, Assembly-CSharp
+          m_MethodName: DebugLog
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    m_DropInWrongZone:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: fc6da6201260b6c408ac3a04134a9932, type: 2}
+          m_TargetAssemblyTypeName: DebugAsset, Assembly-CSharp
+          m_MethodName: DebugLog
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!64 &1528451707
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1126,7 +1251,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9138a78b58d5ab4e9dc82e2ffc34e05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ZoneCard: 4
+  m_CardZone: 48
+  m_EventDrop:
+    m_DropInRightZone:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: ea101be671fb7af48aa2e811a55a6bb2, type: 2}
+          m_TargetAssemblyTypeName: DebugAsset, Assembly-CSharp
+          m_MethodName: DebugLog
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    m_DropInWrongZone:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: fc6da6201260b6c408ac3a04134a9932, type: 2}
+          m_TargetAssemblyTypeName: DebugAsset, Assembly-CSharp
+          m_MethodName: DebugLog
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!64 &1866196102
 MeshCollider:
   m_ObjectHideFlags: 0
