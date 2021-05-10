@@ -1,8 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.Networking;
-using System.IO;
-using System.Collections;
+using System.Collections.Generic;
 
 public class WindowCustomEditor : EditorWindow
 {
@@ -10,19 +9,31 @@ public class WindowCustomEditor : EditorWindow
     public const string SHEET_ID = "12uPt3HF8pTSMS2GVi8SOQMEk4NZ2pA7aUhHwqx-xmx8";
     public const string SHEET_NAME = "DataCardAnglais";
     public const string SHEET_RANGE = "A2:F23";
-    string m_Name = "patrick";
     int Number;
     DeckCard l_Deck = null;
-
+    List<string> m_SetAssetPath = new List<string>();
     public void CreateAssetCard()
     {
         string[] asset = request.downloadHandler.text.Split(new char[] { '\n', ',' });
+        CheckAsset();
+        string[] l_GetAssetPath = m_SetAssetPath.ToArray();
+        Debug.Log(l_GetAssetPath.Length);
         for (int i = 0; i < asset.Length; i++)
         {
+            for (int k = 0; k < l_GetAssetPath.Length; k++)
+            {
+                if (l_GetAssetPath[k].Contains(asset[i]))
+                {
+                    Debug.Log("j'existe déjà");
+                }
+            }
+            
             SO_CardData l_Asset = ScriptableObject.CreateInstance<SO_CardData>();
-
             string p_Name = NacifyText(asset[i]);
-            m_Name = p_Name;
+
+            string l_Name = UnityEditor.AssetDatabase.GenerateUniqueAssetPath($"Assets/Gregoire/Card/{p_Name}.asset");
+            AssetDatabase.CreateAsset(l_Asset, l_Name);
+
             l_Asset.m_CardNames = p_Name;
             i++;
 
@@ -87,31 +98,29 @@ public class WindowCustomEditor : EditorWindow
                 }
             }
 
-          
+            AssetDatabase.SaveAssets();
 
-            string[] unusedFolder = { "Assets/Gregoire/Card" };
-            string[] Asset = AssetDatabase.FindAssets(p_Name, unusedFolder);
-            foreach (var item in Asset)
+            if (l_Deck == null)
             {
-                Debug.Log("je suis une petite patate");
+                l_Deck = FindObjectOfType<DeckCard>();
+                l_Deck.CardList.Add(l_Asset);
             }
-            if(Asset == null)
+            else
             {
-                string l_Name = UnityEditor.AssetDatabase.GenerateUniqueAssetPath($"Assets/Gregoire/Card/{m_Name}.asset");
-                AssetDatabase.CreateAsset(l_Asset, l_Name);
-                AssetDatabase.SaveAssets();
+                l_Deck.CardList.Add(l_Asset);
             }
-            
-            
-            //if (l_Deck == null)
-            //{
-            //    l_Deck = FindObjectOfType<DeckCard>();
-            //    l_Deck.CardList.Add(l_Asset);
-            //}
-            //else
-            //{
-            //    l_Deck.CardList.Add(l_Asset);
-            //}
+        }
+    }
+
+    private void CheckAsset()
+    {
+        string[] unusedFolder = { "Assets/Gregoire/Card" };
+        string[] AssetsArray = AssetDatabase.FindAssets("t:SO_CardData", unusedFolder);
+
+        foreach (var item in AssetsArray)
+        {
+            var path = AssetDatabase.GUIDToAssetPath(item);
+            m_SetAssetPath.Add(path);
         }
     }
 
@@ -142,7 +151,6 @@ public class WindowCustomEditor : EditorWindow
             var path = AssetDatabase.GUIDToAssetPath(asset);
             AssetDatabase.DeleteAsset(path);
         }
-
         if(l_Deck == null)
         {
             l_Deck = FindObjectOfType<DeckCard>();
@@ -152,6 +160,8 @@ public class WindowCustomEditor : EditorWindow
         {
             l_Deck.CardList.Clear();
         }
+        m_SetAssetPath.Clear();
+
     }
 
     public void OnGUI()
