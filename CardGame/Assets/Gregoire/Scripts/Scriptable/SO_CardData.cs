@@ -17,17 +17,6 @@ public class SO_CardData : ScriptableObject
 
     public int m_Zone = 0;
 
-    public CardZones m_CardZone = 0;
+    public EZoneCard.CardZones m_CardZone = 0;
 }
 
-[System.Flags]
-public enum CardZones
-{
-    Zone1 = 1,
-    Zone2 = 2,
-    Zone3 = 4,
-    Zone4 = 8,
-    Zone5 = 16,
-    Zone0 = 32
-
-}

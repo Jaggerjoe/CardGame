@@ -76,22 +76,22 @@ public class WindowCustomEditor : EditorWindow
                     //On veut que l'enum de la zone correspondent à la zone sur la carte sur le excel
                     //pype |
                     case 1:
-                        l_Asset.m_CardZone |= CardZones.Zone1;
+                        l_Asset.m_CardZone |= EZoneCard.CardZones.Zone1;
                         break;
                     case 2:
-                        l_Asset.m_CardZone |= CardZones.Zone2;
+                        l_Asset.m_CardZone |= EZoneCard.CardZones.Zone2;
                         break;
                     case 3:
-                        l_Asset.m_CardZone |= CardZones.Zone3;
+                        l_Asset.m_CardZone |= EZoneCard.CardZones.Zone3;
                         break;
                     case 4:
-                        l_Asset.m_CardZone |= CardZones.Zone4;
+                        l_Asset.m_CardZone |= EZoneCard.CardZones.Zone4;
                         break;
                     case 5:
-                        l_Asset.m_CardZone |= CardZones.Zone5;
+                        l_Asset.m_CardZone |= EZoneCard.CardZones.Zone5;
                         break;
                     case 0:
-                        l_Asset.m_CardZone = CardZones.Zone0;
+                        l_Asset.m_CardZone = EZoneCard.CardZones.Zone0;
                         break;
                     default:
                         break;
