@@ -1,8 +1,9 @@
+using MLAPI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeckCard : MonoBehaviour
+public class DeckCard : NetworkBehaviour
 {
     [SerializeField]
     private List<SO_CardData> m_MyDeck = new List<SO_CardData>();
@@ -24,8 +25,10 @@ public class DeckCard : MonoBehaviour
     {
     }
 
+    
     private void CreateStartHand()
     {
+        m_Hand = GameObject.Find("BoardPlayer");
         for (int i = 0; i < 6; i++)
         {
             GameObject l_CardAsset = Instantiate(m_CardPrefabAsset, m_Hand.transform);

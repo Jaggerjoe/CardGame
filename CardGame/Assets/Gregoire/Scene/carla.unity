@@ -585,7 +585,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4282977732937056542, guid: 38c84536fa1fa1347b06423d792066af, type: 3}
       propertyPath: NetworkConfig.RegisteredScenes.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4282977732937056542, guid: 38c84536fa1fa1347b06423d792066af, type: 3}
       propertyPath: NetworkConfig.RegisteredScenes.Array.data[0]
@@ -593,7 +593,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4282977732937056542, guid: 38c84536fa1fa1347b06423d792066af, type: 3}
       propertyPath: NetworkConfig.RegisteredScenes.Array.data[1]
-      value: ToolCard
+      value: carla
       objectReference: {fileID: 0}
     - target: {fileID: 4282977732937056542, guid: 38c84536fa1fa1347b06423d792066af, type: 3}
       propertyPath: NetworkConfig.NetworkPrefabs.Array.data[0].Prefab
