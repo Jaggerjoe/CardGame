@@ -21,7 +21,7 @@ public class NetworkSpawn : NetworkBehaviour
         if (IsLocalPlayer)
         {
             Debug.Log("IsLocalPlayer apres " + IsLocalPlayer);
-            m_SpawningPoint = GameObject.Find("EnemBoard");
+            m_SpawningPoint = GameObject.Find("BoardPlayer");
             GameObject l_Go = Instantiate(m_PrefaCard, m_SpawningPoint.transform);
             l_Go.GetComponent<NetworkObject>().Spawn();
             Debug.Log("coucou je spawn avec le boardP");

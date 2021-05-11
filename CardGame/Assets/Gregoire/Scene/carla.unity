@@ -137,7 +137,6 @@ GameObject:
   - component: {fileID: 51600601}
   - component: {fileID: 51600606}
   - component: {fileID: 51600605}
-  - component: {fileID: 51600604}
   m_Layer: 5
   m_Name: BoardPlayer
   m_TagString: Untagged
@@ -228,20 +227,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 51600599}
   m_CullTransparentMesh: 1
---- !u!114 &51600604
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 51600599}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfd77d2152596c64aa113ec2a2264f9d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_PrefaCard: {fileID: 1770337509942026516, guid: b72deebe32c4cee458b1cab992c05aad, type: 3}
-  m_SpawningPoint: {fileID: 0}
 --- !u!114 &51600605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -585,11 +570,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4282977732937056542, guid: 38c84536fa1fa1347b06423d792066af, type: 3}
       propertyPath: NetworkConfig.RegisteredScenes.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4282977732937056542, guid: 38c84536fa1fa1347b06423d792066af, type: 3}
       propertyPath: NetworkConfig.RegisteredScenes.Array.data[0]
-      value: ToolCard
+      value: carla
       objectReference: {fileID: 0}
     - target: {fileID: 4282977732937056542, guid: 38c84536fa1fa1347b06423d792066af, type: 3}
       propertyPath: NetworkConfig.RegisteredScenes.Array.data[1]
@@ -787,7 +772,6 @@ GameObject:
   - component: {fileID: 1857763198}
   - component: {fileID: 1857763202}
   - component: {fileID: 1857763201}
-  - component: {fileID: 1857763197}
   m_Layer: 5
   m_Name: EnemBoard
   m_TagString: Untagged
@@ -814,20 +798,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 611}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0.5, y: 0}
---- !u!114 &1857763197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1857763195}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfd77d2152596c64aa113ec2a2264f9d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_PrefaCard: {fileID: 1770337509942026516, guid: b72deebe32c4cee458b1cab992c05aad, type: 3}
-  m_SpawningPoint: {fileID: 0}
 --- !u!114 &1857763198
 MonoBehaviour:
   m_ObjectHideFlags: 0
