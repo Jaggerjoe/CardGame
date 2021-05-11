@@ -24,7 +24,11 @@ public class ZoneDrop3D : MonoBehaviour
         if (transform.childCount != 0)
         {
             m_Child = transform.GetComponentInChildren<DragCard>();
-            if (m_Child.CardZone == m_CardZone /*|| m_Child.CardZone.HasFlag(m_CardZone)*/)
+            if(m_Child.CardZone.HasFlag(m_CardZone))
+            {
+                m_EventDrop.m_DropInRightZone.Invoke();
+            }
+            else if(m_Child.CardZone.HasFlag(EZoneCard.CardZones.Zone0))
             {
                 m_EventDrop.m_DropInRightZone.Invoke();
             }

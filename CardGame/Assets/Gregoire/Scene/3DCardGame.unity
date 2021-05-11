@@ -234,7 +234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Card: {fileID: 0}
   m_Parent: {fileID: 0}
-  m_CardZone: 21
+  m_CardZone: 0
 --- !u!1 &626308214
 GameObject:
   m_ObjectHideFlags: 0
@@ -377,7 +377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9138a78b58d5ab4e9dc82e2ffc34e05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CardZone: 34
+  m_CardZone: 2
   m_EventDrop:
     m_DropInRightZone:
       m_PersistentCalls:
@@ -605,7 +605,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9138a78b58d5ab4e9dc82e2ffc34e05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CardZone: 33
+  m_CardZone: 1
   m_EventDrop:
     m_DropInRightZone:
       m_PersistentCalls:
@@ -760,7 +760,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9138a78b58d5ab4e9dc82e2ffc34e05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CardZone: 36
+  m_CardZone: 4
   m_EventDrop:
     m_DropInRightZone:
       m_PersistentCalls:
@@ -1110,7 +1110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9138a78b58d5ab4e9dc82e2ffc34e05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CardZone: 40
+  m_CardZone: 8
   m_EventDrop:
     m_DropInRightZone:
       m_PersistentCalls:
@@ -1251,7 +1251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9138a78b58d5ab4e9dc82e2ffc34e05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CardZone: 48
+  m_CardZone: 16
   m_EventDrop:
     m_DropInRightZone:
       m_PersistentCalls:
