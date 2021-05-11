@@ -2,11 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MLAPI;
-
+using MLAPI.Messaging;
+using UnityEngine.Networking.Types;
 
 public class NetWorkConnect : NetworkBehaviour
 {
+    //static NetworkObject m_NetworkMana;
 
+    //private void Start()
+    //{
+    //    m_NetworkMana.GetComponent<NetworkObject>();
+    //}
     void OnGUI()
     {
         //taill et position des boutons
@@ -24,19 +30,38 @@ public class NetWorkConnect : NetworkBehaviour
 
     static void StartButtons()
     {
+        
         if (GUILayout.Button("Host"))
         {
             NetworkManager.Singleton.StartHost();
-            FindObjectOfType<NetworkSpawn>().SpawnningObjectClientRpc();
-            
+            FindObjectOfType<NetWorkSpawnPlayer>().CreateBoardSOServerRpc();
+
         }
         if (GUILayout.Button("Client"))
         {
             NetworkManager.Singleton.StartClient();
-            Debug.Log("youyoy");
-            FindObjectOfType<NetworkSpawn>().SpawnningObjectClientRpc();
+            //quand c'est lancer le client est deja instancier 
+            NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
         }
-        //if (GUILayout.Button("Server")) NetworkManager.Singleton.StartServer();
+        
+    }
+
+    //appeler sur client et le host 
+    private static void OnClientConnected(ulong clientId)
+    {
+
+        if (NetworkManager.Singleton.IsClient)
+        {
+            FindObjectOfType<NetWorkSpawnPlayer>().BindConnectPlayerClientRpc();
+            Debug.Log("je bind ");
+
+           // m_NetworkMana = NetworkManager.Singleton.ConnectedClients[clientId].PlayerObject;
+
+        }
+        if (NetworkManager.Singleton.IsServer)
+        {
+            Debug.Log("je bind pas");
+        }
     }
 
     static void StopDisconect()

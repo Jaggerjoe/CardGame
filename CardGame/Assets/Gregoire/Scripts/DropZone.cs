@@ -17,12 +17,12 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("pointerEnter");
+        //Debug.Log("pointerEnter");
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log("PointerExit");
+        //Debug.Log("PointerExit");
 
     }
 }
