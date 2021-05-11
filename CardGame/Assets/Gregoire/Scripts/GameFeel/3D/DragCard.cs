@@ -4,16 +4,11 @@ using UnityEngine;
 
 public class DragCard : MonoBehaviour
 {
-    public GameObject m_Card = null;
-    public Transform m_Parent = null;
-
-    private Vector3 m_MousePos = Vector3.zero;
+    private GameObject m_Card = null;
 
     private Vector3 m_Offset = Vector3.zero;
 
     private float m_Zcoord = 0f;
-
-    private LayerMask m_Layer = 0;
 
     private ZoneDrop3D m_Zone = null;
 
@@ -22,8 +17,6 @@ public class DragCard : MonoBehaviour
 
     private void Update()
     {
-        m_MousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
         m_Offset = gameObject.transform.position - GetMouseWorldPos();
     }
 
@@ -45,8 +38,6 @@ public class DragCard : MonoBehaviour
     {
         this.transform.position = GetMouseWorldPos() + m_Offset;
         m_Card = this.gameObject;
-       
-        //gameObject.layer = 2;
     }
 
     private void OnMouseUpAsButton()

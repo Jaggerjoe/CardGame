@@ -36,25 +36,7 @@ public class ZoneDrop3D : MonoBehaviour
             {
                 m_EventDrop.m_DropInWrongZone.Invoke();
             }
-            m_Child.transform.position = transform.position;
-        }
-
-        if (transform.childCount != 0)
-        {
-            Debug.Log("j'ai au moins un enfant");
-            m_Child = transform.GetComponentInChildren<DragCard>();
-            switch(m_CardZone)
-            {
-                case EZoneCard.CardZones.Zone1:
-                    Debug.Log("couco1");
-                    break;
-                case EZoneCard.CardZones.Zone3:
-                    Debug.Log("couco3");
-                    break;
-
-            }
-            m_Child.transform.position = transform.position;
+            m_Child.transform.position = transform.position - new Vector3(0,0, .01f);
         }
     }
-
 }
