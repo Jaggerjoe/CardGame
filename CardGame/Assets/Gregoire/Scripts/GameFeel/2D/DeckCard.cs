@@ -28,19 +28,20 @@ public class DeckCard : NetworkBehaviour
     
     private void CreateStartHand()
     {
-        if(IsLocalPlayer)
-        {
-            m_Hand = GameObject.Find("BoardPlayer");
+        //if(IsLocalPlayer)
+        //{
 
-        }
-        else
-        {
-            m_Hand = GameObject.Find("EnemBoard");
+        //}
+        //else
+        //{
+        //    m_Hand = GameObject.Find("EnemBoard");
 
-        }
+        //}
+        m_Hand = GameObject.Find("HandPlayer");
+
         for (int i = 0; i < 6; i++)
         {
-            GameObject l_CardAsset = Instantiate(m_CardPrefabAsset, m_Hand.transform);
+            GameObject l_CardAsset = Instantiate(m_CardPrefabAsset, m_Hand.transform.position,Quaternion.identity);
            // l_CardAsset.GetComponent<NetworkObject>().Spawn();
             int l_Index = Random.Range(0, m_MyDeck.Count);
             l_CardAsset.GetComponent<DataCard>().Card = m_MyDeck[l_Index];

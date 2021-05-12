@@ -216,7 +216,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5939019580987468224}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 4.12, y: 0, z: 0.5}
+  m_LocalPosition: {x: -4.1, y: 0, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6624339541686402381}
@@ -414,6 +414,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_DataCard: {fileID: 11400000, guid: 8b093a75e09810a44a83a43569a9bf74, type: 2}
   m_TextCardName: {fileID: 4740576018115983944}
+  m_Point: {fileID: 197190352671739619}
+  m_Sign: {fileID: 2656405740710501759}
+  m_PointCombo: {fileID: 2465975941497164717}
 --- !u!1 &6987805333373576832
 GameObject:
   m_ObjectHideFlags: 0
@@ -440,7 +443,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6987805333373576832}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -4.45, y: 0, z: 0.5}
+  m_LocalPosition: {x: 4.04, y: 0, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6624339541686402381}
