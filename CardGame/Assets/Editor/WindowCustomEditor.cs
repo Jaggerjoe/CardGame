@@ -10,14 +10,14 @@ public class WindowCustomEditor : EditorWindow
     public const string SHEET_NAME = "DataCardAnglais";
     public const string SHEET_RANGE = "A2:F23";
     int Number;
-    DeckCard l_Deck = null;
+    HandPlayer m_DeckCards = null;
     List<string> m_SetAssetPath = new List<string>();
     public void CreateAssetCard()
     {
         string[] asset = request.downloadHandler.text.Split(new char[] { '\n', ',' });
         CheckAsset();
         string[] l_GetAssetPath = m_SetAssetPath.ToArray();
-        Debug.Log(l_GetAssetPath.Length);
+        //loadasset si il existe, sinon create, attention GUID pas un chemin normalement a traduire.
         for (int i = 0; i < asset.Length; i++)
         {
             for (int k = 0; k < l_GetAssetPath.Length; k++)
@@ -100,14 +100,17 @@ public class WindowCustomEditor : EditorWindow
 
             AssetDatabase.SaveAssets();
 
-            if (l_Deck == null)
+            if (m_DeckCards == null)
             {
-                l_Deck = FindObjectOfType<DeckCard>();
-                l_Deck.CardList.Add(l_Asset);
+                m_DeckCards = FindObjectOfType<HandPlayer>();
+                if(m_DeckCards != null)
+                {
+                    m_DeckCards.CardList.Add(l_Asset);
+                }
             }
             else
             {
-                l_Deck.CardList.Add(l_Asset);
+                m_DeckCards.CardList.Add(l_Asset);
             }
         }
     }
@@ -151,14 +154,17 @@ public class WindowCustomEditor : EditorWindow
             var path = AssetDatabase.GUIDToAssetPath(asset);
             AssetDatabase.DeleteAsset(path);
         }
-        if(l_Deck == null)
+        if(m_DeckCards == null)
         {
-            l_Deck = FindObjectOfType<DeckCard>();
-            l_Deck.CardList.Clear();
+            m_DeckCards = FindObjectOfType<HandPlayer>();
+            if(m_DeckCards != null)
+            {
+                m_DeckCards.CardList.Clear();
+            }
         }
         else
         {
-            l_Deck.CardList.Clear();
+            m_DeckCards.CardList.Clear();
         }
         m_SetAssetPath.Clear();
 
