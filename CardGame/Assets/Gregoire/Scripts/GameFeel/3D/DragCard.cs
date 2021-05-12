@@ -10,7 +10,7 @@ public class DragCard : MonoBehaviour
 
     private float m_Zcoord = 0f;
 
-    private ZoneDrop3D m_Zone = null;
+    private BoardZoneEmplacement m_Zone = null;
 
     [SerializeField]
     private EZoneCard.CardZones m_CardZone = 0;
@@ -43,16 +43,17 @@ public class DragCard : MonoBehaviour
     private void OnMouseUpAsButton()
     {
         RaycastHit[] l_Hits = { };
-        l_Hits = Physics.RaycastAll(transform.position, Vector3.forward, 100F);
+        l_Hits = Physics.RaycastAll(transform.position, Vector3.down, 100F);
         for (int i = 0; i < l_Hits.Length; i++)
         {
             RaycastHit hit = l_Hits[i];
-            m_Zone = hit.transform.GetComponent<ZoneDrop3D>();
+            m_Zone = hit.transform.GetComponent<BoardZoneEmplacement>();
             if (m_Zone != null)
             {
                 m_Card.transform.SetParent(m_Zone.transform);
-                m_Card.transform.position = m_Zone.transform.position;
-                m_Zone.CheckCardZone();
+                m_Card.transform.position = m_Zone.transform.position + new Vector3(0,.1f,0);
+                m_Card.transform.rotation = m_Zone.transform.rotation;
+                this.GetComponentInParent<BoardGame>().ReplaceGameObjectZoneByGameObjectCardInArray();
             }
         }
     }

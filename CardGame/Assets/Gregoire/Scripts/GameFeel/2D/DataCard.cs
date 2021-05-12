@@ -9,25 +9,23 @@ public class DataCard : MonoBehaviour
     private SO_CardData m_DataCard = null;
 
     [SerializeField]
-    private Text m_TextCardName = null;
+    private TextMesh m_TextCardName = null;
+
     [SerializeField]
     private TextMesh m_Point = null;
+
     [SerializeField]
     private TextMesh m_Sign = null;
+
     [SerializeField]
     private TextMesh m_PointCombo = null;
 
     // Start is called before the first frame update
     void Start()
     {
-        m_TextCardName = GetComponentInChildren<Text>();
+        m_TextCardName = GetComponentInChildren<TextMesh>();
         CreateAssetCad();
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
     }
 
     private void CreateAssetCad()
@@ -35,9 +33,9 @@ public class DataCard : MonoBehaviour
         if (m_DataCard != null)
         {
             m_TextCardName.text = m_DataCard.m_CardNames;
-            //m_Point.text = m_DataCard.m_PointsCard.ToString();
-            //m_Sign.text = m_DataCard.m_Sign;
-            //m_PointCombo.text = m_DataCard.m_PointCombo.ToString();
+            m_Point.text = m_DataCard.m_PointsCard.ToString();
+            m_Sign.text = m_DataCard.m_Sign;
+            m_PointCombo.text = m_DataCard.m_PointCombo.ToString();
         }
     }
 
