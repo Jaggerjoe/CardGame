@@ -100,15 +100,15 @@ public class WindowCustomEditor : EditorWindow
 
             AssetDatabase.SaveAssets();
 
-            if (l_Deck == null)
-            {
-                l_Deck = FindObjectOfType<DeckCard>();
-                l_Deck.CardList.Add(l_Asset);
-            }
-            else
-            {
-                l_Deck.CardList.Add(l_Asset);
-            }
+            //if (l_Deck == null)
+            //{
+            //    l_Deck = FindObjectOfType<DeckCard>();
+            //    l_Deck.CardList.Add(l_Asset);
+            //}
+            //else
+            //{
+            //    l_Deck.CardList.Add(l_Asset);
+            //}
         }
     }
 

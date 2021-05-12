@@ -5,6 +5,14 @@ using UnityEngine;
 
 public class NetWorkPlayer : NetworkBehaviour
 {
+    /// <summary>
+    ///  NetworkVariableSettings permet d'autoriser la synchronisation.
+    ///  nous donne une autorisation d'ecriture (WritePermission) et de lecture (ReadPermission).
+    ///  le champs de position du joueur est ecris par le serveur donc tout le monde peut le voir.
+    ///  si en temps que client on se connect sur le serveur on ne peut pas modifier sa postion via 
+    ///  un logiciel de piratage.
+    ///  NetworkVariablePermission.Everyone met a jour tout le monde apres avoir lu le ServerOnly
+    /// </summary>
     public NetworkVariableVector3 Position = new NetworkVariableVector3(new NetworkVariableSettings
     {
         WritePermission = NetworkVariablePermission.ServerOnly,
@@ -23,12 +31,10 @@ public class NetWorkPlayer : NetworkBehaviour
             var randomPosition = GetRandomPositionOnPlane();
             transform.position = randomPosition;
             Position.Value = randomPosition;
-            Debug.Log("Je passe dans move et je sui isServer");
         }
         else
         {
             SubmitPositionRequestServerRpc();
-            Debug.Log("si on est client");
         }
     }
 

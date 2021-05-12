@@ -5,14 +5,8 @@ using MLAPI;
 using MLAPI.Messaging;
 using UnityEngine.Networking.Types;
 
-public class NetWorkConnect : NetworkBehaviour
+public class NetWorkConnect : MonoBehaviour
 {
-    //static NetworkObject m_NetworkMana;
-
-    //private void Start()
-    //{
-    //    m_NetworkMana.GetComponent<NetworkObject>();
-    //}
     void OnGUI()
     {
         //taill et position des boutons
@@ -54,8 +48,6 @@ public class NetWorkConnect : NetworkBehaviour
         {
             FindObjectOfType<NetWorkSpawnPlayer>().BindConnectPlayerClientRpc();
             Debug.Log("je bind ");
-
-           // m_NetworkMana = NetworkManager.Singleton.ConnectedClients[clientId].PlayerObject;
 
         }
         if (NetworkManager.Singleton.IsServer)
