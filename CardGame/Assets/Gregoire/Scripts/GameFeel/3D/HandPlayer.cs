@@ -15,6 +15,10 @@ public class HandPlayer : MonoBehaviour
 
     [SerializeField]
     private List<SO_CardData> m_DeckCards = new List<SO_CardData>();
+
+    [SerializeField]
+    private Transform m_HandPlayer = null;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +26,7 @@ public class HandPlayer : MonoBehaviour
         for (int i = 0; i < m_RowLenght; i++)
         {
             GameObject l_Card =  Instantiate(m_Prefab, new Vector3(transform.position.x + (m_Space * (i % m_RowLenght)), 0.1f, transform.position.z), transform.rotation);
+            l_Card.transform.SetParent(m_HandPlayer);
             l_Card.GetComponent<DataCard>().Card = m_DeckCards[0];
             m_DeckCards.RemoveAt(0);
         }

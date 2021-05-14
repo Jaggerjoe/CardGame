@@ -20,7 +20,6 @@ public class BoardGame : MonoBehaviour
             {
                 if(m_CardsData[i].gameObject.transform.childCount != 0)
                 {
-                    Debug.Log($"oh moins 1 enfant chakal  sur la zone : {m_CardsData[i]}");
                     Transform l_Trs = m_CardsData[i].GetComponentInChildren<DataCard>().transform;
                     SO_CardData l_Card = l_Trs.GetComponent<DataCard>().Card;
                     EZoneCard.CardZones zone = m_CardsData[i].GetComponent<BoardZoneEmplacement>().Zone;
