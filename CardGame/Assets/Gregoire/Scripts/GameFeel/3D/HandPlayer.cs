@@ -13,11 +13,12 @@ public class HandPlayer : MonoBehaviour
     [SerializeField]
     private GameObject m_Prefab = null;
 
-    [SerializeField]
-    private List<SO_CardData> m_DeckCards = new List<SO_CardData>();
 
     [SerializeField]
     private Transform m_HandPlayer = null;
+
+    [SerializeField]
+    private List<SO_CardData> m_DeckCards = new List<SO_CardData>();
 
     // Start is called before the first frame update
     void Start()
@@ -32,17 +33,11 @@ public class HandPlayer : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void Shuffle()
+    public void Shuffle()
     {
         for (int i = 0; i < m_DeckCards.Count; i++)
         {
-            int j = Random.Range(i, m_DeckCards.Count   );
+            int j = Random.Range(i, m_DeckCards.Count);
             SO_CardData l_Temp = m_DeckCards[i];
             m_DeckCards[i] = m_DeckCards[j];
             m_DeckCards[j] = l_Temp;

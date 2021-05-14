@@ -382,6 +382,7 @@ GameObject:
   - component: {fileID: 1023303895}
   - component: {fileID: 1023303894}
   - component: {fileID: 1023303898}
+  - component: {fileID: 1023303899}
   m_Layer: 0
   m_Name: BoardGame
   m_TagString: Untagged
@@ -489,6 +490,50 @@ MonoBehaviour:
   - {fileID: 1147562040}
   - {fileID: 1528451705}
   - {fileID: 1866196100}
+  m_EventCard:
+    m_OnZone:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: ea101be671fb7af48aa2e811a55a6bb2, type: 2}
+          m_TargetAssemblyTypeName: DebugAsset, Assembly-CSharp
+          m_MethodName: DebugLog
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    m_NotInZone:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: fc6da6201260b6c408ac3a04134a9932, type: 2}
+          m_TargetAssemblyTypeName: DebugAsset, Assembly-CSharp
+          m_MethodName: DebugLog
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &1023303899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023303893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e04a0e1e7d149a4cab6b75563c3e7b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PartiePahse: 0
 --- !u!1 &1057024351
 GameObject:
   m_ObjectHideFlags: 0

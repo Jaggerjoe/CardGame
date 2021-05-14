@@ -25,7 +25,6 @@ public class DataCard : MonoBehaviour
     {
         m_TextCardName = GetComponentInChildren<TextMesh>();
         CreateAssetCad();
-
     }
 
     private void CreateAssetCad()
