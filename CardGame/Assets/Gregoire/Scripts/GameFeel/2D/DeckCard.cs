@@ -1,4 +1,5 @@
 using MLAPI;
+using MLAPI.NetworkVariable;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,7 +16,7 @@ public class DeckCard : NetworkBehaviour
     private GameObject m_CardPrefabAsset = null;
 
     // Start is called before the first frame update
-    void Start()
+     public override void NetworkStart()
     {
         CreateStartHand();
     }
@@ -28,21 +29,27 @@ public class DeckCard : NetworkBehaviour
     
     private void CreateStartHand()
     {
-        //if(IsLocalPlayer)
-        //{
+        if (IsServer)
+        {
+            m_Hand = GameObject.Find("BoardPlayer");
+        }
+        else
+        {
+            m_Hand = GameObject.Find("EnemBoard");
 
-        //}
-        //else
-        //{
-        //    m_Hand = GameObject.Find("EnemBoard");
-
-        //}
-        m_Hand = GameObject.Find("HandPlayer");
+        }
+        // m_Hand = GameObject.Find("HandPlayer");
 
         for (int i = 0; i < 6; i++)
         {
+            Debug.Log(m_CardPrefabAsset);
+            Debug.Log(m_Hand);
+            Debug.Log(m_Hand.transform.position);
+
             GameObject l_CardAsset = Instantiate(m_CardPrefabAsset, m_Hand.transform.position,Quaternion.identity);
-           // l_CardAsset.GetComponent<NetworkObject>().Spawn();
+            Debug.Log(l_CardAsset);
+            Debug.Log(m_Hand.transform.position);
+            // l_CardAsset.GetComponent<NetworkObject>().Spawn();
             int l_Index = Random.Range(0, m_MyDeck.Count);
             l_CardAsset.GetComponent<DataCard>().Card = m_MyDeck[l_Index];
             m_MyDeck.RemoveAt(l_Index);

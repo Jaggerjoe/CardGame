@@ -218,7 +218,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_DataCard: {fileID: 0}
-  m_TextCardName: {fileID: 0}
+  m_TextCardName: {fileID: 5402590388335538733}
+  m_Point: {fileID: 0}
+  m_Sign: {fileID: 0}
+  m_PointCombo: {fileID: 0}
 --- !u!114 &4210433045467522786
 MonoBehaviour:
   m_ObjectHideFlags: 0

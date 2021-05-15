@@ -17,7 +17,11 @@ public class NetWorkConnect : MonoBehaviour
             StartButtons();
 
         }
-        if (GUILayout.Button("Disconeted")) StopDisconect();
+        else
+        {
+            StatusLabels();
+        }
+       // if (GUILayout.Button("Disconeted")) StopDisconect();
 
         GUILayout.EndArea();
     }
@@ -54,6 +58,17 @@ public class NetWorkConnect : MonoBehaviour
         {
             Debug.Log("je bind pas");
         }
+    }
+    static void StatusLabels()
+    {
+        if (GUILayout.Button("Disconeted")) StopDisconect();
+
+        string mode = NetworkManager.Singleton.IsHost ?
+            "Host" : NetworkManager.Singleton.IsServer ? "Server" : "Client";
+
+        GUILayout.Label("Transport: " +
+            NetworkManager.Singleton.NetworkConfig.NetworkTransport.GetType().Name);
+        GUILayout.Label("Mode: " + mode);
     }
 
     static void StopDisconect()

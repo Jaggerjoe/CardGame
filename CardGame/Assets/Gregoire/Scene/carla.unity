@@ -558,7 +558,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4282977732937056542, guid: 38c84536fa1fa1347b06423d792066af, type: 3}
       propertyPath: LogLevel
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4282977732937056542, guid: 38c84536fa1fa1347b06423d792066af, type: 3}
       propertyPath: NetworkConfig.PlayerPrefabHash

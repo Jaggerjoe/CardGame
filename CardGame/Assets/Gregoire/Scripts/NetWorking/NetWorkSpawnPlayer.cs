@@ -11,9 +11,12 @@ public class NetWorkSpawnPlayer : NetworkBehaviour
 
 
     //avoir la permission
-    //public NetworkVariable<float> m_Permission = 
-    //    new NetworkVariable<float>(new NetworkVariableSettings { WritePermission 
-    //        = NetworkVariablePermission.OwnerOnly });
+    public NetworkVariableFloat m_Permission =
+        new NetworkVariableFloat(new NetworkVariableSettings
+        {
+            WritePermission
+            = NetworkVariablePermission.OwnerOnly
+        });
 
     //il va creer le so_boad mais vide
     [ServerRpc]
@@ -32,7 +35,9 @@ public class NetWorkSpawnPlayer : NetworkBehaviour
     //Les joueurs vont se faire spawn eux-meme
     public void SpawnPlayer()
     {
-
+        //m_SpawningPoint = GameObject.Find("BoardPlayer");
+        //GameObject l_Go = Instantiate(m_PrefaCard, m_SpawningPoint.transform);
+        //l_Go.GetComponent<NetworkObject>().Spawn();
     }
 
 

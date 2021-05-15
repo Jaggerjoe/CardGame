@@ -50,10 +50,11 @@ public class NetWorkTestGameManager : MonoBehaviour
                 out var networkedClient))
             {
                 //ont lui connect son clien en résesau, et aller chercher le composant sur l'objet Player
-                var player = networkedClient.PlayerObject.GetComponent<NetWorkPlayer>();
+                var player = networkedClient.PlayerObject.GetComponent<NetWorkTestPlayer>();
                 if (player)
                 {
-                    player.Move();
+                     player.Move();
+                    //Debug.Log("coucou je bouge");
                 }
             }
         }

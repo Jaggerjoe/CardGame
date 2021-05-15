@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b35eca5b6f2cf6042b20ea04f873931a, type: 3}
+  m_Name: NewBoard 1
+  m_EditorClassIdentifier: 
+  m_Player: {fileID: 0}
+  m_Slots: 0
+  m_Jauge: 0
+  m_Pion: 0
