@@ -23,7 +23,6 @@ public class DataCard : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_TextCardName = GetComponentInChildren<TextMesh>();
         CreateAssetCad();
     }
 

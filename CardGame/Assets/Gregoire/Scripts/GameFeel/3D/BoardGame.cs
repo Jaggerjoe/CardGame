@@ -36,14 +36,17 @@ public class BoardGame : MonoBehaviour
                     if (l_Card.m_CardZone.HasFlag(zone))
                     {
                         m_EventCard.m_OnZone.Invoke();
+                        l_Trs.gameObject.layer = 2;
                     }
                     else if (l_Card.m_CardZone.HasFlag(EZoneCard.CardZones.Zone0))
                     {
                         m_EventCard.m_OnZone.Invoke();
+                        l_Trs.gameObject.layer = 2;
                     }
                     else
                     {
                         m_EventCard.m_NotInZone.Invoke();
+                        l_Trs.gameObject.layer = 2;
                     }
                     m_CardsData[i] = l_Trs;
                 }
