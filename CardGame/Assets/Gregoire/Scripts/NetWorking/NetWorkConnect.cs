@@ -5,14 +5,8 @@ using MLAPI;
 using MLAPI.Messaging;
 using UnityEngine.Networking.Types;
 
-public class NetWorkConnect : NetworkBehaviour
+public class NetWorkConnect : MonoBehaviour
 {
-    //static NetworkObject m_NetworkMana;
-
-    //private void Start()
-    //{
-    //    m_NetworkMana.GetComponent<NetworkObject>();
-    //}
     void OnGUI()
     {
         //taill et position des boutons
@@ -23,7 +17,11 @@ public class NetWorkConnect : NetworkBehaviour
             StartButtons();
 
         }
-        if (GUILayout.Button("Disconeted")) StopDisconect();
+        else
+        {
+            StatusLabels();
+        }
+       // if (GUILayout.Button("Disconeted")) StopDisconect();
 
         GUILayout.EndArea();
     }
@@ -55,13 +53,22 @@ public class NetWorkConnect : NetworkBehaviour
             FindObjectOfType<NetWorkSpawnPlayer>().BindConnectPlayerClientRpc();
             Debug.Log("je bind ");
 
-           // m_NetworkMana = NetworkManager.Singleton.ConnectedClients[clientId].PlayerObject;
-
         }
         if (NetworkManager.Singleton.IsServer)
         {
             Debug.Log("je bind pas");
         }
+    }
+    static void StatusLabels()
+    {
+        if (GUILayout.Button("Disconeted")) StopDisconect();
+
+        string mode = NetworkManager.Singleton.IsHost ?
+            "Host" : NetworkManager.Singleton.IsServer ? "Server" : "Client";
+
+        GUILayout.Label("Transport: " +
+            NetworkManager.Singleton.NetworkConfig.NetworkTransport.GetType().Name);
+        GUILayout.Label("Mode: " + mode);
     }
 
     static void StopDisconect()

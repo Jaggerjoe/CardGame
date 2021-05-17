@@ -4,18 +4,20 @@ using UnityEngine;
 using UnityEditor;
 using MLAPI;
 using MLAPI.Messaging;
+using MLAPI.NetworkVariable;
 
 public class NetWorkSpawnPlayer : NetworkBehaviour
 {
-    [SerializeField]
-    private ulong m_ClientId;
 
 
+    //avoir la permission
+    public NetworkVariableFloat m_Permission =
+        new NetworkVariableFloat(new NetworkVariableSettings
+        {
+            WritePermission
+            = NetworkVariablePermission.OwnerOnly
+        });
 
-    private void Start()
-    {
-
-    }
     //il va creer le so_boad mais vide
     [ServerRpc]
     public void CreateBoardSOServerRpc()
@@ -33,7 +35,9 @@ public class NetWorkSpawnPlayer : NetworkBehaviour
     //Les joueurs vont se faire spawn eux-meme
     public void SpawnPlayer()
     {
-
+        //m_SpawningPoint = GameObject.Find("BoardPlayer");
+        //GameObject l_Go = Instantiate(m_PrefaCard, m_SpawningPoint.transform);
+        //l_Go.GetComponent<NetworkObject>().Spawn();
     }
 
 
@@ -44,15 +48,6 @@ public class NetWorkSpawnPlayer : NetworkBehaviour
     {
         Debug.Log("IsLocalPlayer ClientRpc  = " + IsLocalPlayer);
 
-       // GetComponent<NetworkObject>().ChangeOwnership(m_ClientId);
-
-
-
-        //m_NetworkMana =NetworkManager.Singleton.ConnectedClients[m_ClientId].PlayerObject;
-        //Debug.Log("Network mana id =" + m_NetworkMana);
-        // Debug.Log("client id =" + m_ClientId);
-        //m_NetworkMana = NetworkManager.Singleton.LocalClientId[l_ClientId];
-
         if (IsLocalPlayer)
         {
             Debug.Log(" is local player J1");
@@ -62,13 +57,13 @@ public class NetWorkSpawnPlayer : NetworkBehaviour
             Debug.Log(" is local player J2");
         }
 
-        //if (IsOwner)
-        //{
-        //    Debug.Log(" youyou");
-        //}
-        //else
-        //{
-        //    Debug.Log("pas youyu");
-        //}
+        if (IsOwner)
+        {
+            Debug.Log(" youyou");
+        }
+        else
+        {
+            Debug.Log("pas youyu");
+        }
     }
 }
