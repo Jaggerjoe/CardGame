@@ -9,7 +9,7 @@ namespace NetWork
     public class NetWorkGUI : MonoBehaviour
     {
 
-        private Board m_Board = null;
+        private ActionInTheBoard m_Board = null;
         private void OnGUI()
         {
             using (new GUILayout.HorizontalScope())
@@ -86,7 +86,7 @@ namespace NetWork
             }
         }
 
-        private Board Board
+        private ActionInTheBoard Board
         {
             get
             {
@@ -94,7 +94,7 @@ namespace NetWork
                 {
                     if (NetworkManager.Singleton.ConnectedClients.TryGetValue(NetworkManager.Singleton.LocalClientId, out NetworkClient l_Client))
                     {
-                        m_Board = l_Client.PlayerObject.GetComponent<Board>();
+                        m_Board = l_Client.PlayerObject.GetComponent<ActionInTheBoard>();
                     }
                 }
                 else if (m_Board != null)

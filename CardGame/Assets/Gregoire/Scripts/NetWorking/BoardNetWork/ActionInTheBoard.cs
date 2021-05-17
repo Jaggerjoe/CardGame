@@ -8,7 +8,7 @@ using MLAPI.Messaging;
 
 namespace NetWork
 {
-    public class Board : NetworkBehaviour
+    public class ActionInTheBoard : NetworkBehaviour
     {
         [SerializeField]
         private SO_Board m_BoardInstance;
