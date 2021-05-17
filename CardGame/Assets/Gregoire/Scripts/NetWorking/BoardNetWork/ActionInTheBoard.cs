@@ -8,10 +8,19 @@ using MLAPI.Messaging;
 
 namespace NetWork
 {
+    // player
     public class ActionInTheBoard : NetworkBehaviour
     {
         [SerializeField]
-        private SO_Board m_BoardInstance;
+        private static SO_Board m_BoardInstance;
+
+        [SerializeField]
+        private ulong m_ClientID = 0;
+        [SerializeField]
+        private int[] m_IDSlot = { };
+        [SerializeField]
+        private int m_IDCard = 0;
+
         public override void NetworkStart()
         {
             m_BoardInstance = ScriptableObject.CreateInstance<SO_Board>();
@@ -28,26 +37,28 @@ namespace NetWork
 
             if (IsServer)
             {
-                ReceiveBoardClientRpc();
+                PlacementCardClientRpc(m_ClientID, m_IDSlot, m_IDCard);
             }
             else
             {
-                ConnectBoardServerRpc();
+                PlacementCardServerRpc(m_ClientID, m_IDSlot, m_IDCard);
 
             }
         }
 
         [ServerRpc]
-        public void ConnectBoardServerRpc()
+        public void PlacementCardServerRpc(ulong p_ClientID, int[] p_IDSlot, int p_IDCard)
         {
-            ReceiveBoardClientRpc();
+            PlacementCardClientRpc(p_ClientID,p_IDSlot,p_IDCard);
             Debug.Log("youyu 2");
         }
 
         [ClientRpc]
-        public void ReceiveBoardClientRpc()
+        public void PlacementCardClientRpc(ulong p_ClientID, int[] p_IDSlot, int p_IDCard)
         {
             Debug.Log("youyu");
+            //update le board de facon individuel  et recupere les infos
+            m_BoardInstance.PutCardOnSlot();
         }
     }
 }

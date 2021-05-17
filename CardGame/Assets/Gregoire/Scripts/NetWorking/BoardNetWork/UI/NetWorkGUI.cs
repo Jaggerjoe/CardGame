@@ -18,9 +18,6 @@ namespace NetWork
                 {
                     ConnectButton();
                 }
-
-
-
             }
 
         }
@@ -39,13 +36,11 @@ namespace NetWork
                 if (GUILayout.Button("Start Client"))
                 {
                     NetworkManager.Singleton.StartClient();
-
                 }
-                if (GUILayout.Button("Start Server")) NetworkManager.Singleton.StartServer();
             }
             else
             {
-                // Displayy status
+                // Display status
                 var mode = NetworkManager.Singleton.IsHost ?
                 "Host" : NetworkManager.Singleton.IsServer ? "Server" : "Client";
 
