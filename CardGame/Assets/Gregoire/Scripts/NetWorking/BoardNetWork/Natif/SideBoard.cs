@@ -4,7 +4,8 @@ using UnityEngine;
 
 namespace NetWork
 {
-    public class Player : MonoBehaviour
+
+    public class SideBoard 
     {
         // Start is called before the first frame update
         void Start()

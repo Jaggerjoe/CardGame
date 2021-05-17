@@ -235,6 +235,7 @@ MonoBehaviour:
   m_RowLenght: 6
   m_Space: 6
   m_Prefab: {fileID: 6624339541686402417, guid: 89893544aeb4a204fb53986eff825274, type: 3}
+  m_HandPlayer: {fileID: 626308218}
   m_DeckCards:
   - {fileID: 11400000, guid: 934ccf80adcc8c1429a328056a348b45, type: 2}
   - {fileID: 11400000, guid: f9ffc2b10f044ed469a305fd498d7029, type: 2}
@@ -258,7 +259,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 89db818da3fc58940ae35641133c8995, type: 2}
   - {fileID: 11400000, guid: e9c1b06fa165950468da375839cf4266, type: 2}
   - {fileID: 11400000, guid: b9cf6d6dc7d795749afbdf45bc304be5, type: 2}
-  m_HandPlayer: {fileID: 626308218}
 --- !u!1 &842249767
 GameObject:
   m_ObjectHideFlags: 0
