@@ -1,12 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BoardGame : MonoBehaviour
 {
+    [System.Serializable]
+    private class EventCard
+    {
+        public UnityEvent m_OnZone = new UnityEvent();
+        public UnityEvent m_NotInZone = new UnityEvent();
+    }
+    
     [SerializeField]
     private Transform[] m_CardsData = new Transform[5];
 
+    [SerializeField]
+    private EventCard m_EventCard = null;
     private void Update()
     {
         //ReplaceGameObjectZoneByGameObjectCardInArray();
@@ -20,23 +30,21 @@ public class BoardGame : MonoBehaviour
             {
                 if(m_CardsData[i].gameObject.transform.childCount != 0)
                 {
-                    Debug.Log($"oh moins 1 enfant chakal  sur la zone : {m_CardsData[i]}");
                     Transform l_Trs = m_CardsData[i].GetComponentInChildren<DataCard>().transform;
                     SO_CardData l_Card = l_Trs.GetComponent<DataCard>().Card;
                     EZoneCard.CardZones zone = m_CardsData[i].GetComponent<BoardZoneEmplacement>().Zone;
                     if (l_Card.m_CardZone.HasFlag(zone))
                     {
-                        Debug.Log("je suis dans ma zone");
+                        m_EventCard.m_OnZone.Invoke();
                     }
                     else if (l_Card.m_CardZone.HasFlag(EZoneCard.CardZones.Zone0))
                     {
-                        Debug.Log("Elle peut etre mise partout");   
+                        m_EventCard.m_OnZone.Invoke();
                     }
                     else
                     {
-                        Debug.Log("je ne suis pas dans ma zone");
+                        m_EventCard.m_NotInZone.Invoke();
                     }
-                    Debug.Log($"mon element est : { m_CardsData[i].GetComponentInChildren<DataCard>().transform}");
                     m_CardsData[i] = l_Trs;
                 }
             }

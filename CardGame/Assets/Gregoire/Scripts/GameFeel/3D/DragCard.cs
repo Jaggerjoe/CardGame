@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class DragCard : MonoBehaviour
 {
-    private GameObject m_Card = null;
-
     private Vector3 m_Offset = Vector3.zero;
 
     private float m_Zcoord = 0f;
 
     private BoardZoneEmplacement m_Zone = null;
+
+    private Vector3 m_OriginalPos;
 
     [SerializeField]
     private EZoneCard.CardZones m_CardZone = 0;
@@ -31,13 +31,13 @@ public class DragCard : MonoBehaviour
 
     private void OnMouseDown()
     {
+        m_OriginalPos = transform.position;
         m_Zcoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
     }
 
     private void OnMouseDrag()
     {
         this.transform.position = GetMouseWorldPos() + m_Offset;
-        m_Card = this.gameObject;
     }
 
     private void OnMouseUpAsButton()
@@ -48,14 +48,22 @@ public class DragCard : MonoBehaviour
         {
             RaycastHit hit = l_Hits[i];
             m_Zone = hit.transform.GetComponent<BoardZoneEmplacement>();
+
             if (m_Zone != null)
             {
-                m_Card.transform.SetParent(m_Zone.transform);
-                m_Card.transform.position = m_Zone.transform.position + new Vector3(0,.1f,0);
-                m_Card.transform.rotation = m_Zone.transform.rotation;
+                this.transform.SetParent(m_Zone.transform);
+                this.transform.position = m_Zone.transform.position + new Vector3(0, .1f, 0);
+                this.transform.rotation = m_Zone.transform.rotation;
                 this.GetComponentInParent<BoardGame>().ReplaceGameObjectZoneByGameObjectCardInArray();
+                return;
             }
         }
+        this.transform.position = m_OriginalPos;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawRay(Input.mousePosition, Vector3.down *100f);
     }
 
     public EZoneCard.CardZones CardZone => m_CardZone;
