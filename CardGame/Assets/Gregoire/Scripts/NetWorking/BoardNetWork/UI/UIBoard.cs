@@ -6,16 +6,17 @@ namespace NetWork
 {
     public class UIBoard : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
+        SO_Board m_SoBoard = null;
+
+        private void Awake()
         {
+            FindObjectOfType<SO_Board>().DropCardEvent.AddListener(ListenBoard);
+
 
         }
-
-        // Update is called once per frame
-        void Update()
+        //va recuperer les info et les appliquer à l'UI
+        public void ListenBoard()
         {
-
         }
     }
 }
