@@ -276,7 +276,7 @@ MonoBehaviour:
     - 3DCardGame
     AllowRuntimeSceneChanges: 0
     NetworkPrefabs:
-    - Prefab: {fileID: 5737733451027463090, guid: 1ee94b34fbf14094298f79ff437571b4, type: 3}
+    - Prefab: {fileID: 3530328449851030445, guid: cce7a59145de8d34386f48572b90140d, type: 3}
       PlayerPrefab: 1
     - Prefab: {fileID: 1770337509942026516, guid: b72deebe32c4cee458b1cab992c05aad, type: 3}
       PlayerPrefab: 0
@@ -309,7 +309,7 @@ MonoBehaviour:
     00000000:
       type: {class: NullableBoolSerializable, ns: MLAPI.Configuration, asm: Unity.Multiplayer.MLAPI.Runtime}
       data:
-        Value: 10976051512016791343
+        Value: 9522322682293204933
 --- !u!4 &1648342558
 Transform:
   m_ObjectHideFlags: 0

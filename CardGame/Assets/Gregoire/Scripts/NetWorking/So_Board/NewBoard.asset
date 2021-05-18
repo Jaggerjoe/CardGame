@@ -12,6 +12,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b35eca5b6f2cf6042b20ea04f873931a, type: 3}
   m_Name: NewBoard
   m_EditorClassIdentifier: 
+  m_Side:
+    m_Hand: []
+    m_Deck:
+    - {fileID: 11400000, guid: 934ccf80adcc8c1429a328056a348b45, type: 2}
+    - {fileID: 11400000, guid: f9ffc2b10f044ed469a305fd498d7029, type: 2}
+    - {fileID: 11400000, guid: c3eb3ba752ee6ae4d92bc711b6e6f7c8, type: 2}
+    - {fileID: 11400000, guid: 5940a3d9b16b6a14181775cd49720262, type: 2}
+    - {fileID: 11400000, guid: b8b3c53df7bd5d8479f7754f80dbce9f, type: 2}
+    - {fileID: 11400000, guid: 8b093a75e09810a44a83a43569a9bf74, type: 2}
+    - {fileID: 11400000, guid: 19131dacb1ae93e4280cd8646131ad4e, type: 2}
+    - {fileID: 11400000, guid: dc6954184d787284eb6948be9ba9ef78, type: 2}
+    - {fileID: 11400000, guid: 3daf3e70c59e1824bb80f23a12c67fae, type: 2}
+    - {fileID: 11400000, guid: 5c8c4bcee0bac9541bf2dd6451a969cf, type: 2}
+    - {fileID: 11400000, guid: a1295b1f79eea0041b49bde4eadf3ff0, type: 2}
+    - {fileID: 11400000, guid: 8b8ba13a486c33346897eadafec7195e, type: 2}
+    - {fileID: 11400000, guid: 23254c75ff3f86849992737b9c0185a9, type: 2}
+    - {fileID: 11400000, guid: 5f884860fde17da499fd72442fabed1a, type: 2}
+    - {fileID: 11400000, guid: a52f2bc9950a1e64ab3f4932a77ca7ab, type: 2}
+    - {fileID: 11400000, guid: bee08f900cad8654a8235b9b47386e87, type: 2}
+    - {fileID: 11400000, guid: e3254d1c6a354ed439c70b53447a05c9, type: 2}
+    - {fileID: 11400000, guid: ee839d2ebbb3d2b42a51ac99e253288d, type: 2}
+    - {fileID: 11400000, guid: bdfdb50f902c8fe43b2a635a282a1b2d, type: 2}
+    - {fileID: 11400000, guid: 89db818da3fc58940ae35641133c8995, type: 2}
+    - {fileID: 11400000, guid: e9c1b06fa165950468da375839cf4266, type: 2}
+    - {fileID: 11400000, guid: b9cf6d6dc7d795749afbdf45bc304be5, type: 2}
+    m_Discard: []
+    m_Slot: []
+    m_Point: 0
   m_DropCard:
     m_PersistentCalls:
       m_Calls: []

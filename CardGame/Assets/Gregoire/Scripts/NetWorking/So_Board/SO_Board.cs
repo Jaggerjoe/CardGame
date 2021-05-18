@@ -18,7 +18,7 @@ namespace NetWork
 
 #region Events
         //cette event va nous servir � si on peut poser une carte
-        [SerializeField]
+        [SerializeField] [Space(10)]
         private UnityEvent m_DropCard = new UnityEvent();
 
         //cette event va nous servir a compter les points une fois la carte poser
@@ -50,6 +50,10 @@ namespace NetWork
         public void PutCardOnSlot()
         {
             //action que l'on va faire lors d'un tour
+            //Récupéré la carte
+            m_DropCard.Invoke();
+            //Ajouter la carte sur le slot 
+            
             //On va regarder de quel side on est
 
             //on va poser nos card sur les slots, 
@@ -68,8 +72,6 @@ namespace NetWork
             //On va piocher jusqu'a avoir 6 card
 
         }
-
-
 
         #region Accesseur
 
@@ -97,6 +99,10 @@ namespace NetWork
 
         #endregion
 
+        public void GetCard()
+        {
+
+        }
         public void Shuffle()
         {
             for (int i = 0; i < Side.m_Deck.Count; i++)
