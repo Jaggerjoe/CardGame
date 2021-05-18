@@ -4,12 +4,18 @@ using UnityEngine;
 
 namespace NetWork
 {
+    [System.Serializable]
     public class SlotBoard 
     {
-        private  EZoneCard m_Zone = null;
+        private EZoneCard.CardZones m_Zone = 0;
         private SO_CardData m_Card = null;
 
-        public EZoneCard ZoneCard
+        public SlotBoard(EZoneCard.CardZones zone1)
+        {
+            m_Zone = zone1;
+        }
+
+        public EZoneCard.CardZones ZoneCard
         {
             get { return m_Zone; }
             set { m_Zone = value; }

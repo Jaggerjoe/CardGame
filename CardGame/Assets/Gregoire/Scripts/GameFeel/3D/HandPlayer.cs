@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NetWork;
 
 public class HandPlayer : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class HandPlayer : MonoBehaviour
     private Transform m_HandPlayer = null;
 
     [SerializeField]
-    private List<SO_CardData> m_DeckCards = new List<SO_CardData>();
+    private SO_Board m_Board = null;
 
     // Start is called before the first frame update
     void Start()
@@ -28,25 +29,20 @@ public class HandPlayer : MonoBehaviour
         {
             GameObject l_Card =  Instantiate(m_Prefab, new Vector3(transform.position.x + (m_Space * (i % m_RowLenght)), 0.1f, transform.position.z), transform.rotation);
             l_Card.transform.SetParent(m_HandPlayer);
-            l_Card.GetComponent<DataCard>().Card = m_DeckCards[0];
-            m_DeckCards.RemoveAt(0);
+            l_Card.GetComponent<DataCard>().Card = m_Board.Side.m_Deck[0];
+            m_Board.Side.m_Hand.Add(m_Board.Side.m_Deck[0]);
+            m_Board.Side.m_Deck.RemoveAt(0);
         }
     }
 
     public void Shuffle()
     {
-        for (int i = 0; i < m_DeckCards.Count; i++)
+        for (int i = 0; i < m_Board.Side.m_Deck.Count; i++)
         {
-            int j = Random.Range(i, m_DeckCards.Count);
-            SO_CardData l_Temp = m_DeckCards[i];
-            m_DeckCards[i] = m_DeckCards[j];
-            m_DeckCards[j] = l_Temp;
+            int j = Random.Range(i, m_Board.Side.m_Deck.Count);
+            SO_CardData l_Temp = m_Board.Side.m_Deck[i];
+            m_Board.Side.m_Deck[i] = m_Board.Side.m_Deck[j];
+            m_Board.Side.m_Deck[j] = l_Temp;
         }
-    }
-
-    public List<SO_CardData> CardList
-    {
-        get { return m_DeckCards; }
-        set { m_DeckCards = value; }
     }
 }

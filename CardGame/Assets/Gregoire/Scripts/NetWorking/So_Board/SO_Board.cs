@@ -9,10 +9,11 @@ namespace NetWork
     public class SO_Board : ScriptableObject
     {
         //va avoir 2 instances de side(coter)
+        [SerializeField]
         private SideBoard m_Side = new SideBoard();
         private SideBoard m_Side2 = new SideBoard();
 
-        private SlotBoard m_Slot = new SlotBoard();
+        //private SlotBoard m_Slot = new SlotBoard();
 
         //Reçoit les RPC
 
@@ -29,12 +30,23 @@ namespace NetWork
             set { m_Side2 = value; }
         }
 
-        public SlotBoard Slot
-        {
-            get { return m_Slot; }
-            set { m_Slot = value; }
-        }
+        //public SlotBoard Slot
+        //{
+        //    get { return m_Slot; }
+        //    set { m_Slot = value; }
+        //}
 
         #endregion
+
+        public void Shuffle()
+        {
+            for (int i = 0; i < Side.m_Deck.Count; i++)
+            {
+                int j = Random.Range(i, Side.m_Deck.Count);
+                SO_CardData l_Temp = Side.m_Deck[i];
+                Side.m_Deck[i] = Side.m_Deck[j];
+                Side.m_Deck[j] = l_Temp;
+            }
+        }
     }
 }

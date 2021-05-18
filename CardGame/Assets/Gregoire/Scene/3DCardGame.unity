@@ -259,6 +259,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 89db818da3fc58940ae35641133c8995, type: 2}
   - {fileID: 11400000, guid: e9c1b06fa165950468da375839cf4266, type: 2}
   - {fileID: 11400000, guid: b9cf6d6dc7d795749afbdf45bc304be5, type: 2}
+  m_Board: {fileID: 11400000, guid: 31475fa8f69e5e948ba40dcd59ab355f, type: 2}
 --- !u!1 &842249767
 GameObject:
   m_ObjectHideFlags: 0
@@ -271,8 +272,7 @@ GameObject:
   - component: {fileID: 842249772}
   - component: {fileID: 842249771}
   - component: {fileID: 842249770}
-  - component: {fileID: 842249773}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Zone2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -356,19 +356,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 842249767}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &842249773
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 842249767}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afbd13f89325d34438811fde7569bdd0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Zone: 2
 --- !u!1 &1023303893
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,37 +477,7 @@ MonoBehaviour:
   - {fileID: 1147562040}
   - {fileID: 1528451705}
   - {fileID: 1866196100}
-  m_EventCard:
-    m_OnZone:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 11400000, guid: ea101be671fb7af48aa2e811a55a6bb2, type: 2}
-          m_TargetAssemblyTypeName: DebugAsset, Assembly-CSharp
-          m_MethodName: DebugLog
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    m_NotInZone:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 11400000, guid: fc6da6201260b6c408ac3a04134a9932, type: 2}
-          m_TargetAssemblyTypeName: DebugAsset, Assembly-CSharp
-          m_MethodName: DebugLog
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+  m_BoardAsset: {fileID: 11400000, guid: 31475fa8f69e5e948ba40dcd59ab355f, type: 2}
 --- !u!114 &1023303899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -546,8 +503,7 @@ GameObject:
   - component: {fileID: 1057024355}
   - component: {fileID: 1057024354}
   - component: {fileID: 1057024353}
-  - component: {fileID: 1057024357}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Zone1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -631,19 +587,6 @@ Transform:
   m_Father: {fileID: 1023303897}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 180, y: 180, z: 180}
---- !u!114 &1057024357
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1057024351}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afbd13f89325d34438811fde7569bdd0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Zone: 1
 --- !u!1 &1082278960
 GameObject:
   m_ObjectHideFlags: 0
@@ -722,8 +665,7 @@ GameObject:
   - component: {fileID: 1147562044}
   - component: {fileID: 1147562043}
   - component: {fileID: 1147562042}
-  - component: {fileID: 1147562045}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Zone3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -807,19 +749,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1147562039}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1147562045
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1147562039}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afbd13f89325d34438811fde7569bdd0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Zone: 4
 --- !u!1 &1217087102
 GameObject:
   m_ObjectHideFlags: 0
@@ -1041,8 +970,7 @@ GameObject:
   - component: {fileID: 1528451709}
   - component: {fileID: 1528451708}
   - component: {fileID: 1528451707}
-  - component: {fileID: 1528451710}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Zone4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1126,19 +1054,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1528451704}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1528451710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1528451704}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afbd13f89325d34438811fde7569bdd0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Zone: 8
 --- !u!1 &1866196099
 GameObject:
   m_ObjectHideFlags: 0
@@ -1151,8 +1066,7 @@ GameObject:
   - component: {fileID: 1866196104}
   - component: {fileID: 1866196103}
   - component: {fileID: 1866196102}
-  - component: {fileID: 1866196105}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Zone5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1236,16 +1150,3 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1866196099}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1866196105
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1866196099}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afbd13f89325d34438811fde7569bdd0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Zone: 16
