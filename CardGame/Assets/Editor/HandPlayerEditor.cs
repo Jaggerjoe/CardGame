@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using NetWork;
 
-[CustomEditor(typeof(HandPlayer))]
+[CustomEditor(typeof(SO_Board))]
 public class HandPlayerEditor : Editor
 {
     public override void OnInspectorGUI()
     {
-        HandPlayer l_HandPlayer = target as HandPlayer;
+        SO_Board l_HandPlayer = target as SO_Board;
         base.OnInspectorGUI();
         using (new EditorGUILayout.VerticalScope())
         {

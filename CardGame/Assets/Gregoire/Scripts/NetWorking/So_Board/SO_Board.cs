@@ -9,14 +9,15 @@ namespace NetWork
     [CreateAssetMenu(fileName = "DataBoard", menuName = "GamesBoard")]
     public class SO_Board : ScriptableObject
     {
-        //va avoir 2 instances de side
+        //va avoir 2 instances de side(coter)
+        [SerializeField]
         private SideBoard m_Side = new SideBoard();
         private SideBoard m_OtherSide = new SideBoard();
 
-        private SlotBoard m_Slot = new SlotBoard();
+        //private SlotBoard m_Slot = new SlotBoard();
 
 #region Events
-        //cette event va nous servir à si on peut poser une carte
+        //cette event va nous servir ï¿½ si on peut poser une carte
         [SerializeField]
         private UnityEvent m_DropCard = new UnityEvent();
 
@@ -83,12 +84,11 @@ namespace NetWork
             set { m_OtherSide = value; }
         }
 
-        public SlotBoard Slot
-        {
-            get { return m_Slot; }
-            set { m_Slot = value; }
-        }
-
+        //public SlotBoard Slot
+        //{
+        //    get { return m_Slot; }
+        //    set { m_Slot = value; }
+        //}
         public UnityEvent DropCardEvent
         {
             get { return m_DropCard; }
@@ -96,5 +96,16 @@ namespace NetWork
         }
 
         #endregion
+
+        public void Shuffle()
+        {
+            for (int i = 0; i < Side.m_Deck.Count; i++)
+            {
+                int j = Random.Range(i, Side.m_Deck.Count);
+                SO_CardData l_Temp = Side.m_Deck[i];
+                Side.m_Deck[i] = Side.m_Deck[j];
+                Side.m_Deck[j] = l_Temp;
+            }
+        }
     }
 }
