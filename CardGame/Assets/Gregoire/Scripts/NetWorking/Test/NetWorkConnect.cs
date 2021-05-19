@@ -2,19 +2,91 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MLAPI;
-using MLAPI.Messaging;
-using UnityEngine.Networking.Types;
+using MLAPI.Transports.UNET;
+using System;
 
 public class NetWorkConnect : MonoBehaviour
 {
-    void OnGUI()
+    [SerializeField]
+    private string m_IpAdress = "127.0.0.1";
+    UNetTransport m_Transport;
+
+    //private void OnGUI()
+    //{
+    //    if (!NetworkManager.Singleton.IsClient && !NetworkManager.Singleton.IsServer)
+    //    {
+    //        HostButton();
+    //        JoinButton();
+
+    //    }
+    //    else
+    //    {
+    //        StatusLabels();
+    //    }
+    //}
+    public void HostButton()
+    {
+        NetworkManager.Singleton.ConnectionApprovalCallback += ApprovalCallback;
+        NetworkManager.Singleton.StartHost();
+    }
+
+    private void ApprovalCallback(byte[] p_ConnectionData, ulong p_ClientID, NetworkManager.ConnectionApprovedDelegate p_Callback)
+    {
+         bool l_Approve = System.Text.Encoding.ASCII.GetString(p_ConnectionData) == "passeword";
+        p_Callback(true, null, l_Approve, Vector3.zero, Quaternion.identity);
+    }
+
+    public void JoinButton()
+    {
+        m_Transport = NetworkManager.Singleton.GetComponent<UNetTransport>();
+        m_Transport.ConnectAddress = m_IpAdress;
+
+        NetworkManager.Singleton.NetworkConfig.ConnectionData = System.Text.Encoding.ASCII.GetBytes("passeword");
+        NetworkManager.Singleton.StartClient();
+    }
+    
+    private void StatusLabels()
+    {
+        
+        string mode = NetworkManager.Singleton.IsHost ?
+            "Host" : NetworkManager.Singleton.IsServer ? "Server" : "Client";
+
+        GUILayout.Label("Transport: " +
+            NetworkManager.Singleton.NetworkConfig.NetworkTransport.GetType().Name);
+        GUILayout.Label("Mode: " + mode);
+    }
+
+    public void IPAdressChanged(string p_NewAdress)
+    {
+        this.m_IpAdress = p_NewAdress;
+    }
+
+    private void StopDisconect()
+    {
+
+        if (NetworkManager.Singleton.IsHost)
+        {
+            NetworkManager.Singleton.StopHost();
+          //  NetworkManager.Singleton.DisconnectClient();
+        }
+        else if (NetworkManager.Singleton.IsClient)
+        {
+            NetworkManager.Singleton.StopClient();
+        }
+        else if (NetworkManager.Singleton.IsServer)
+        {
+            NetworkManager.Singleton.StopServer();
+        }
+    }
+}
+/*   void OnGUI()
     {
         //taill et position des boutons
         GUILayout.BeginArea(new Rect(200, 200, 300, 300));
 
         if (!NetworkManager.Singleton.IsClient && !NetworkManager.Singleton.IsServer)
         {
-            StartButtons();
+           // StartButtons();
 
         }
         else
@@ -39,7 +111,7 @@ public class NetWorkConnect : MonoBehaviour
         {
             NetworkManager.Singleton.StartClient();
             //quand c'est lancer le client est deja instancier 
-            NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
+           // NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
         }
         
     }
@@ -58,34 +130,4 @@ public class NetWorkConnect : MonoBehaviour
         {
             Debug.Log("je bind pas");
         }
-    }
-    static void StatusLabels()
-    {
-        if (GUILayout.Button("Disconeted")) StopDisconect();
-
-        string mode = NetworkManager.Singleton.IsHost ?
-            "Host" : NetworkManager.Singleton.IsServer ? "Server" : "Client";
-
-        GUILayout.Label("Transport: " +
-            NetworkManager.Singleton.NetworkConfig.NetworkTransport.GetType().Name);
-        GUILayout.Label("Mode: " + mode);
-    }
-
-    static void StopDisconect()
-    {
-
-        if (NetworkManager.Singleton.IsHost)
-        {
-            NetworkManager.Singleton.StopHost();
-          //  NetworkManager.Singleton.DisconnectClient();
-        }
-        else if (NetworkManager.Singleton.IsClient)
-        {
-            NetworkManager.Singleton.StopClient();
-        }
-        else if (NetworkManager.Singleton.IsServer)
-        {
-            NetworkManager.Singleton.StopServer();
-        }
-    }
-}
+    }*/

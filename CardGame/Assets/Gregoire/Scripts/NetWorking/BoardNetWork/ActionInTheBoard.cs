@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using MLAPI;
+using MLAPI.Connection;
 using MLAPI.NetworkVariable;
 using MLAPI.Messaging;
+using MLAPI.Transports.UNET;
 
 namespace NetWork
 {
@@ -27,6 +29,8 @@ namespace NetWork
             string l_AssetPathName = AssetDatabase.GenerateUniqueAssetPath("Assets/Gregoire/Scripts/NetWorking/So_Board/NewBoard.asset");
             AssetDatabase.CreateAsset(m_BoardInstance, l_AssetPathName);
             Debug.Log("coucou je suis l'instance So creer");
+
+            
         }
         public void ConnectBoard()
         {

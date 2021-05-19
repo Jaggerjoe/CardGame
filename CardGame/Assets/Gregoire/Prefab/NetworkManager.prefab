@@ -57,6 +57,7 @@ MonoBehaviour:
     - 
     - carla
     - BoardScene
+    - Menu
     AllowRuntimeSceneChanges: 0
     NetworkPrefabs:
     - Prefab: {fileID: 1415072595088106392, guid: 2fc35ac5b8b66ca459384d43a39eb51b, type: 3}
