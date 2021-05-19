@@ -49,11 +49,13 @@ public class DragCard : MonoBehaviour
 
             if (l_Hits[i].transform.gameObject.layer == 6)
             {
-                this.transform.SetParent(l_Hits[i].transform);
-                this.transform.position = l_Hits[i].transform.position + new Vector3(0, .1f, 0);
-                this.transform.rotation = l_Hits[i].transform.rotation;
-                this.GetComponentInParent<BoardGame>().ReplaceGameObjectZoneByGameObjectCardInArray();
-                return;
+                if(l_Hits[i].transform.childCount == 0)
+                {
+                    this.transform.SetParent(l_Hits[i].transform);
+                    this.transform.position = l_Hits[i].transform.position + new Vector3(0, .1f, 0);
+                    this.transform.rotation = l_Hits[i].transform.rotation;
+                    return;
+                }
             }
         }
         this.transform.position = m_OriginalPos;

@@ -10,9 +10,9 @@ namespace NetWork
         private EZoneCard.CardZones m_Zone = 0;
         private SO_CardData m_Card = null;
 
-        public SlotBoard(EZoneCard.CardZones zone1)
+        public SlotBoard(EZoneCard.CardZones p_zone)
         {
-            m_Zone = zone1;
+            m_Zone = p_zone;
         }
 
         public EZoneCard.CardZones ZoneCard

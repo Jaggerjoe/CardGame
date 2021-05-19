@@ -9,7 +9,7 @@ public class WindowCustomEditor : EditorWindow
     UnityWebRequest request;
     public const string SHEET_ID = "12uPt3HF8pTSMS2GVi8SOQMEk4NZ2pA7aUhHwqx-xmx8";
     public const string SHEET_NAME = "DataCardAnglais";
-    public const string SHEET_RANGE = "A2:F23";
+    public const string SHEET_RANGE = "A2:G23";
 
     int Number;
     SO_Board m_DeckCards = null;
@@ -104,6 +104,12 @@ public class WindowCustomEditor : EditorWindow
                 }
             }
 
+            i++;
+            string l_IndexCard = NacifyText(asset[i]);
+            if (int.TryParse(l_IndexCard, out Number))
+            {
+                l_Asset.m_Index = Number;
+            }
             AssetDatabase.SaveAssets();
             //AddToLosit(l_Asset);
         }
@@ -209,11 +215,6 @@ public class WindowCustomEditor : EditorWindow
         {
             Request();
         }
-
-        //if(GUILayout.Button("Create"))
-        //{
-        //    CreateAssetCard();
-        //}
 
         if (GUILayout.Button("Clear"))
         {
