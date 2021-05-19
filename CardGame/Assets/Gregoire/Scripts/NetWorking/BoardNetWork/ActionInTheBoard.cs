@@ -12,7 +12,9 @@ namespace NetWork
     public class ActionInTheBoard : NetworkBehaviour
     {
         [SerializeField]
-        private static SO_Board m_BoardInstance;
+        private  SO_Board m_BoardReference;
+
+        private SO_Board m_BoardInstance = null;
 
         [SerializeField]
         private ulong m_ClientID = 0;
@@ -25,16 +27,7 @@ namespace NetWork
 
         public override void NetworkStart()
         {
-            AssetDatabase.CopyAsset("Assets/Gregoire/Scripts/NetWorking/So_Board/DataBoard.asset", "Assets/Gregoire/Scripts/NetWorking/So_Board/NewBoard.asset");
-            //SO_Board l_Board = (SO_Board)AssetDatabase.LoadAssetAtPath(l_Path, typeof(SO_Board));
-            //Debug.Log(l_Board);
-            //l_Board = ScriptableObject.CreateInstance<SO_Board>();
-            //Debug.Log(l_Board);
-            //string l_AssetPathName = AssetDatabase.GenerateUniqueAssetPath("Assets/Gregoire/Scripts/NetWorking/So_Board/NewBoard.asset");
-            ////l_BoardInstance = m_BoardInstance;
-            //AssetDatabase.CreateAsset(l_Board, l_AssetPathName);
-            //Debug.Log(l_Board);
-            //Debug.Log("coucou je suis l'instance So creer");
+            m_BoardInstance = Instantiate(m_BoardReference);
         }
 
         public void ConnectBoard()
@@ -58,6 +51,7 @@ namespace NetWork
         public void PlacementCardServerRpc(ulong p_ClientID, int[] p_IDSlot, int p_IDCard)
         {
             PlacementCardClientRpc(p_ClientID,p_IDSlot,p_IDCard);
+            //ici on va appeller la fonction de nos event de l'instance ce notre so_Board (m_BoardInstance)
             Debug.Log("youyu 2");
         }
 
@@ -73,6 +67,12 @@ namespace NetWork
         public void HandCardInTheSlot()
         {
 
+        }
+
+        public SO_Board BoardInstance
+        {
+            get { return m_BoardInstance; }
+            set { m_BoardInstance = value; }
         }
     }
 }

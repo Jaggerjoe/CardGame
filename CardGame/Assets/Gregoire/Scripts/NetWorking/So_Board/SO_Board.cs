@@ -99,10 +99,6 @@ namespace NetWork
 
         #endregion
 
-        public void GetCard()
-        {
-
-        }
         public void Shuffle()
         {
             for (int i = 0; i < Side.m_Deck.Count; i++)
