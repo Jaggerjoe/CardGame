@@ -8,8 +8,9 @@ using System;
 public class NetWorkConnect : MonoBehaviour
 {
     [SerializeField]
-    private string m_IpAdress = "192.168.83.78";
-
+    private string m_IpAdress = "192.168.1.13";
+    [SerializeField]
+    private string m_IpAdressChanged;
     private int m_IpAdressPort = 7777;
     UNetTransport m_Transport;
 
@@ -26,6 +27,7 @@ public class NetWorkConnect : MonoBehaviour
     //        StatusLabels();
     //    }
     //}
+    
     public void HostButton()
     {
         NetworkManager.Singleton.ConnectionApprovalCallback += ApprovalCallback;
@@ -41,7 +43,8 @@ public class NetWorkConnect : MonoBehaviour
     public void JoinButton()
     {
         m_Transport = NetworkManager.Singleton.GetComponent<UNetTransport>();
-        m_Transport.ConnectAddress = m_IpAdress; 
+        m_Transport.ConnectAddress = m_IpAdress;
+       
         Debug.Log("join connect adress");
         m_Transport.ConnectPort = m_IpAdressPort;
         Debug.Log("join connect adress port");
@@ -49,7 +52,6 @@ public class NetWorkConnect : MonoBehaviour
 
         NetworkManager.Singleton.NetworkConfig.ConnectionData = System.Text.Encoding.ASCII.GetBytes("passeword");
         NetworkManager.Singleton.StartClient();
-        Debug.Log("va la bas");
     }
     
     private void StatusLabels()

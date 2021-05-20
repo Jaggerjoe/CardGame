@@ -686,7 +686,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a418bf10383ef374e9ec4ad029a88cef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_IpAdress: 
+  m_IpAdress: 192.168.83.78
+  m_IpAdressChanged: 
 --- !u!1 &1187739474
 GameObject:
   m_ObjectHideFlags: 0
@@ -725,7 +726,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0.002319336, y: -126.74837}
+  m_AnchoredPosition: {x: 0.0021972656, y: -126.74837}
   m_SizeDelta: {x: -778, y: 418.5727}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1187739476
@@ -1219,7 +1220,7 @@ MonoBehaviour:
   MessageBufferSize: 5120
   MaxConnections: 100
   MaxSentMessageQueueSize: 128
-  ConnectAddress: 127.0.0.1
+  ConnectAddress: 192.168.1.13
   ConnectPort: 7777
   ServerListenPort: 7777
   ServerWebsocketListenPort: 8887
@@ -1760,7 +1761,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2023372534
 RectTransform:
   m_ObjectHideFlags: 0
