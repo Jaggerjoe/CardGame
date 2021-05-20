@@ -8,8 +8,9 @@ using System;
 public class NetWorkConnect : MonoBehaviour
 {
     [SerializeField]
-    private string m_IpAdress = "127.0.0.1";
-    private int m_IpAdressPort = 777;
+    private string m_IpAdress = "192.168.83.78";
+
+    private int m_IpAdressPort = 7777;
     UNetTransport m_Transport;
 
     //private void OnGUI()
@@ -48,6 +49,7 @@ public class NetWorkConnect : MonoBehaviour
 
         NetworkManager.Singleton.NetworkConfig.ConnectionData = System.Text.Encoding.ASCII.GetBytes("passeword");
         NetworkManager.Singleton.StartClient();
+        Debug.Log("va la bas");
     }
     
     private void StatusLabels()
