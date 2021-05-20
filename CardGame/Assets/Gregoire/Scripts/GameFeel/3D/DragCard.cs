@@ -1,14 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NetWork;
 
 public class DragCard : MonoBehaviour
 {
     private Vector3 m_Offset = Vector3.zero;
 
     private float m_Zcoord = 0f;
-
-    private BoardZoneEmplacement m_Zone = null;
 
     private Vector3 m_OriginalPos;
 
@@ -32,7 +31,7 @@ public class DragCard : MonoBehaviour
     private void OnMouseDown()
     {
         m_OriginalPos = transform.position;
-        m_Zcoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
+        m_Zcoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;    
     }
 
     private void OnMouseDrag()
@@ -47,15 +46,16 @@ public class DragCard : MonoBehaviour
         for (int i = 0; i < l_Hits.Length; i++)
         {
             RaycastHit hit = l_Hits[i];
-            m_Zone = hit.transform.GetComponent<BoardZoneEmplacement>();
 
-            if (m_Zone != null)
+            if (l_Hits[i].transform.gameObject.layer == 6)
             {
-                this.transform.SetParent(m_Zone.transform);
-                this.transform.position = m_Zone.transform.position + new Vector3(0, .1f, 0);
-                this.transform.rotation = m_Zone.transform.rotation;
-                this.GetComponentInParent<BoardGame>().ReplaceGameObjectZoneByGameObjectCardInArray();
-                return;
+                if(l_Hits[i].transform.childCount == 0)
+                {
+                    this.transform.SetParent(l_Hits[i].transform);
+                    this.transform.position = l_Hits[i].transform.position + new Vector3(0, .1f, 0);
+                    this.transform.rotation = l_Hits[i].transform.rotation;
+                    return;
+                }
             }
         }
         this.transform.position = m_OriginalPos;

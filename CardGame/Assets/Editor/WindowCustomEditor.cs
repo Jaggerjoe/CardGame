@@ -2,16 +2,17 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.Networking;
 using System.Collections.Generic;
+using NetWork;
 
 public class WindowCustomEditor : EditorWindow
 {
     UnityWebRequest request;
     public const string SHEET_ID = "12uPt3HF8pTSMS2GVi8SOQMEk4NZ2pA7aUhHwqx-xmx8";
     public const string SHEET_NAME = "DataCardAnglais";
-    public const string SHEET_RANGE = "A2:F23";
+    public const string SHEET_RANGE = "A2:G23";
 
     int Number;
-    HandPlayer m_DeckCards = null;
+    SO_Board m_DeckCards = null;
     List<string> m_SetAssetPath = new List<string>();
     public void CreateAssetCard()
     {
@@ -103,8 +104,14 @@ public class WindowCustomEditor : EditorWindow
                 }
             }
 
+            i++;
+            string l_IndexCard = NacifyText(asset[i]);
+            if (int.TryParse(l_IndexCard, out Number))
+            {
+                l_Asset.m_Index = Number;
+            }
             AssetDatabase.SaveAssets();
-            AddToLosit(l_Asset);
+            //AddToLosit(l_Asset);
         }
     }
 
@@ -123,17 +130,25 @@ public class WindowCustomEditor : EditorWindow
     {
         if (m_DeckCards == null)
         {
-            m_DeckCards = FindObjectOfType<HandPlayer>();
-            if (m_DeckCards != null)
+            string[] unusedFolder = { "Assets/Gregoire/Scripts/GameFeel/3D" };
+            string[] AssetsArray = AssetDatabase.FindAssets("t:SO_Board", unusedFolder);
+            foreach (var item in AssetsArray)
             {
-                m_DeckCards.CardList.Add(p_Asset);
+                Debug.Log(item);
+                if (m_DeckCards != null)
+                {
+                    m_DeckCards.Side.m_Deck.Add(p_Asset);
+                    Debug.Log("ma liste existe");
+                }
             }
         }
         else
         {
-            m_DeckCards.CardList.Add(p_Asset);
+            m_DeckCards.Side.m_Deck.Add(p_Asset);
+            Debug.Log("ma liste existe");
         }
     }
+
     private void CreatePathAssetExist()
     {
         string[] unusedFolder = { "Assets/Gregoire/Card" };
@@ -174,7 +189,7 @@ public class WindowCustomEditor : EditorWindow
             var path = AssetDatabase.GUIDToAssetPath(asset);
             AssetDatabase.DeleteAsset(path);
         }
-        ClearList();
+        //ClearList();
         m_SetAssetPath.Clear();
     }
 
@@ -182,15 +197,15 @@ public class WindowCustomEditor : EditorWindow
     {
         if (m_DeckCards == null)
         {
-            m_DeckCards = FindObjectOfType<HandPlayer>();
+            m_DeckCards = FindObjectOfType<SO_Board>();
             if (m_DeckCards != null)
             {
-                m_DeckCards.CardList.Clear();
+                m_DeckCards.Side.m_Deck.Clear();
             }
         }
         else
         {
-            m_DeckCards.CardList.Clear();
+            m_DeckCards.Side.m_Deck.Clear();
         }
     }
 
@@ -200,11 +215,6 @@ public class WindowCustomEditor : EditorWindow
         {
             Request();
         }
-
-        //if(GUILayout.Button("Create"))
-        //{
-        //    CreateAssetCard();
-        //}
 
         if (GUILayout.Button("Clear"))
         {

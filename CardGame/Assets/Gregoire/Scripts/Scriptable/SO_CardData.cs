@@ -16,5 +16,7 @@ public class SO_CardData : ScriptableObject
     public int m_PointCombo = 0;
 
     public EZoneCard.CardZones m_CardZone = 0;
+
+    public int m_Index = 0;
 }
 

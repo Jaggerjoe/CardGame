@@ -8,15 +8,16 @@ namespace NetWork
     [CreateAssetMenu(fileName = "DataBoard", menuName = "GamesBoard")]
     public class SO_Board : ScriptableObject
     {
-        //va avoir 2 instances de side
+        //va avoir 2 instances de side(coter)
+        [SerializeField]
         private SideBoard m_Side = new SideBoard();
         private SideBoard m_OtherSide = new SideBoard();
 
-        private SlotBoard m_Slot = new SlotBoard();
+        //private SlotBoard m_Slot = new SlotBoard();
 
 #region Events
-        //cette event va nous servir � si on peut poser une carte
-        [SerializeField]
+        //cette event va nous servir � si on peut poser une carte
+        [SerializeField] [Space(10)]
         private UnityEvent m_DropCard = new UnityEvent();
 
         //cette event va nous servir a compter les points une fois la carte poser
@@ -48,6 +49,10 @@ namespace NetWork
         public void PutCardOnSlot()
         {
             //action que l'on va faire lors d'un tour
+            //Récupéré la carte
+            m_DropCard.Invoke();
+            //Ajouter la carte sur le slot 
+            
             //On va regarder de quel side on est
 
             //on va poser nos card sur les slots, 
@@ -67,8 +72,6 @@ namespace NetWork
 
         }
 
-
-
         #region Accesseur
 
         public SideBoard Side
@@ -82,12 +85,11 @@ namespace NetWork
             set { m_OtherSide = value; }
         }
 
-        public SlotBoard Slot
-        {
-            get { return m_Slot; }
-            set { m_Slot = value; }
-        }
-
+        //public SlotBoard Slot
+        //{
+        //    get { return m_Slot; }
+        //    set { m_Slot = value; }
+        //}
         public UnityEvent DropCardEvent
         {
             get { return m_DropCard; }
@@ -95,5 +97,16 @@ namespace NetWork
         }
 
         #endregion
+
+        public void Shuffle()
+        {
+            for (int i = 0; i < Side.m_Deck.Count; i++)
+            {
+                int j = Random.Range(i, Side.m_Deck.Count);
+                SO_CardData l_Temp = Side.m_Deck[i];
+                Side.m_Deck[i] = Side.m_Deck[j];
+                Side.m_Deck[j] = l_Temp;
+            }
+        }
     }
 }
