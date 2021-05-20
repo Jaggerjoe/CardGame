@@ -25,10 +25,10 @@ namespace NetWork
 
         public override void NetworkStart()
         {
-            m_BoardInstance = ScriptableObject.CreateInstance<SO_Board>();
-            string l_AssetPathName = AssetDatabase.GenerateUniqueAssetPath("Assets/Gregoire/Scripts/NetWorking/So_Board/NewBoard.asset");
-            AssetDatabase.CreateAsset(m_BoardInstance, l_AssetPathName);
-            Debug.Log("coucou je suis l'instance So creer");
+            //m_BoardInstance = ScriptableObject.CreateInstance<SO_Board>();
+            //string l_AssetPathName = AssetDatabase.GenerateUniqueAssetPath("Assets/Gregoire/Scripts/NetWorking/So_Board/NewBoard.asset");
+            //AssetDatabase.CreateAsset(m_BoardInstance, l_AssetPathName);
+            //Debug.Log("coucou je suis l'instance So creer");
 
             
         }
