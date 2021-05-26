@@ -7,6 +7,8 @@ namespace NetWork
     [System.Serializable]
     public class SideBoard
     {
+        public ulong m_PlayerID;
+
         public List<SO_CardData> m_Hand = null;
 
         public List<SO_CardData> m_Deck = null;

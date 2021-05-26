@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Dynamic;
+using System.Globalization;
 using UnityEngine;
 
 namespace NetWork
@@ -15,6 +17,21 @@ namespace NetWork
             m_Zone = p_zone;
         }
 
+       
+        public SlotBoard()
+        {
+            //if(m_Card ==null)
+            //{
+            //    m_Card = ScriptableObject.CreateInstance<SO_CardData>();
+            //    Debug.Log(m_Card);
+            //}
+            //else
+            //{
+            //    return;
+            //}
+            
+            //Debug.Log("coucou je suis le 2e slotboard fonction");
+        }
         public EZoneCard.CardZones ZoneCard
         {
             get { return m_Zone; }

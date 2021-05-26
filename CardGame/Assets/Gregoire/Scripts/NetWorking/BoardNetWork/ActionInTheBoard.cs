@@ -5,6 +5,7 @@ using UnityEngine;
 using MLAPI;
 using MLAPI.NetworkVariable;
 using MLAPI.Messaging;
+using MLAPI.Connection;
 
 namespace NetWork
 {
@@ -17,62 +18,96 @@ namespace NetWork
         private SO_Board m_BoardInstance = null;
 
         [SerializeField]
-        private ulong m_ClientID = 0;
-
-        [SerializeField]
-        private int[] m_IDSlot = { };
-
-        [SerializeField]
-        private int m_IDCard = 0;
+        private bool m_IsConnect = false;
 
         public override void NetworkStart()
         {
-            m_BoardInstance = Instantiate(m_BoardReference);
-        }
+            m_IsConnect = true;
 
-        public void ConnectBoard()
-        {
-            m_BoardInstance = FindObjectOfType<SO_Board>();
-            
-            Debug.Log(OwnerClientId);
-            Debug.Log("alut");
-
-            if (IsServer)
+            if (m_IsConnect)
             {
-                PlacementCardClientRpc(m_ClientID, m_IDSlot, m_IDCard);
+                Debug.Log(m_IsConnect);
+                m_BoardInstance = Instantiate(m_BoardReference);
+                m_BoardInstance.Shuffle();
+                DrawCard(0,5);
+            //check savoir si on est deja co
+            //set les id dans les side
+            
+            Debug.Log("NOOOOOOOOOOOOOOOOOOOOOOOOOO, je vous baise");
             }
             else
             {
-                PlacementCardServerRpc(m_ClientID, m_IDSlot, m_IDCard);
+                Debug.Log("TA GRAND MERE EN STRING DE GUERRE");
             }
         }
 
-        [ServerRpc]
-        public void PlacementCardServerRpc(ulong p_ClientID, int[] p_IDSlot, int p_IDCard)
+        #region Placement Card
+        //fonctsion qui sera appeler dans pour l'instant le start 
+        //car c'est la generic et qu'elle fait le check
+        private void PlacementCard(ulong p_SideID, int p_IDSlot, int p_IDCard)
         {
-            PlacementCardClientRpc(p_ClientID,p_IDSlot,p_IDCard);
+            /* if (IsServer)
+             {
+                 PlacementCardClientRpc(p_SideID, p_IDSlot, p_IDCard);
+                 Debug.Log("je suis server " + IsServer);
+             }
+             else
+             {
+                 PlacementCardServerRpc(p_SideID, p_IDSlot, p_IDCard);
+                 Debug.Log("je suis client " + IsClient);
+             }*/
+        }
+        [ServerRpc]
+        public void PlacementCardServerRpc(ulong p_SideID, int p_IDSlot, int p_IDCard)
+        {
+            PlacementCardClientRpc(p_SideID, p_IDSlot, p_IDCard);
+
             //ici on va appeller la fonction de nos event de l'instance ce notre so_Board (m_BoardInstance)
             Debug.Log("youyu 2");
         }
 
         [ClientRpc]
-        public void PlacementCardClientRpc(ulong p_ClientID, int[] p_IDSlot, int p_IDCard)
+        public void PlacementCardClientRpc(ulong p_SideID, int p_IDSlot, int p_IDCard)
         {
-            Debug.Log("youyu");
             //update le board de facon individuel  et recupere les infos
-          //  m_BoardInstance.PutCardOnSlot();
-
+            m_BoardInstance.PutCardOnSlot(p_IDSlot,p_IDCard);
+            //Debug.Log("youyu");
+            Debug.Log($"j'ai récupéré la carte dans placementcArd: {p_IDCard}");
         }
 
-        public void HandCardInTheSlot()
+        #endregion
+
+        #region Pioche Card
+        public void DrawCard(ulong p_IDSlot, int p_IDCard)
         {
-
+            if(IsServer)
+            {
+                DrawCardClientRpc(p_IDSlot, p_IDCard);
+            }
+            else
+            {
+                DrawCardServerRpc(p_IDSlot, p_IDCard);
+            }
         }
+
+        [ServerRpc]
+        public void DrawCardServerRpc(ulong p_IDSlot, int p_IDCard)
+        {
+            DrawCardClientRpc(p_IDSlot, p_IDCard);
+        }
+        [ClientRpc]
+        public void DrawCardClientRpc(ulong p_IDSlot, int p_IDCard)
+        {
+            m_BoardInstance.DrawCard(p_IDSlot, p_IDCard);
+            Debug.Log("je suis la coucou");
+        }
+        #endregion
 
         public SO_Board BoardInstance
         {
             get { return m_BoardInstance; }
             set { m_BoardInstance = value; }
         }
+
     }
 }

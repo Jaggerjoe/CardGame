@@ -40,6 +40,10 @@ MonoBehaviour:
     m_Discard: []
     m_Slot: []
     m_Point: 0
+  m_IDCardIndexe: 0
+  m_InstantiateCard:
+    m_PersistentCalls:
+      m_Calls: []
   m_DropCard:
     m_PersistentCalls:
       m_Calls: []

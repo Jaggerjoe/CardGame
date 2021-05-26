@@ -45,9 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BoardReference: {fileID: 11400000, guid: 31475fa8f69e5e948ba40dcd59ab355f, type: 2}
-  m_ClientID: 0
-  m_IDSlot: 
-  m_IDCard: 0
+  m_ClientID: 1
+  m_IDSlot: 2
+  m_IDCard: 3
 --- !u!114 &-9163933224942590814
 MonoBehaviour:
   m_ObjectHideFlags: 0

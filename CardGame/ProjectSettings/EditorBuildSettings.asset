@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Gregoire/Scene/Menu.unity
     guid: 6329ac48ee6993e4d909d5880d622bf5
+  - enabled: 1
+    path: Assets/Gregoire/Scene/3DCardGame.unity
+    guid: fe88b39b0c0595644899c36d766d3fc6
   m_configObjects: {}
