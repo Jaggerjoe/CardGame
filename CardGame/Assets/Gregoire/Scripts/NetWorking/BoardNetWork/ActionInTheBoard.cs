@@ -13,32 +13,40 @@ namespace NetWork
     public class ActionInTheBoard : NetworkBehaviour
     {
         [SerializeField]
-        private  SO_Board m_BoardReference;
+        private SO_Board m_BoardReference;
 
         private SO_Board m_BoardInstance = null;
 
         [SerializeField]
-        private bool m_IsConnect = false;
+        private bool m_IsConnect = true;
+        private bool m_IsConnectClient = false;
 
         public override void NetworkStart()
         {
-            m_IsConnect = true;
+            if(m_IsConnect == false)
+            {
+                if (IsHost)
+                {
+                    m_BoardInstance = Instantiate(m_BoardReference);
+                    m_BoardInstance.Shuffle();
+                    //m_BoardInstance.GetPlayerSide(OwnerClientId);
+                    Debug.Log("id server " + m_BoardInstance.Side.m_PlayerID);
+                    m_IsConnect = true;
+                }
+                else
+                {
+                        m_BoardInstance = Instantiate(m_BoardReference);
+                        m_BoardInstance.Shuffle();
+                        m_BoardInstance.Side2.m_PlayerID = OwnerClientId;
 
-            if (m_IsConnect)
-            {
-                Debug.Log(m_IsConnect);
-                m_BoardInstance = Instantiate(m_BoardReference);
-                m_BoardInstance.Shuffle();
-                DrawCard(0,5);
-            //check savoir si on est deja co
-            //set les id dans les side
-            
+                        m_IsConnect = true;
+                        Debug.Log("id client" + m_BoardInstance.Side.m_PlayerID);
+                }
+            }
+
+            DrawCard(0, 5);
             Debug.Log("NOOOOOOOOOOOOOOOOOOOOOOOOOO, je vous baise");
-            }
-            else
-            {
-                Debug.Log("TA GRAND MERE EN STRING DE GUERRE");
-            }
+
         }
 
         #region Placement Card
@@ -70,7 +78,7 @@ namespace NetWork
         public void PlacementCardClientRpc(ulong p_SideID, int p_IDSlot, int p_IDCard)
         {
             //update le board de facon individuel  et recupere les infos
-            m_BoardInstance.PutCardOnSlot(p_IDSlot,p_IDCard);
+            m_BoardInstance.PutCardOnSlot(p_IDSlot, p_IDCard);
             //Debug.Log("youyu");
             Debug.Log($"j'ai récupéré la carte dans placementcArd: {p_IDCard}");
         }
@@ -78,27 +86,27 @@ namespace NetWork
         #endregion
 
         #region Pioche Card
-        public void DrawCard(ulong p_IDSlot, int p_IDCard)
+        public void DrawCard(ulong p_PlayerNetworkID, int p_IDCard)
         {
-            if(IsServer)
+            if (IsServer)
             {
-                DrawCardClientRpc(p_IDSlot, p_IDCard);
+                DrawCardClientRpc(p_PlayerNetworkID, p_IDCard);
             }
             else
             {
-                DrawCardServerRpc(p_IDSlot, p_IDCard);
+                DrawCardServerRpc(p_PlayerNetworkID, p_IDCard);
             }
         }
 
         [ServerRpc]
-        public void DrawCardServerRpc(ulong p_IDSlot, int p_IDCard)
+        public void DrawCardServerRpc(ulong p_PlayerNetworkID, int p_IDCard)
         {
-            DrawCardClientRpc(p_IDSlot, p_IDCard);
+            DrawCardClientRpc(p_PlayerNetworkID, p_IDCard);
         }
         [ClientRpc]
-        public void DrawCardClientRpc(ulong p_IDSlot, int p_IDCard)
+        public void DrawCardClientRpc(ulong p_PlayerNetworkID, int p_IDCard)
         {
-            m_BoardInstance.DrawCard(p_IDSlot, p_IDCard);
+            m_BoardInstance.DrawCard(p_PlayerNetworkID, p_IDCard);
             Debug.Log("je suis la coucou");
         }
         #endregion

@@ -66,7 +66,6 @@ namespace NetWork
         {
             //Invoke le  fait de piocher
             // m_RemoveCardDeck.Invoke();
-            Debug.Log("mon erreur est ici");
             m_AddCardHand.Invoke();
             Debug.Log("je remove ma carte");
 
@@ -105,10 +104,9 @@ namespace NetWork
         }
 
         //ajouter une carte dans la main
-        public void DrawCardData()
+        public void AddDrawCard()
         {
             Side.m_Hand.Add(m_CardDeckToHand);
-            Debug.Log("je passe la mon cochon");
             //p_IDCard = Side.m_Deck[0].m_Index;
         }
 
@@ -120,6 +118,18 @@ namespace NetWork
             //p_IDCard = Side.m_Deck[0].m_Index;
         }
 
+        //fonction qui sera appeler dans le fonction qui ont besoin de savoir l'id
+        public void GetPlayerSide(ulong p_PlayerNetworkID)
+        {
+            //va chercher le networkManager pour recup le client ID
+            // sa prendrais cette forme = NetworkManager.Singleton.OwnerClientID; dans l'idee
+
+            //si l'id tu paramettre est la meme que celle du networkManager alors c'est le local
+            //sinon c'est l'autre
+            //en gros, p_PlayerNetworkId doit = ou non a NetworkManager.Singleton.OwnerClientID
+        }
+
+        //je recupere l'id de ma card que je revois apres
         public int GetIDCard()
         {
             int l_IdCard;
