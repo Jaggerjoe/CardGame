@@ -1,8 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using MLAPI;
 using MLAPI.Transports.UNET;
+using MLAPI.SceneManagement;
+using UnityEngine.SceneManagement;
 using System;
 
 public class NetWorkConnect : MonoBehaviour
@@ -13,6 +13,7 @@ public class NetWorkConnect : MonoBehaviour
     private string m_IpAdressChanged;
     private int m_IpAdressPort = 7777;
     UNetTransport m_Transport;
+    private SceneSwitchProgress m_SceneProgress;
 
     //private void OnGUI()
     //{
@@ -27,11 +28,14 @@ public class NetWorkConnect : MonoBehaviour
     //        StatusLabels();
     //    }
     //}
-    
+
     public void HostButton()
     {
         NetworkManager.Singleton.ConnectionApprovalCallback += ApprovalCallback;
         NetworkManager.Singleton.StartHost();
+      //  NetworkSceneManager.SwitchScene("3DCardGame");
+        //SceneManager.LoadScene("3DCardGame");
+
     }
 
     private void ApprovalCallback(byte[] p_ConnectionData, ulong p_ClientID, NetworkManager.ConnectionApprovedDelegate p_Callback)
@@ -44,16 +48,19 @@ public class NetWorkConnect : MonoBehaviour
     {
         m_Transport = NetworkManager.Singleton.GetComponent<UNetTransport>();
         m_Transport.ConnectAddress = m_IpAdress;
-       
-        Debug.Log("join connect adress");
-        m_Transport.ConnectPort = m_IpAdressPort;
-        Debug.Log("join connect adress port");
 
+        Debug.Log("join connect adress");
 
         NetworkManager.Singleton.NetworkConfig.ConnectionData = System.Text.Encoding.ASCII.GetBytes("passeword");
         NetworkManager.Singleton.StartClient();
+       // m_SceneProgress.OnClientLoadedScene  += SceneProgress_OnClientLoadedScene;
     }
-    
+
+    private void SceneProgress_OnClientLoadedScene(ulong clientId)
+    {
+
+    }
+
     private void StatusLabels()
     {
         

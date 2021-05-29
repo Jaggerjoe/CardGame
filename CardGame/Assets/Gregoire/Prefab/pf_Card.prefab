@@ -204,7 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f8e75b28c8358b4e825df137910424e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Parent: {fileID: 0}
+  m_Parent: {fileID: 3530328449851030433, guid: cce7a59145de8d34386f48572b90140d, type: 3}
 --- !u!114 &7072064370692613420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,7 +218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_DataCard: {fileID: 0}
-  m_TextCardName: {fileID: 5402590388335538733}
+  m_TextCardName: {fileID: 0}
   m_Point: {fileID: 0}
   m_Sign: {fileID: 0}
   m_PointCombo: {fileID: 0}

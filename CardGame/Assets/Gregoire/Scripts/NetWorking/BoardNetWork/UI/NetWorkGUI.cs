@@ -50,11 +50,11 @@ namespace NetWork
 
                 GUILayout.Label("ID: " + NetworkManager.Singleton.LocalClientId);
 
-                using (new GUILayout.HorizontalScope())
-                {
-                    if (GUILayout.Button("ConnectBoard")) Board.ConnectBoard();
+                //using (new GUILayout.HorizontalScope())
+                //{
+                //    if (GUILayout.Button("ConnectBoard")) Board.ConnectBoard();
 
-                }
+                //}
                 GUILayout.Space(20);
                 using (new GUILayout.HorizontalScope())
                 {
