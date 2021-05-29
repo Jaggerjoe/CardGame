@@ -20,7 +20,7 @@ public class WindowCustomEditor : EditorWindow
         CreatePathAssetExist();
         string[] l_GetAssetPath = m_SetAssetPath.ToArray();
         ClearList();
-        //loadasset si il existe, sinon create, attention GUID pas un chemin normalement a traduire.
+
         for (int i = 0; i < asset.Length; i++)
         {
             string l_NameCard = NacifyText(asset[i]);
@@ -32,7 +32,7 @@ public class WindowCustomEditor : EditorWindow
                 {
                     l_Asset = (SO_CardData)AssetDatabase.LoadAssetAtPath(l_GetAssetPath[k], typeof(SO_CardData));
                     break;
-                }               
+                }
             }
 
             if(l_Asset == null)
@@ -110,12 +110,14 @@ public class WindowCustomEditor : EditorWindow
             {
                 l_Asset.m_Index = Number;
             }
+
+
             AssetDatabase.SaveAssets();
             //AddToLosit(l_Asset);
         }
     }
 
-    private SO_CardData CreateAssetCard( string p_Name)
+    private SO_CardData CreateAssetCard(string p_Name)
     {
         SO_CardData p_Asset = null;
         p_Asset = ScriptableObject.CreateInstance<SO_CardData>();
@@ -124,6 +126,11 @@ public class WindowCustomEditor : EditorWindow
         AssetDatabase.CreateAsset(p_Asset, l_Name);
 
         return p_Asset;
+    }
+
+    private void AddEffectToCard()
+    {
+
     }
 
     private void AddToLosit(SO_CardData p_Asset)
@@ -209,6 +216,15 @@ public class WindowCustomEditor : EditorWindow
         }
     }
 
+    private void CreateEffect()
+    {
+        SO_EffectCard p_Asset = null;
+        p_Asset = ScriptableObject.CreateInstance<SO_EffectCard>();
+
+        string l_Name = UnityEditor.AssetDatabase.GenerateUniqueAssetPath($"Assets/Gregoire/Effect/Effect.asset");
+        AssetDatabase.CreateAsset(p_Asset, l_Name);
+    }
+
     public void OnGUI()
     {
         if (GUILayout.Button("Request"))
@@ -219,6 +235,11 @@ public class WindowCustomEditor : EditorWindow
         if (GUILayout.Button("Clear"))
         {
             ClearFolderCard();
+        }
+
+        if(GUILayout.Button("CreateEffect"))
+        {
+            CreateEffect();
         }
     }
 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "DATACard", menuName = "Games")]
+[CreateAssetMenu(fileName = "DATACard", menuName = "CardGame/CardData")]
 public class SO_CardData : ScriptableObject
 {
     public string m_CardNames = string.Empty;
@@ -16,6 +16,8 @@ public class SO_CardData : ScriptableObject
     public int m_PointCombo = 0;
 
     public EZoneCard.CardZones m_CardZone = 0;
+
+    public SO_EffectCard m_Effect = null;
 
     public int m_Index = 0;
 }
