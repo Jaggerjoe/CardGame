@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: XVI.THE TOWER (16)
   m_EditorClassIdentifier: 
   m_CardNames: 
-  m_EffectCard: 
+  m_EffectCardText: 
   m_PointsCard: 0
   m_Sign: 
   m_PointCombo: 0
   m_CardZone: 0
+  m_Effect: {fileID: 0}
   m_Index: 0

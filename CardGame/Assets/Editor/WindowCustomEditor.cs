@@ -3,39 +3,43 @@ using UnityEditor;
 using UnityEngine.Networking;
 using System.Collections.Generic;
 using NetWork;
+using System;
+using System.Collections;
 
 public class WindowCustomEditor : EditorWindow
 {
-    UnityWebRequest request;
     public const string SHEET_ID = "12uPt3HF8pTSMS2GVi8SOQMEk4NZ2pA7aUhHwqx-xmx8";
     public const string SHEET_NAME = "DataCardAnglais";
     public const string SHEET_RANGE = "A2:G23";
 
     int Number;
     SO_Board m_DeckCards = null;
+
     List<string> m_SetAssetPath = new List<string>();
+
+    List<SO_EffectCard> m_SetEffetPAth = new List<SO_EffectCard>();
+
+    string[] asset;
     public void CreateAssetCard()
     {
-        string[] asset = request.downloadHandler.text.Split(new char[] { '\n', ',' });
         CreatePathAssetExist();
-        string[] l_GetAssetPath = m_SetAssetPath.ToArray();
-        ClearList();
+        GetFolderEffect();
 
         for (int i = 0; i < asset.Length; i++)
         {
             string l_NameCard = NacifyText(asset[i]);
             SO_CardData l_Asset = null;
 
-            for (int k = 0; k < l_GetAssetPath.Length; k++)
+            for (int k = 0; k < m_SetAssetPath.Count; k++)
             {
-                if (l_GetAssetPath[k].Contains(l_NameCard))
+                if (m_SetAssetPath[k].Contains(l_NameCard))
                 {
-                    l_Asset = (SO_CardData)AssetDatabase.LoadAssetAtPath(l_GetAssetPath[k], typeof(SO_CardData));
+                    l_Asset = (SO_CardData)AssetDatabase.LoadAssetAtPath(m_SetAssetPath[k], typeof(SO_CardData));
                     break;
                 }
             }
 
-            if(l_Asset == null)
+            if (l_Asset == null)
             {
                 l_Asset = CreateAssetCard(l_NameCard);
             }
@@ -44,7 +48,7 @@ public class WindowCustomEditor : EditorWindow
             i++;
 
             string l_AffectCard = NacifyText(asset[i]);
-            l_Asset.m_EffectCard = l_AffectCard;
+            l_Asset.m_EffectCardText = l_AffectCard;
             i++;
 
             string l_PointCard = NacifyText(asset[i]);
@@ -109,11 +113,19 @@ public class WindowCustomEditor : EditorWindow
             if (int.TryParse(l_IndexCard, out Number))
             {
                 l_Asset.m_Index = Number;
+
+                for (int j = 0; j < m_SetEffetPAth.Count; j++)
+                {
+                    if (m_SetEffetPAth[j].IDCard == Number)
+                    {
+                        l_Asset.m_Effect = m_SetEffetPAth[j];
+                        break;
+                    }
+                }
             }
 
-
             AssetDatabase.SaveAssets();
-            //AddToLosit(l_Asset);
+            AddToLosit(l_Asset);
         }
     }
 
@@ -127,45 +139,35 @@ public class WindowCustomEditor : EditorWindow
 
         return p_Asset;
     }
-
-    private void AddEffectToCard()
-    {
-
-    }
-
-    private void AddToLosit(SO_CardData p_Asset)
-    {
-        if (m_DeckCards == null)
-        {
-            string[] unusedFolder = { "Assets/Gregoire/Scripts/GameFeel/3D" };
-            string[] AssetsArray = AssetDatabase.FindAssets("t:SO_Board", unusedFolder);
-            foreach (var item in AssetsArray)
-            {
-                Debug.Log(item);
-                if (m_DeckCards != null)
-                {
-                    m_DeckCards.Side.m_Deck.Add(p_Asset);
-                    Debug.Log("ma liste existe");
-                }
-            }
-        }
-        else
-        {
-            m_DeckCards.Side.m_Deck.Add(p_Asset);
-            Debug.Log("ma liste existe");
-        }
-    }
-
     private void CreatePathAssetExist()
     {
         string[] unusedFolder = { "Assets/Gregoire/Card" };
         string[] AssetsArray = AssetDatabase.FindAssets("t:SO_CardData", unusedFolder);
-        m_SetAssetPath.Clear();
 
         foreach (var item in AssetsArray)
         {
             var path = AssetDatabase.GUIDToAssetPath(item);
-            m_SetAssetPath.Add(path);
+            if(!m_SetAssetPath.Contains(path))
+            {
+                m_SetAssetPath.Add(path);
+            }
+        }
+    }
+
+    private void GetFolderEffect()
+    {
+        string[] l_FolderPath = { "Assets/Gregoire/Effect" };
+        string[] l_EffectArrayPath = AssetDatabase.FindAssets("t:SO_EffectCard", l_FolderPath);
+
+        foreach (var Asset in l_EffectArrayPath)
+        {
+            SO_EffectCard l_Effect;
+            var path = AssetDatabase.GUIDToAssetPath(Asset);
+            l_Effect = (SO_EffectCard)AssetDatabase.LoadAssetAtPath(path, typeof(SO_EffectCard));
+            if(!m_SetEffetPAth.Contains(l_Effect))
+            {
+                m_SetEffetPAth.Add(l_Effect);
+            }
         }
     }
 
@@ -177,12 +179,13 @@ public class WindowCustomEditor : EditorWindow
 
     public void Request()
     {
-        request = UnityWebRequest.Get($"https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&sheet={SHEET_NAME}&range={SHEET_RANGE}");
+        UnityWebRequest request = UnityWebRequest.Get($"https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&sheet={SHEET_NAME}&range={SHEET_RANGE}");
         request.SendWebRequest();
         while (!request.isDone)
         {
             if (request.isDone)
             {
+                asset = request.downloadHandler.text.Split(new char[] { '\n', ',' });
                 CreateAssetCard();
             }
         }
@@ -196,17 +199,41 @@ public class WindowCustomEditor : EditorWindow
             var path = AssetDatabase.GUIDToAssetPath(asset);
             AssetDatabase.DeleteAsset(path);
         }
-        //ClearList();
         m_SetAssetPath.Clear();
     }
 
+    private void AddToLosit(SO_CardData p_Asset)
+    {
+        if (m_DeckCards == null)
+        {
+            string[] unusedFolder = { "Assets/Gregoire/Scripts/Networking/So_Board" };
+            string[] AssetsArray = AssetDatabase.FindAssets("t:SO_Board", unusedFolder);
+            foreach (var item in AssetsArray)
+            {
+                var path = AssetDatabase.GUIDToAssetPath(item);
+                m_DeckCards = (SO_Board)AssetDatabase.LoadAssetAtPath(path, typeof(SO_Board));
+                Debug.Log(m_DeckCards);
+                m_DeckCards.Side.m_Deck.Add(p_Asset);
+            }
+        }
+        else
+        {
+            if(!m_DeckCards.Side.m_Deck.Contains(p_Asset))
+            {
+                m_DeckCards.Side.m_Deck.Add(p_Asset);
+            }
+        }
+    }
     private void ClearList()
     {
         if (m_DeckCards == null)
         {
-            m_DeckCards = FindObjectOfType<SO_Board>();
-            if (m_DeckCards != null)
+            string[] unusedFolder = { "Assets/Gregoire/Scripts/Networking/So_Board" };
+            string[] AssetsArray = AssetDatabase.FindAssets("t:SO_Board", unusedFolder);
+            foreach (var item in AssetsArray)
             {
+                var path = AssetDatabase.GUIDToAssetPath(item);
+                m_DeckCards = (SO_Board)AssetDatabase.LoadAssetAtPath(path, typeof(SO_Board));
                 m_DeckCards.Side.m_Deck.Clear();
             }
         }
@@ -235,9 +262,10 @@ public class WindowCustomEditor : EditorWindow
         if (GUILayout.Button("Clear"))
         {
             ClearFolderCard();
+            ClearList();
         }
 
-        if(GUILayout.Button("CreateEffect"))
+        if (GUILayout.Button("CreateEffect"))
         {
             CreateEffect();
         }

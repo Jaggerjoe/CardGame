@@ -7,7 +7,7 @@ public class SO_CardData : ScriptableObject
 {
     public string m_CardNames = string.Empty;
 
-    public string m_EffectCard = string.Empty;
+    public string m_EffectCardText = string.Empty;
 
     public int m_PointsCard = 0;
 
