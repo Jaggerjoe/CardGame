@@ -58,16 +58,14 @@ namespace NetWork
 
         private void DrawUICard()
         {
-           //m_SoBoard.DrawCardInfo();
-           //if(m_board.side.playerID == 0)
+            //m_SoBoard.DrawCardInfo();
+            //if(m_board.side.playerID == 0)
             //on va creer une boucle qui fera apparaitre 6 fois nos card
-            for(int i = 0; i < 6; i++)
+            for (int i = 0; i < m_SoBoard.Side.m_Hand.Count; i++)
             {
-                
-                m_SoBoard.SwitchCardDeckToDrow();
-                m_SoBoard.AddDrawCard();
+
                 TakeCardDeck();
-              
+
                 //on instancie la prefab a la position de la main qui est GO_Vide in scene
                 GameObject l_Card = Instantiate(m_Card, m_Hand);
 
