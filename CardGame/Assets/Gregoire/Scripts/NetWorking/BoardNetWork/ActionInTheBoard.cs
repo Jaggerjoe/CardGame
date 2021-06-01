@@ -15,6 +15,7 @@ namespace NetWork
         [SerializeField]
         private SO_Board m_BoardReference;
 
+       [SerializeField]
         private SO_Board m_BoardInstance = null;
 
         [SerializeField]
@@ -23,28 +24,28 @@ namespace NetWork
 
         public override void NetworkStart()
         {
-            if(m_IsConnect == false)
-            {
-                if (IsHost)
-                {
+            //if(m_IsConnect == false)
+            //{
+            //    if (IsHost)
+            //    {
                     m_BoardInstance = Instantiate(m_BoardReference);
                     m_BoardInstance.Shuffle();
                     //m_BoardInstance.GetPlayerSide(OwnerClientId);
-                    Debug.Log("id server " + m_BoardInstance.Side.m_PlayerID);
-                    m_IsConnect = true;
-                }
-                else
-                {
-                        m_BoardInstance = Instantiate(m_BoardReference);
-                        m_BoardInstance.Shuffle();
-                        m_BoardInstance.Side2.m_PlayerID = OwnerClientId;
+                    
+                    //m_IsConnect = true;
+            //    }
+            //    else
+            //    {
+            //            m_BoardInstance = Instantiate(m_BoardReference);
+            //            m_BoardInstance.Shuffle();
+            //          //  m_BoardInstance.Side2.m_PlayerID = OwnerClientId;
 
-                        m_IsConnect = true;
-                        Debug.Log("id client" + m_BoardInstance.Side.m_PlayerID);
-                }
-            }
+            //            m_IsConnect = true;
+            //            
+            //    }
+            //}
 
-            DrawCard(0, 5);
+            DrawCard(OwnerClientId, 0);
             Debug.Log("NOOOOOOOOOOOOOOOOOOOOOOOOOO, je vous baise");
 
         }
@@ -78,7 +79,7 @@ namespace NetWork
         public void PlacementCardClientRpc(ulong p_SideID, int p_IDSlot, int p_IDCard)
         {
             //update le board de facon individuel  et recupere les infos
-            m_BoardInstance.PutCardOnSlot(p_IDSlot, p_IDCard);
+            m_BoardInstance.PutCardOnSlot(p_SideID,p_IDSlot, p_IDCard);
             //Debug.Log("youyu");
             Debug.Log($"j'ai récupéré la carte dans placementcArd: {p_IDCard}");
         }
@@ -106,7 +107,8 @@ namespace NetWork
         [ClientRpc]
         public void DrawCardClientRpc(ulong p_PlayerNetworkID, int p_IDCard)
         {
-            m_BoardInstance.DrawCard(p_PlayerNetworkID, p_IDCard);
+           
+            m_BoardInstance.DrawCardBoard(p_PlayerNetworkID, p_IDCard);
             Debug.Log("je suis la coucou");
         }
         #endregion
