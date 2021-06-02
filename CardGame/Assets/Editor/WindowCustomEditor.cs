@@ -273,11 +273,13 @@ public class WindowCustomEditor : EditorWindow
                 var path = AssetDatabase.GUIDToAssetPath(item);
                 m_DeckCards = (SO_Board)AssetDatabase.LoadAssetAtPath(path, typeof(SO_Board));
                 m_DeckCards.Side.m_Deck.Clear();
+                m_DeckCards.Side2.m_Deck.Clear();
             }
         }
         else
         {
             m_DeckCards.Side.m_Deck.Clear();
+            m_DeckCards.Side2.m_Deck.Clear();
         }
     }
 
@@ -307,6 +309,7 @@ public class WindowCustomEditor : EditorWindow
         {
             CreateEffect();
         }
+       
     }
 
     [MenuItem("Tools/MyWindow")]

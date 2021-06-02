@@ -2,6 +2,7 @@ using UnityEngine;
 using MLAPI;
 using UnityEngine.Events;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace NetWork
 {
@@ -183,17 +184,19 @@ namespace NetWork
         }
 
 
-        //appeler dans l'action in the board dans le networkStart
-        public void Shuffle()
-        {
-            for (int i = 0; i < Side.m_Deck.Count; i++)
-            {
-                int j = Random.Range(i, Side.m_Deck.Count);
-                SO_CardData l_Temp = Side.m_Deck[i];
-                Side.m_Deck[i] = Side.m_Deck[j];
-                Side.m_Deck[j] = l_Temp;
-            }
-        }
+        ////appeler dans l'action in the board dans le networkStart
+        //public void Shuffle()
+        //{
+        //    for (int i = 0; i < Side.m_Deck.Count; i++)
+        //    {
+        //        int j = Random.Range(i, Side.m_Deck.Count);
+        //        SO_CardData l_Temp = Side.m_Deck[i];
+        //        Side.m_Deck[i] = Side.m_Deck[j];
+        //        Side.m_Deck[j] = l_Temp;
+        //    }
+        //}
+
+        
 
        
 
