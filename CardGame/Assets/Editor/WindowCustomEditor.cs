@@ -10,7 +10,7 @@ public class WindowCustomEditor : EditorWindow
 {
     public const string SHEET_ID = "12uPt3HF8pTSMS2GVi8SOQMEk4NZ2pA7aUhHwqx-xmx8";
     public const string SHEET_NAME = "DataCardAnglais";
-    public const string SHEET_RANGE = "A2:G23";
+    public const string SHEET_RANGE = "A2:H23";
 
     int Number;
     SO_Board m_DeckCards = null;
@@ -19,12 +19,14 @@ public class WindowCustomEditor : EditorWindow
 
     List<SO_EffectCard> m_SetEffetPAth = new List<SO_EffectCard>();
 
+    List<Texture2D> m_GetTextures = new List<Texture2D>();
+
     string[] asset;
     public void CreateAssetCard()
     {
         CreatePathAssetExist();
         GetFolderEffect();
-
+        GetTexture();
         for (int i = 0; i < asset.Length; i++)
         {
             string l_NameCard = NacifyText(asset[i]);
@@ -124,11 +126,25 @@ public class WindowCustomEditor : EditorWindow
                 }
             }
 
+            i++;
+            string l_CardTxrName = NacifyText(asset[i]);
+            for (int k = 0; k < m_GetTextures.Count; k++)
+            {
+                if (m_GetTextures[k].name == l_CardTxrName)
+                {
+                    l_Asset.m_CardTxr = m_GetTextures[k];
+                    break;
+                }
+            }
+
             AssetDatabase.SaveAssets();
             AddToLosit(l_Asset);
         }
     }
 
+#if UNITY_EDITOR
+
+#endif
     private SO_CardData CreateAssetCard(string p_Name)
     {
         SO_CardData p_Asset = null;
@@ -150,6 +166,23 @@ public class WindowCustomEditor : EditorWindow
             if(!m_SetAssetPath.Contains(path))
             {
                 m_SetAssetPath.Add(path);
+            }
+        }
+    }
+
+    private void GetTexture()
+    {
+        string[] l_FolderPath = { "Assets/Gregoire/CardTexture" };
+        string[] l_TextureCard = AssetDatabase.FindAssets("t:texture2D", l_FolderPath);
+
+        foreach (var item in l_TextureCard)
+        {
+
+            var path = AssetDatabase.GUIDToAssetPath(item);
+            Texture2D l_Txr = (Texture2D)AssetDatabase.LoadAssetAtPath(path, typeof(Texture2D));
+            if (!m_GetTextures.Contains(l_Txr))
+            {
+                m_GetTextures.Add(l_Txr);
             }
         }
     }
@@ -214,6 +247,7 @@ public class WindowCustomEditor : EditorWindow
                 m_DeckCards = (SO_Board)AssetDatabase.LoadAssetAtPath(path, typeof(SO_Board));
                 Debug.Log(m_DeckCards);
                 m_DeckCards.Side.m_Deck.Add(p_Asset);
+                m_DeckCards.Side2.m_Deck.Add(p_Asset);
             }
         }
         else
@@ -221,6 +255,10 @@ public class WindowCustomEditor : EditorWindow
             if(!m_DeckCards.Side.m_Deck.Contains(p_Asset))
             {
                 m_DeckCards.Side.m_Deck.Add(p_Asset);
+            } 
+            if(!m_DeckCards.Side2.m_Deck.Contains(p_Asset))
+            {
+                m_DeckCards.Side2.m_Deck.Add(p_Asset);
             }
         }
     }
