@@ -20,5 +20,7 @@ public class SO_CardData : ScriptableObject
     public SO_EffectCard m_Effect = null;
 
     public int m_Index = 0;
+
+    public Texture2D m_CardTxr;
 }
 
