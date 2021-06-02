@@ -18,7 +18,8 @@ public class HandPlayerEditor : Editor
             EditorGUILayout.Space(5);
             if (GUILayout.Button("Shuffle"))
             {
-                l_HandPlayer.Shuffle();
+                l_HandPlayer.Side.m_Deck.Shuffle();
+                l_HandPlayer.Side2.m_Deck.Shuffle();
             }
         }
     }

@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a857f5a1b9c2343ad15e1293421193, type: 3}
   m_Name: I.THE MAGICIAN (1)
   m_EditorClassIdentifier: 
-  m_CardNames: I.THE MAGICIAN (1)
-  m_EffectCardText: "Annule l'effet de la derni\xE8re carte jou\xE9e"
+  m_CardNames: 
+  m_EffectCardText: 
   m_PointsCard: 0
-  m_Sign: '-'
+  m_Sign: 
   m_PointCombo: 0
-  m_CardZone: 32
-  m_Effect: {fileID: 11400000, guid: 7df31ec0da28b18439957edac800d37e, type: 2}
-  m_Index: 1
+  m_CardZone: 0
+  m_Effect: {fileID: 0}
+  m_Index: 0
   m_CardTxr: {fileID: 0}

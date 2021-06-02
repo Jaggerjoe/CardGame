@@ -29,7 +29,7 @@ namespace NetWork
             //    if (IsHost)
             //    {
                     m_BoardInstance = Instantiate(m_BoardReference);
-                    m_BoardInstance.Shuffle();
+                    //m_BoardInstance.Shuffle();
                     //m_BoardInstance.GetPlayerSide(OwnerClientId);
                     
                     //m_IsConnect = true;
