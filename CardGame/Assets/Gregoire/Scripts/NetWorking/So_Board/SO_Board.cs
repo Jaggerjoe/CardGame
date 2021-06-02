@@ -94,7 +94,7 @@ namespace NetWork
         }
 
         //retirer une carte du deck
-        private void SwitchCardDeckToDrow(int p_IDCards)
+        private void SwitchCardDeckToDrow(int p_IDCard)
         {
           
             for (int i = 0; i < 6; i++)
@@ -103,8 +103,8 @@ namespace NetWork
                 m_CardDeckToHand = m_SideChoice.m_Deck[0];
                
 
-                p_IDCards = m_SideChoice.m_Deck[0].m_Index;
-                Debug.Log("je suis indxe de card " + p_IDCards);
+                p_IDCard = m_SideChoice.m_Deck[0].m_Index;
+                Debug.Log("je suis indxe de card " + p_IDCard);
 
                 m_SideChoice.m_Deck.RemoveAt(0);
                 AddDrawCard();
@@ -112,7 +112,7 @@ namespace NetWork
         }
         #endregion
 
-
+     
         //Toute les regle du jeu appeler dans l'action in the board dans le placementCard
         public void PutCardOnSlot(ulong p_SideID,int p_SlotId,int p_CardID)
         {
@@ -158,13 +158,13 @@ namespace NetWork
             if (p_PlayerNetworkID == NetworkManager.Singleton.LocalClientId)
             {
                 m_SideChoice = m_Side;
-                Debug.Log("je suis tsa mere");
+                Debug.Log("je suis tsa mere" + m_SideChoice);
                 //tout ce qui se passe sur un sid
             }
             else
             {
                 m_SideChoice = m_OtherSide;
-                Debug.Log("je suis ton pere");
+                Debug.Log("je suis ton pere" + m_SideChoice);
 
             }
             //sinon c'est l'autre

@@ -18,38 +18,36 @@ namespace NetWork
        [SerializeField]
         private SO_Board m_BoardInstance = null;
 
-        [SerializeField]
-        private bool m_IsConnect = true;
-        private bool m_IsConnectClient = false;
-
         public override void NetworkStart()
         {
-            //if(m_IsConnect == false)
-            //{
-            //    if (IsHost)
-            //    {
-                    m_BoardInstance = Instantiate(m_BoardReference);
-                    //m_BoardInstance.Shuffle();
-                    //m_BoardInstance.GetPlayerSide(OwnerClientId);
-                    
-                    //m_IsConnect = true;
-            //    }
-            //    else
-            //    {
-            //            m_BoardInstance = Instantiate(m_BoardReference);
-            //            m_BoardInstance.Shuffle();
-            //          //  m_BoardInstance.Side2.m_PlayerID = OwnerClientId;
+            if (IsLocalPlayer)
+            {
+                m_BoardInstance = Instantiate(m_BoardReference);
 
-            //            m_IsConnect = true;
-            //            
-            //    }
-            //}
+                if (IsHost)
+                {
+                    m_BoardInstance.Shuffle();
+                    Debug.Log("JE SUIS CO" + IsLocalPlayer);
+                }
+                else
+                {
+                    RequestDeckServerRpc();
+                    Debug.Log("client");
+                }
 
-            DrawCard(OwnerClientId, 0);
-            Debug.Log("NOOOOOOOOOOOOOOOOOOOOOOOOOO, je vous baise");
+               // DrawCard(OwnerClientId, 0);
+                Debug.Log("NOOOOOOOOOOOOOOOOOOOOOOOOOO, je vous baise");
+            }
+
 
         }
 
+
+        [ServerRpc]
+        private void RequestDeckServerRpc()
+        {
+            Debug.Log("youyuour dedans F");
+        }
         #region Placement Card
         //fonctsion qui sera appeler dans pour l'instant le start 
         //car c'est la generic et qu'elle fait le check
@@ -81,7 +79,7 @@ namespace NetWork
             //update le board de facon individuel  et recupere les infos
             m_BoardInstance.PutCardOnSlot(p_SideID,p_IDSlot, p_IDCard);
             //Debug.Log("youyu");
-            Debug.Log($"j'ai récupéré la carte dans placementcArd: {p_IDCard}");
+            Debug.Log($"j'ai rï¿½cupï¿½rï¿½ la carte dans placementcArd: {p_IDCard}");
         }
 
         #endregion
@@ -103,6 +101,7 @@ namespace NetWork
         public void DrawCardServerRpc(ulong p_PlayerNetworkID, int p_IDCard)
         {
             DrawCardClientRpc(p_PlayerNetworkID, p_IDCard);
+            Debug.Log("ta mere le cookie");
         }
         [ClientRpc]
         public void DrawCardClientRpc(ulong p_PlayerNetworkID, int p_IDCard)
