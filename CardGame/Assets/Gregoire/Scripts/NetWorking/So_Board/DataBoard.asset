@@ -13,9 +13,15 @@ MonoBehaviour:
   m_Name: DataBoard
   m_EditorClassIdentifier: 
   m_Side:
-    m_PlayerID: 0
     m_Hand: []
     m_Deck: []
     m_Discard: []
     m_Slot: []
     m_Point: 0
+  m_OtherSide:
+    m_Hand: []
+    m_Deck: []
+    m_Discard: []
+    m_Slot: []
+    m_Point: 0
+  m_AllCards: []

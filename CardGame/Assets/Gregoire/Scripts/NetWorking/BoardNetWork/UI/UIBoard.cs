@@ -49,8 +49,8 @@ namespace NetWork
             {
                 if (FindObjectOfType<SO_Board>())
                 {
-                    Debug.Log("coucou j'ai trouvé ta référence");
                     m_SoBoard = FindObjectOfType<ActionInTheBoard>().BoardInstance;
+                    //Debug.Log("jerecupère mon instance");
                     ListenBoard();
                 }
             }
