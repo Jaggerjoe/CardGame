@@ -22,7 +22,8 @@ namespace NetWork
 
         private SO_CardData m_CardDeckToHand = null;
 
-
+        [SerializeField]
+        private List<SO_CardData> m_AllCardsInstance =  new List<SO_CardData>();
 
         
         #region Events
@@ -63,7 +64,25 @@ namespace NetWork
 
         #endregion
 
+        public void SetDeckSideAndOtherSide()
+        {
+            //boucle car on ne peut pas ajouter directement la liste entiere
+            Side.m_Deck.AddRange(m_AllCardsInstance);
+            Side2.m_Deck.AddRange(m_AllCardsInstance);
+            //for (int i = 0; i < m_AllCardsInstance.Count; i++)
+            //{
+            //    Side.m_Deck.Add(m_AllCardsInstance[i]);
+            //}
 
+            //for (int i = 0; i < m_AllCardsInstance.Count; i++)
+            //{
+            //    Side2.m_Deck.Add(m_AllCardsInstance[i]);
+            //}
+            //Side.m_Deck = m_AllCardsInstance;
+            //    Side2.m_Deck = m_AllCards;
+
+
+        }
 
         #region pioche 
 
@@ -93,8 +112,9 @@ namespace NetWork
             //p_IDCard = Side.m_Deck[0].m_Index;
         }
 
+       
         //retirer une carte du deck
-        private void SwitchCardDeckToDrow(int p_IDCards)
+        private void SwitchCardDeckToDrow(int p_IDCard)
         {
           
             for (int i = 0; i < 6; i++)
@@ -103,8 +123,8 @@ namespace NetWork
                 m_CardDeckToHand = m_SideChoice.m_Deck[0];
                
 
-                p_IDCards = m_SideChoice.m_Deck[0].m_Index;
-                Debug.Log("je suis indxe de card " + p_IDCards);
+                p_IDCard = m_SideChoice.m_Deck[0].m_Index;
+                Debug.Log("je suis indxe de card " + p_IDCard);
 
                 m_SideChoice.m_Deck.RemoveAt(0);
                 AddDrawCard();
@@ -112,7 +132,7 @@ namespace NetWork
         }
         #endregion
 
-
+     
         //Toute les regle du jeu appeler dans l'action in the board dans le placementCard
         public void PutCardOnSlot(ulong p_SideID,int p_SlotId,int p_CardID)
         {
@@ -158,19 +178,24 @@ namespace NetWork
             if (p_PlayerNetworkID == NetworkManager.Singleton.LocalClientId)
             {
                 m_SideChoice = m_Side;
-                Debug.Log("je suis tsa mere");
+                Debug.Log("je suis tsa mere" + m_SideChoice);
                 //tout ce qui se passe sur un sid
             }
             else
             {
                 m_SideChoice = m_OtherSide;
-                Debug.Log("je suis ton pere");
+                Debug.Log("je suis ton pere" + m_SideChoice);
 
             }
             //sinon c'est l'autre
             //en gros, p_PlayerNetworkId doit = ou non a NetworkManager.Singleton.OwnerClientID
         }
 
+        public void SetDeck(SO_CardData p_Card,ulong p_IDside)
+        {
+            GetPlayerSide(p_IDside);
+            m_SideChoice.m_Deck.Add(p_Card);
+        }
 
         //je recupere l'id de ma card que je revois apres
         //appeler dans putCardOnTheSlot
@@ -185,20 +210,20 @@ namespace NetWork
 
 
         ////appeler dans l'action in the board dans le networkStart
-        //public void Shuffle()
-        //{
-        //    for (int i = 0; i < Side.m_Deck.Count; i++)
-        //    {
-        //        int j = Random.Range(i, Side.m_Deck.Count);
-        //        SO_CardData l_Temp = Side.m_Deck[i];
-        //        Side.m_Deck[i] = Side.m_Deck[j];
-        //        Side.m_Deck[j] = l_Temp;
-        //    }
-        //}
+        public void Shuffle(SideBoard p_side)
+        {
+            for (int i = 0; i < p_side.m_Deck.Count; i++)
+            {
+                int j = Random.Range(i, p_side.m_Deck.Count);
+                SO_CardData l_Temp = p_side.m_Deck[i];
+                p_side.m_Deck[i] = p_side.m_Deck[j];
+                p_side.m_Deck[j] = l_Temp;
+            }
+        }
 
-        
 
-       
+
+
 
         #region Accesseur
         public SideBoard Side
@@ -216,6 +241,13 @@ namespace NetWork
         {
             get { return m_Slot; }
             set { m_Slot = value; }
+        }
+
+
+        public List<SO_CardData> AllCards
+        {
+            get { return m_AllCardsInstance; }
+          //  set { m_AllCardsInstance = value; }
         }
         public UnityEvent InstantiateCardEvent
         {

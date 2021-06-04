@@ -246,20 +246,16 @@ public class WindowCustomEditor : EditorWindow
                 var path = AssetDatabase.GUIDToAssetPath(item);
                 m_DeckCards = (SO_Board)AssetDatabase.LoadAssetAtPath(path, typeof(SO_Board));
                 Debug.Log(m_DeckCards);
-                m_DeckCards.Side.m_Deck.Add(p_Asset);
-                m_DeckCards.Side2.m_Deck.Add(p_Asset);
+                m_DeckCards.AllCards.Add(p_Asset);
             }
         }
         else
         {
-            if(!m_DeckCards.Side.m_Deck.Contains(p_Asset))
+            if(!m_DeckCards.AllCards.Contains(p_Asset))
             {
-                m_DeckCards.Side.m_Deck.Add(p_Asset);
+                m_DeckCards.AllCards.Add(p_Asset);
             } 
-            if(!m_DeckCards.Side2.m_Deck.Contains(p_Asset))
-            {
-                m_DeckCards.Side2.m_Deck.Add(p_Asset);
-            }
+            
         }
     }
     private void ClearList()
@@ -272,14 +268,12 @@ public class WindowCustomEditor : EditorWindow
             {
                 var path = AssetDatabase.GUIDToAssetPath(item);
                 m_DeckCards = (SO_Board)AssetDatabase.LoadAssetAtPath(path, typeof(SO_Board));
-                m_DeckCards.Side.m_Deck.Clear();
-                m_DeckCards.Side2.m_Deck.Clear();
+                m_DeckCards.AllCards.Clear();
             }
         }
         else
         {
-            m_DeckCards.Side.m_Deck.Clear();
-            m_DeckCards.Side2.m_Deck.Clear();
+            m_DeckCards.AllCards.Clear();
         }
     }
 
