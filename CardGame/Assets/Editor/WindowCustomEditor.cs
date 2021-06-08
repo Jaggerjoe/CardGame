@@ -255,7 +255,6 @@ public class WindowCustomEditor : EditorWindow
             {
                 m_DeckCards.AllCards.Add(p_Asset);
             } 
-            
         }
     }
     private void ClearList()

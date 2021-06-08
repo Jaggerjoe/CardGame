@@ -12,7 +12,6 @@ public static class ShuffleFunction
             Object l_Temp = (Object)_pIlist[i];
             _pIlist[i] = _pIlist[j];
             _pIlist[j] = l_Temp;
-            //Debug.Log("shuffle");
         }
     }
 }
