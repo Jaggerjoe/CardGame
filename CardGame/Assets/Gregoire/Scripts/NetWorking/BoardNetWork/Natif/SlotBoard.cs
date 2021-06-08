@@ -9,28 +9,14 @@ namespace NetWork
     [System.Serializable]
     public class SlotBoard 
     {
+        [SerializeField]
         private EZoneCard.CardZones m_Zone = 0;
+        [SerializeField]
         private SO_CardData m_Card = null;
 
         public SlotBoard(EZoneCard.CardZones p_zone)
         {
             m_Zone = p_zone;
-        }
-
-       
-        public SlotBoard()
-        {
-            //if(m_Card ==null)
-            //{
-            //    m_Card = ScriptableObject.CreateInstance<SO_CardData>();
-            //    Debug.Log(m_Card);
-            //}
-            //else
-            //{
-            //    return;
-            //}
-            
-            //Debug.Log("coucou je suis le 2e slotboard fonction");
         }
         public EZoneCard.CardZones ZoneCard
         {

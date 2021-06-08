@@ -14,11 +14,13 @@ public class DragCard : MonoBehaviour
     [SerializeField]
     private EZoneCard.CardZones m_CardZone = 0;
 
+    private UIBoard m_UIBoard = null;
     private ActionInTheBoard m_ActionInTheBoard = null;
 
     private void Start()
     {
         m_ActionInTheBoard = FindObjectOfType<ActionInTheBoard>();
+        m_UIBoard = FindObjectOfType<UIBoard>();
     }
     private void Update()
     {
@@ -60,7 +62,8 @@ public class DragCard : MonoBehaviour
                     this.transform.SetParent(l_Hits[i].transform);
                     this.transform.position = l_Hits[i].transform.position + new Vector3(0, .1f, 0);
                     this.transform.rotation = l_Hits[i].transform.rotation;
-                   // m_ActionInTheBoard.ConnectBoard();
+                    m_UIBoard.GetCardOnSlot();
+                    m_ActionInTheBoard.PlacementCard();
 
                     return;
                 }
