@@ -32,12 +32,10 @@ namespace NetWork
                     //puis on shuffle
                     s_LocalInstance.Side.m_Deck.Shuffle();
                     s_LocalInstance.Side2.m_Deck.Shuffle();
-                    Debug.Log("isserver");
                 }
                 else
                 {
                     //appele de la fonction server rpc pour recup les info a envoyer au client
-                    Debug.Log("client");
                     RequestServerRpc();
                     DrawCardServerRpc();
                 }
@@ -61,29 +59,13 @@ namespace NetWork
                 //on ajoute le other deck au client
                 AddCardToDeckClientRpc(s_LocalInstance.Side2.m_Deck[i].m_Index);
             }
-            //Debug.Log("je suis dans la server Rpc" + s_LocalInstance.Side2.m_Deck[0].m_Index);
 
             for (int i = 0; i < s_LocalInstance.Side.m_Deck.Count; i++)
             {
                 //on ajoute le other deck au client
                 AddCardToOtherDeckClientRpc(s_LocalInstance.Side.m_Deck[i].m_Index);
             }
-            //Debug.Log("boucle 2 je suis dans la server Rpc" + s_LocalInstance.Side.m_Deck[0].m_Index); 
         }
-
-        [ClientRpc]
-        private void DebugFirstDeckCardNumbeClientRpc()
-        {
-            if(IsHost)
-            {
-                Debug.Log("Je suis le host, rpc magique : " + s_LocalInstance.Side2.m_Deck[0].m_Index);
-            }
-            else
-            {
-                Debug.Log("Je suis le client, rpc magique : " + s_LocalInstance.Side2.m_Deck[0].m_Index);
-            }
-        }
-
 
         //Utilisé par le serveur pour diffuser un message à tous les clients.
         //on ajoute les au deck du serveur au client
@@ -158,7 +140,6 @@ namespace NetWork
             //je pioche une carte;
             s_LocalInstance.SwitchCardDeckToDrow(s_LocalInstance.Side);
             //je boucle pour piocher et mettre au bon emplacmeent la card
-            //for (int i = 0; i < s_LocalInstance.Side2.m_Deck.Count; i++)
             for (int i = 0; i < s_LocalInstance.Side.m_Hand.Count; i++)
             {
                 //j'appele la clientRpc
@@ -185,7 +166,6 @@ namespace NetWork
         public void DrawCardClientRpc(int p_IdCard)
         {
             //je pioche une carte;
-            Debug.Log($"je sui appeller par {NetworkManager.Singleton.LocalClientId}");
 
             for (int i = 0; i < s_LocalInstance.Side2.m_Deck.Count; i++)
             {
@@ -203,11 +183,9 @@ namespace NetWork
                             //alors on ajoute au deck de ce joueur la liste dans le meme ordre avec i
                             s_LocalInstance.Side2.m_Hand.Add(s_LocalInstance.Side2.m_Deck[i]);
                             s_LocalInstance.Side2.m_Deck.Remove(s_LocalInstance.Side2.m_Deck[i]);
-                            //Debug.Log("j'ai le même ID ");
                         }
                         else
                         {
-                            //Debug.Log("je n'ai pas le même ID ");
                             //sinon on ajoute au deck de l'autre joueur la liste aussi
                             s_LocalInstance.Side.m_Hand.Add(s_LocalInstance.Side2.m_Deck[i]);
                             s_LocalInstance.Side.m_Deck.Remove(s_LocalInstance.Side2.m_Deck[i]);
@@ -237,11 +215,9 @@ namespace NetWork
                             //alors on ajoute au deck de ce joueur la liste dans le meme ordre avec i
                             s_LocalInstance.Side.m_Hand.Add(s_LocalInstance.Side.m_Deck[i]);
                             s_LocalInstance.Side.m_Deck.Remove(s_LocalInstance.Side.m_Deck[i]);
-                            //Debug.Log("j'ai le même ID ");
                         }
                         else
                         {
-                            //Debug.Log("je n'ai pas le même ID ");
                             //sinon on ajoute au deck de l'autre joueur la liste aussi
                             s_LocalInstance.Side2.m_Hand.Add(s_LocalInstance.Side.m_Deck[i]);
                             s_LocalInstance.Side2.m_Deck.Remove(s_LocalInstance.Side.m_Deck[i]);
@@ -261,27 +237,21 @@ namespace NetWork
             {
                 for (int i = 0; i < s_LocalInstance.Side.m_Slot.Length; i++)
                 {
-                    Debug.Log("coucou je suis dans placement card client dans ma boucle for");
-                    if (s_LocalInstance.Side.m_Slot[i].m_Card != null)
+                    if (s_LocalInstance.Side.m_Slot[i].Card != null)
                     {
-                        Debug.Log(s_LocalInstance.Side.m_Slot[i].m_Card.m_Index);
-                        PlacementCardClientRpc(s_LocalInstance.Side.m_Slot[i].m_Card.m_Index, i);
+                        PlacementCardClientRpc(s_LocalInstance.Side.m_Slot[i].Card.m_Index, i);
                     }
                 }
-                Debug.Log("je suis server " + IsServer);
             }
             else
             {
                 for (int i = 0; i < s_LocalInstance.Side.m_Slot.Length; i++)
                 {
-                    Debug.Log("coucou je suis dans placement card client dans ma boucle for");
-                    if (s_LocalInstance.Side.m_Slot[i].m_Card != null)
+                    if (s_LocalInstance.Side.m_Slot[i].Card != null)
                     {
-                        Debug.Log(s_LocalInstance.Side.m_Slot[i].m_Card.m_Index);
-                        PlacementCardServerRpc(s_LocalInstance.Side.m_Slot[i].m_Card.m_Index, i);
+                        PlacementCardServerRpc(s_LocalInstance.Side.m_Slot[i].Card.m_Index, i);
                     }
                 }
-                Debug.Log("je suis client " + IsClient);
             }
         }
         [ServerRpc]
@@ -294,6 +264,8 @@ namespace NetWork
         [ClientRpc]
         public void PlacementCardClientRpc(int p_IDCard, int p_SlotIndex)
         {
+            //je parcours ma main, je check si je trouve l'ID enregistrer, si ouin je parcours mon slot[] quand je suis au même index que mon ,
+            //je place ma carte dans ma variable card dans mon slot, et je remove ma carte de ma main.
             for (int i = 0; i < s_LocalInstance.Side2.m_Hand.Count; i++)
             {
                 if (p_IDCard == s_LocalInstance.Side2.m_Hand[i].m_Index)

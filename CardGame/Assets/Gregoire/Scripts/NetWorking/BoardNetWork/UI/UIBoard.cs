@@ -5,7 +5,6 @@ using MLAPI;
 
 namespace NetWork
 {
-
     public class UIBoard : MonoBehaviour
     {
         [SerializeField]
@@ -26,15 +25,7 @@ namespace NetWork
         [SerializeField]
         private float m_Space = 2;
 
-        private int m_SlotID = 0;
-        private int m_CardID = 0; 
 
-       // private ActionInTheBoard m_ActionPlayerNetwork = null;
-
-        private void Start()
-        {
-            //j'ecoute mes events pour pouvoir plus tard les lancer avec mon ActionInTheBoard
-        }
         private void Update()
         {
             GetInstanceOfTheBoard();
@@ -44,7 +35,6 @@ namespace NetWork
         public void ListenBoard()
         {
             m_SoBoard.DropCardEvent.AddListener(GetCardOnSlot);
-            //m_SoBoard.RemoveCardDeckEvent.AddListener(TakeCardDeck);
             m_SoBoard.AddCardHandEvent.AddListener(DrawUICardStartGame);
             m_SoBoard.InstantiateCardEvent.AddListener(DrawUICardStartGame);
         }
@@ -57,7 +47,6 @@ namespace NetWork
                 if (FindObjectOfType<SO_Board>())
                 {
                     m_SoBoard = FindObjectOfType<ActionInTheBoard>().BoardInstance;
-                    //Debug.Log("jerecupère mon instance");
                     ListenBoard();
                 }
             }
@@ -65,8 +54,6 @@ namespace NetWork
 
         private void DrawUICardStartGame()
         {
-            //m_SoBoard.DrawCardInfo();
-            //if(m_board.side.playerID == 0)
             //on va creer une boucle qui fera apparaitre 6 fois nos card
 
             for (int i = 0; i < m_SoBoard.Side.m_Hand.Count; i++)
@@ -75,7 +62,6 @@ namespace NetWork
                 TakeCardDeck();
 
                 //on instancie la prefab a la position de la main qui est GO_Vide in scene
-                //GameObject l_Card = Instantiate(m_Card, m_Hand);
                 GameObject l_Card = Instantiate(m_Card, new Vector3(m_Hand.position.x + (m_Space * (i % m_SoBoard.Side.m_Hand.Count)), 0.1f, m_Hand.position.z), transform.rotation);
 
                 //on met la card en enfant de la main
@@ -112,15 +98,17 @@ namespace NetWork
         {
             for (int j = 0; j < m_CardsData.Length; j++)
             {
+                //je récupère ma carte qui est en enfant de ma zone
                 if (m_CardsData[j].gameObject.transform.childCount != 0)
                 {
                     Transform l_Trs = m_CardsData[j].GetComponentInChildren<DataCard>().transform;
                     SO_CardData l_Card = l_Trs.GetComponent<DataCard>().Card;
+                    //je remplit l'index avec la carte
                     m_CardsData[j] = l_Trs;
-                    Debug.Log($"la carte est sur le slot {j}");
+
                     for (int i = 0; i < m_SoBoard.Side.m_Slot.Length; i++)
                     {
-                        if(i ==j)
+                        if(i == j)
                         {
                             m_SoBoard.SetCardOnSlotAndRemoveCardOnHand(l_Card.m_Index, i);
                             Debug.Log($"ma carte est { m_SoBoard.Side.m_Slot[i].Card} a ma position {m_SoBoard.Side.m_Slot[i].ZoneCard} et {i}");

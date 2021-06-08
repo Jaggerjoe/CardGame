@@ -30,12 +30,10 @@ public class NetWorkConnect : MonoBehaviour
             if (!NetworkManager.Singleton.IsClient && !NetworkManager.Singleton.IsServer)
             {
                 GUILayout.Label("Not connected...");
-                Debug.Log(" rien");
                 return;
             }
             else if (NetworkManager.Singleton.IsHost)
             {
-                Debug.Log("pas rien");
                 GUILayout.Space(800);
                 using (new GUILayout.HorizontalScope())
                 {
@@ -43,9 +41,7 @@ public class NetWorkConnect : MonoBehaviour
                     {
                         StatusLabels();
                     }
-
                 }
-
             }
         }
     }
@@ -57,7 +53,6 @@ public class NetWorkConnect : MonoBehaviour
         {
             m_JoinButton.interactable = true;
             m_HostButton.interactable = false;
-           
         }
         m_IsHostConnect = true;
     }
@@ -66,8 +61,7 @@ public class NetWorkConnect : MonoBehaviour
     {
         NetworkManager.Singleton.ConnectionApprovalCallback += ApprovalCallback;
         NetworkManager.Singleton.StartHost();
-        m_IsHostConnect =true;
-       // m_JoinButton.interactable = true;
+        m_IsHostConnect = true;
     }
 
     private void ApprovalCallback(byte[] p_ConnectionData, ulong p_ClientID, NetworkManager.ConnectionApprovedDelegate p_Callback)
@@ -110,55 +104,4 @@ public class NetWorkConnect : MonoBehaviour
 
     
 }
-/*   void OnGUI()
-    {
-        //taill et position des boutons
-        GUILayout.BeginArea(new Rect(200, 200, 300, 300));
 
-        if (!NetworkManager.Singleton.IsClient && !NetworkManager.Singleton.IsServer)
-        {
-           // StartButtons();
-
-        }
-        else
-        {
-            StatusLabels();
-        }
-       // if (GUILayout.Button("Disconeted")) StopDisconect();
-
-        GUILayout.EndArea();
-    }
-
-    static void StartButtons()
-    {
-        
-        if (GUILayout.Button("Host"))
-        {
-            NetworkManager.Singleton.StartHost();
-            FindObjectOfType<NetWorkSpawnPlayer>().CreateBoardSOServerRpc();
-
-        }
-        if (GUILayout.Button("Client"))
-        {
-            NetworkManager.Singleton.StartClient();
-            //quand c'est lancer le client est deja instancier 
-           // NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
-        }
-        
-    }
-
-    //appeler sur client et le host 
-    private static void OnClientConnected(ulong clientId)
-    {
-
-        if (NetworkManager.Singleton.IsClient)
-        {
-            FindObjectOfType<NetWorkSpawnPlayer>().BindConnectPlayerClientRpc();
-            Debug.Log("je bind ");
-
-        }
-        if (NetworkManager.Singleton.IsServer)
-        {
-            Debug.Log("je bind pas");
-        }
-    }*/
