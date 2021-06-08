@@ -17,8 +17,8 @@ namespace NetWork
         [SerializeField]
         private SideBoard m_OtherSide = new SideBoard();
 
-        [SerializeField]
-        private SlotBoard m_Slot = new SlotBoard();
+        //[SerializeField]
+        //private SlotBoard m_Slot = new SlotBoard();
 
         private SO_CardData m_CardDeckToHand = null;
 
@@ -80,12 +80,12 @@ namespace NetWork
         public void DrawCardBoard(ulong p_IDSide)//,int p_IDCard)
         {
             GetPlayerSide(p_IDSide);
-            SwitchCardDeckToDrow();//p_IDCard);
+            //SwitchCardDeckToDrow();//p_IDCard);
             //Invoke le  fait de piocher
             // m_RemoveCardDeck.Invoke();
 
-            //m_AddCardHand.Invoke();
-            Debug.Log("je suis le side appeler " + p_IDSide);
+            m_AddCardHand.Invoke();
+            //Debug.Log("je suis le side appeler " + p_IDSide);
            // Debug.Log("je suis la list appeler " + p_IDCard);
 
             //apres avoir piocher on instancie l'ui de la card 
@@ -96,51 +96,50 @@ namespace NetWork
         //ajouter une carte dans la main
         private void AddDrawCard()
         {
-            m_SideChoice.m_Hand.Add(m_CardDeckToHand);
+            Side.m_Hand.Add(m_CardDeckToHand);
             //Debug.Log(m_CardDeckToHand);
-            Debug.Log("longueur de la main = " +m_SideChoice.m_Hand.Count);
+            //Debug.Log("longueur de la main = " +m_SideChoice.m_Hand.Count);
             //p_IDCard = Side.m_Deck[0].m_Index;
         }
 
        
         //retirer une carte du deck
-        private void SwitchCardDeckToDrow()//int p_IDCard)
+        public void SwitchCardDeckToDrow(SideBoard p_side)//int p_IDCard)
         {
           //on a une boucle de taille de 6
             for (int i = 0; i < 6; i++)
             {
                 //Debug.Log("coucou " + m_SideChoice.m_Deck[0]);
                 //on dit que notre asset est egale a un coter a la postion 0
-                m_CardDeckToHand = m_SideChoice.m_Deck[0];
-               
+                //m_CardDeckToHand = Side.m_Deck[0];
+
                 //le p_idCard est egale a un coter d'un deck a la position 0 sur l'index
-               // p_IDCard = m_SideChoice.m_Deck[0].m_Index;
+                // p_IDCard = m_SideChoice.m_Deck[0].m_Index;
                 //Debug.Log("je suis indxe de card " + p_IDCard);
-
+                p_side.m_Hand.Add(p_side.m_Deck[0]);
                 //on eneleve sur un coter du ceck la carte set
-                m_SideChoice.m_Deck.RemoveAt(0);
-
+                p_side.m_Deck.RemoveAt(0);
+                //Side.m_Hand.Add()
                 //on l'ajoute a la main
-                AddDrawCard();
             }
         }
         #endregion
 
         #region poser card on the slot
         //Toute les regle du jeu appeler dans l'action in the board dans le placementCard
-        public void PutCardOnSlot(ulong p_SideID,int p_SlotId,int p_CardID)
+        public void PutCardOnSlot(int p_SlotId,int p_CardID)
         {
 
-            GetPlayerSide(p_SideID);
+            //GetPlayerSide(p_SideID);
             //On recupere l'id de la card que l'on a dans la main
-            p_CardID = GetIDCard(p_CardID);
-            Debug.Log($"mon baord dans mon so_board a la carte avec l'ID {p_CardID}");
-
+            //p_CardID = GetIDCard(p_CardID);
+            Debug.Log($"mon baord dans mon so_board a la carte avec l'ID {p_CardID} ainsi qe sa zone {p_SlotId}");
+            SetCardOnSlotAndRemoveCardOnHand(p_CardID, p_SlotId);
 
             //Récupéré la carte
-            m_DropCard.Invoke();
+            //m_DropCard.Invoke();
             //Ajouter la carte sur le slot 
-            
+
             //On va regarder de quel side on est
 
             //on va poser nos card sur les slots, 
@@ -160,6 +159,24 @@ namespace NetWork
         }
         #endregion
 
+        public void SetCardOnSlotAndRemoveCardOnHand(int p_CardNumber, int p_SlotIndex)
+        {
+            Debug.Log($"ma carete est {p_CardNumber} et mon slot est {p_SlotIndex}");
+            for (int i = 0; i < Side.m_Hand.Count; i++)
+            {
+                if(p_CardNumber == Side.m_Hand[i].m_Index)
+                {
+                    for (int j = 0; j < Side.m_Slot.Length; j++)
+                    {
+                        if(j == p_SlotIndex)
+                        {
+                            Side.m_Slot[j].Card = Side.m_Hand[i];
+                            Side.m_Hand.RemoveAt(i);
+                        }
+                    }
+                }
+            }
+        }
         //fonction qui sera appeler dans le fonction qui ont besoin de savoir l'id
         //appeler dans putCardOnSlot
         private void GetPlayerSide(ulong p_PlayerNetworkID)
@@ -172,13 +189,13 @@ namespace NetWork
             if (p_PlayerNetworkID == NetworkManager.Singleton.LocalClientId)
             {
                 m_SideChoice = m_Side;
-                Debug.Log("je suis tsa mere" + m_SideChoice);
+                //Debug.Log("je suis tsa mere" + m_SideChoice);
                 //tout ce qui se passe sur un sid
             }
             else
             {
                 m_SideChoice = m_OtherSide;
-                Debug.Log("je suis ton pere" + m_SideChoice);
+                //Debug.Log("je suis ton pere" + m_SideChoice);
 
             }
             //sinon c'est l'autre
@@ -231,11 +248,11 @@ namespace NetWork
             set { m_OtherSide = value; }
         }
 
-        public SlotBoard Slot
-        {
-            get { return m_Slot; }
-            set { m_Slot = value; }
-        }
+        //public SlotBoard Slot
+        //{
+        //    get { return m_Slot; }
+        //    set { m_Slot = value; }
+        //}
 
 
         public List<SO_CardData> AllCards
