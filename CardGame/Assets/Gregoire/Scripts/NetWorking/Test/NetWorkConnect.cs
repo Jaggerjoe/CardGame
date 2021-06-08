@@ -1,9 +1,10 @@
 using UnityEngine;
 using MLAPI;
+using MLAPI.Connection;
 using MLAPI.Transports.UNET;
 using MLAPI.SceneManagement;
-using UnityEngine.SceneManagement;
-using System;
+using UnityEngine.UI;
+
 
 public class NetWorkConnect : MonoBehaviour
 {
@@ -11,31 +12,62 @@ public class NetWorkConnect : MonoBehaviour
     private string m_IpAdress = "192.168.1.13";
     [SerializeField]
     private string m_IpAdressChanged;
-    private int m_IpAdressPort = 7777;
+    [SerializeField]
     UNetTransport m_Transport;
-    private SceneSwitchProgress m_SceneProgress;
+    [SerializeField]
+    private Button m_JoinButton; 
+    [SerializeField]
+    private Button m_HostButton;
+    [SerializeField]
+    private bool m_IsHostConnect =false;
 
-    //private void OnGUI()
-    //{
-    //    if (!NetworkManager.Singleton.IsClient && !NetworkManager.Singleton.IsServer)
-    //    {
-    //        HostButton();
-    //        JoinButton();
+    
+    public void OnGUI()
+    {
+        using (new GUILayout.HorizontalScope())
+        {
 
-    //    }
-    //    else
-    //    {
-    //        StatusLabels();
-    //    }
-    //}
+            if (!NetworkManager.Singleton.IsClient && !NetworkManager.Singleton.IsServer)
+            {
+                GUILayout.Label("Not connected...");
+                Debug.Log(" rien");
+                return;
+            }
+            else if (NetworkManager.Singleton.IsHost)
+            {
+                Debug.Log("pas rien");
+                GUILayout.Space(800);
+                using (new GUILayout.HorizontalScope())
+                {
+                    using (new GUILayout.VerticalScope(GUI.skin.box))
+                    {
+                        StatusLabels();
+                    }
+
+                }
+
+            }
+        }
+    }
+
+    public void Start()
+    {
+        Debug.Log("Je suis le buton la ");
+        if (m_IsHostConnect == true)
+        {
+            m_JoinButton.interactable = true;
+            m_HostButton.interactable = false;
+           
+        }
+        m_IsHostConnect = true;
+    }
 
     public void HostButton()
     {
         NetworkManager.Singleton.ConnectionApprovalCallback += ApprovalCallback;
         NetworkManager.Singleton.StartHost();
-      //  NetworkSceneManager.SwitchScene("3DCardGame");
-        //SceneManager.LoadScene("3DCardGame");
-
+        m_IsHostConnect =true;
+       // m_JoinButton.interactable = true;
     }
 
     private void ApprovalCallback(byte[] p_ConnectionData, ulong p_ClientID, NetworkManager.ConnectionApprovedDelegate p_Callback)
@@ -53,23 +85,19 @@ public class NetWorkConnect : MonoBehaviour
 
         NetworkManager.Singleton.NetworkConfig.ConnectionData = System.Text.Encoding.ASCII.GetBytes("passeword");
         NetworkManager.Singleton.StartClient();
-       // m_SceneProgress.OnClientLoadedScene  += SceneProgress_OnClientLoadedScene;
-    }
-
-    private void SceneProgress_OnClientLoadedScene(ulong clientId)
-    {
-
     }
 
     private void StatusLabels()
     {
-        
         string mode = NetworkManager.Singleton.IsHost ?
-            "Host" : NetworkManager.Singleton.IsServer ? "Server" : "Client";
+                      "Host" : NetworkManager.Singleton.IsServer ? "Server" : "Client";
+        
 
         GUILayout.Label("Transport: " +
             NetworkManager.Singleton.NetworkConfig.NetworkTransport.GetType().Name);
+        GUILayout.Label("Adress IP: " + m_Transport.ConnectAddress);
         GUILayout.Label("Mode: " + mode);
+
     }
 
     public void IPAdressChanged(string p_NewAdress)
@@ -77,29 +105,10 @@ public class NetWorkConnect : MonoBehaviour
         this.m_IpAdress = p_NewAdress;
         Debug.Log("adress changed");
     }
-    public void IPAdressChangedPort(int p_NewAdress)
-    {
-        this.m_IpAdressPort = p_NewAdress;
-        Debug.Log("adress changed port");
-    }
+   
+    
 
-    private void StopDisconect()
-    {
-
-        if (NetworkManager.Singleton.IsHost)
-        {
-            NetworkManager.Singleton.StopHost();
-          //  NetworkManager.Singleton.DisconnectClient();
-        }
-        else if (NetworkManager.Singleton.IsClient)
-        {
-            NetworkManager.Singleton.StopClient();
-        }
-        else if (NetworkManager.Singleton.IsServer)
-        {
-            NetworkManager.Singleton.StopServer();
-        }
-    }
+    
 }
 /*   void OnGUI()
     {

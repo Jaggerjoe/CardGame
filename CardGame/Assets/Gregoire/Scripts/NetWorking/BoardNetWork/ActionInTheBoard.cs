@@ -169,15 +169,9 @@ namespace NetWork
         #region Pioche Card
         public void DrawCard()
         {
-            if (IsServer)
-            {
-                DrawCardClientRpc(s_LocalInstance.Side2.m_Deck[0].m_Index);
-                Debug.Log("in drawn card is server ma indexe clientrpc est " + s_LocalInstance.Side2.m_Deck[0].m_Index);
-            }
-            else
-            {
+       
                 DrawCardServerRpc();
-            }
+           
         }
 
         [ServerRpc]
@@ -186,45 +180,33 @@ namespace NetWork
             //je pioche une carte;
             s_LocalInstance.DrawCardBoard(OwnerClientId);
             Debug.Log("alut");
+
             //je boucle pour piocher et mettre au bon emplacmeent la card
             //for (int i = 0; i < s_LocalInstance.Side2.m_Deck.Count; i++)
             for (int i = 0; i<s_LocalInstance.Side.m_Hand.Count; i++)
             {
                 //j'appele la clientRpc
-                DrawCardClientRpc(s_LocalInstance.Side.m_Deck[i].m_Index);
+                DrawCardClientRpc(s_LocalInstance.Side.m_Hand[i].m_Index);
                 Debug.Log("draw serverRpc in boucle");
-                break;
             }
+               
             for(int i = 0; i<s_LocalInstance.Side2.m_Hand.Count; i++)
             {
                 //j'appele la clientRpc
-                DrawCardClientRpc(s_LocalInstance.Side2.m_Deck[i].m_Index);
-                Debug.Log("draw serverRpc in boucle");
-                break;
+                DrawCardClientRpc(s_LocalInstance.Side2.m_Hand[i].m_Index);
+                Debug.Log("draw serverRpc in boucle2");
             }
+             
             Debug.Log("aurevoir");
         }
         [ClientRpc]
         public void DrawCardClientRpc(int p_IdCard)
         {
             //je pioche une carte;
-            s_LocalInstance.DrawCardBoard(OwnerClientId);
+            //s_LocalInstance.DrawCardBoard(OwnerClientId);
             Debug.Log("alut");
+            
 
-            for (int i = 0; i < s_LocalInstance.Side.m_Hand.Count; i++)
-            {
-                //j'appele la clientRpc
-                p_IdCard= s_LocalInstance.Side.m_Deck[i].m_Index;
-                Debug.Log("draw clientRpc in boucle");
-                break;
-            }  
-            for (int i = 0; i < s_LocalInstance.Side2.m_Hand.Count; i++)
-            {
-                //j'appele la clientRpc
-                p_IdCard= s_LocalInstance.Side2.m_Deck[i].m_Index;
-                Debug.Log("draw clientRpc in boucle");
-                break;
-            }
             Debug.Log("aurevoir");
         }
         #endregion

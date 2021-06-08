@@ -58,6 +58,8 @@ MonoBehaviour:
     - carla
     - BoardScene
     - 3DCardGame
+    - Menu
+    - MenuPasDErreur
     AllowRuntimeSceneChanges: 0
     NetworkPrefabs:
     - Prefab: {fileID: 1415072595088106392, guid: 2fc35ac5b8b66ca459384d43a39eb51b, type: 3}
@@ -129,3 +131,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a418bf10383ef374e9ec4ad029a88cef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_IpAdress: 192.168.1.13
+  m_IpAdressChanged: 
+  m_Transport: {fileID: 0}
+  m_JoinButton: {fileID: 0}
+  m_HostButton: {fileID: 0}
+  m_IsHostConnect: 0
