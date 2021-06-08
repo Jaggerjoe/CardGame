@@ -602,7 +602,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4282977732937056542, guid: 38c84536fa1fa1347b06423d792066af, type: 3}
       propertyPath: NetworkConfig.RegisteredScenes.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4282977732937056542, guid: 38c84536fa1fa1347b06423d792066af, type: 3}
       propertyPath: NetworkConfig.RegisteredScenes.Array.data[1]
@@ -610,7 +610,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4282977732937056542, guid: 38c84536fa1fa1347b06423d792066af, type: 3}
       propertyPath: NetworkConfig.RegisteredScenes.Array.data[2]
-      value: carla
+      value: MenuPasDErreur
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38c84536fa1fa1347b06423d792066af, type: 3}
