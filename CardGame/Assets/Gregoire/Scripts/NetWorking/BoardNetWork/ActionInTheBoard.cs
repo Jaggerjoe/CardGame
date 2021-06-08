@@ -152,20 +152,6 @@ namespace NetWork
         
 
         #region Pioche Card
-        public void DrawCard()
-        {
-            if (IsServer)
-            {
-                DrawCardClientRpc(s_LocalInstance.Side.m_Deck[0].m_Index);
-                Debug.Log("in drawn card is server ma indexe clientrpc est " + s_LocalInstance.Side2.m_Deck[0].m_Index);
-            }
-            else
-            {
-       
-                DrawCardServerRpc();
-           
-        }
-
         [ServerRpc]
         public void DrawCardServerRpc()
         {
@@ -199,7 +185,6 @@ namespace NetWork
         public void DrawCardClientRpc(int p_IdCard)
         {
             //je pioche une carte;
-            //s_LocalInstance.DrawCardBoard(OwnerClientId);
             Debug.Log($"je sui appeller par {NetworkManager.Singleton.LocalClientId}");
 
             for (int i = 0; i < s_LocalInstance.Side2.m_Deck.Count; i++)
@@ -236,9 +221,6 @@ namespace NetWork
         public void DrawCardOtherSideClientRpc(int p_IdCard)
         {
             //je pioche une carte;
-            //s_LocalInstance.DrawCardBoard(OwnerClientId);
-
-
             for (int i = 0; i < s_LocalInstance.Side.m_Deck.Count; i++)
             {
                 if (p_IdCard == s_LocalInstance.Side.m_Deck[i].m_Index)
