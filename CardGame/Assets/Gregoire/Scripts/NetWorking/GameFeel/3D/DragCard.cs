@@ -16,6 +16,7 @@ public class DragCard : MonoBehaviour
 
     private UIBoard m_UIBoard = null;
     private ActionInTheBoard m_ActionInTheBoard = null;
+    private SO_CardData m_DraggedCard = null;
 
     private void Start()
     {
@@ -39,7 +40,7 @@ public class DragCard : MonoBehaviour
     private void OnMouseDown()
     {
         m_OriginalPos = transform.position;
-        m_Zcoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;    
+        m_Zcoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
     }
 
     private void OnMouseDrag()
@@ -62,17 +63,12 @@ public class DragCard : MonoBehaviour
                     this.transform.SetParent(l_Hits[i].transform);
                     this.transform.position = l_Hits[i].transform.position + new Vector3(0, .1f, 0);
                     this.transform.rotation = l_Hits[i].transform.rotation;
-                    m_UIBoard.GetCardOnSlot();
-                    m_ActionInTheBoard.PlacementCard();
-                   // m_ActionInTheBoard.TEst();
+                    m_UIBoard.ApplyCardOnSlot(out SO_CardData l_CardAsset, out int l_SlotIndex);
+                    m_ActionInTheBoard.PlacementCard(MLAPI.NetworkManager.Singleton.LocalClientId, l_CardAsset.m_Index, l_SlotIndex);
+                    // m_ActionInTheBoard.TEst();
 
                     return;
                 }
-            }
-            else
-            {
-                Debug.Log("me suis tromper de coter");
-                return;
             }
         }
         this.transform.position = m_OriginalPos;

@@ -530,7 +530,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57a25a9a667e1094e831ff1674708c89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CardsData:
+  m_SlotsTransforms:
   - {fileID: 1057024356}
   - {fileID: 842249768}
   - {fileID: 1147562040}

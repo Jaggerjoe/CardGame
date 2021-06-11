@@ -96,8 +96,10 @@ namespace NetWork
 
         #region poser card on the slot
         //Toute les regle du jeu appeler dans l'action in the board dans le placementCard
-        public void PutCardOnSlot(int p_CardNumber, int p_SlotIndex, int p_IdSide)
+        public void PutCardOnSlot(bool p_IsOnMySide, int p_CardNumber, int p_SlotIndex)
         {
+            Debug.LogWarning($"TODO: Place card {p_CardNumber} on slot {p_SlotIndex} {(p_IsOnMySide ? "on my side" : "on the other side")}");
+
             //GetPlayerSide(p_IdSide);
 
             SetCardOnslotOtherSideAndemoveToHandOtherSide(p_CardNumber, p_SlotIndex);
@@ -125,18 +127,23 @@ namespace NetWork
         }
        
         //j'ajoute ma carte a mon slot et je la retire de ma main 
-        public void SetCardOnSlotAndRemoveCardOnHand(int p_CardNumber, int p_SlotIndex)
+        public void SetCardOnSlotAndRemoveCardFromHand(int p_CardNumber, int p_SlotIndex)
         {
+            // pour chaque carte de MA main
             for (int i = 0; i < Side.m_Hand.Count; i++)
             {
+                // Si la carte placée est égale à l'id de la carte dans MA main
                 if(p_CardNumber == Side.m_Hand[i].m_Index)
                 {
+                    // Pour chaque slot
                     for (int j = 0; j < Side.m_Slot.Length; j++)
                     {
+                        // Si le slot actuel == le slot du tableau
                         if(j == p_SlotIndex)
                         {
                             Side.m_Slot[j].Card = Side.m_Hand[i];
                             Side.m_Hand.RemoveAt(i);
+                            return;
                         }
                     }
                 }

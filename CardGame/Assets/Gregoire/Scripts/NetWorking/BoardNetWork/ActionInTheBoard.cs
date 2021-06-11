@@ -251,59 +251,60 @@ namespace NetWork
         #endregion
 
         #region Placement Card
+
         //fonctsion qui sera appeler dans pour l'instant le start 
         //car c'est la generic et qu'elle fait le check
-        public void PlacementCard()
+        public void PlacementCard(ulong p_LocalClientID, int p_CardNumber, int p_SlotIndex)
         {
-            
-            if(IsServer)
+            if (p_SlotIndex < 0)
+                return;
+
+            if(IsHost)
             {
-                Debug.Log("ishost: " + IsLocalPlayer);
-                //parcours le slot du side 
-                for (int i = 0; i < s_LocalInstance.Side.m_Slot.Length; i++)
-                {
-                    Debug.Log(s_LocalInstance.Side.m_Slot[i]);
-                    //si j'ai une carte sur le slot 
-                    if (s_LocalInstance.Side.m_Slot[i].Card != null)
-                    {
-
-                        PlacementCardClientRpc(s_LocalInstance.Side.m_Slot[i].Card.m_Index, i, OwnerClientId);
-                    }
-                }
-
+                PlacementCardClientRpc(p_LocalClientID, p_CardNumber, p_SlotIndex);
             }
-            else 
+            else
             {
-                Debug.Log("isclient: " + IsLocalPlayer);
-
-                for (int i = 0; i < s_LocalInstance.Side.m_Slot.Length; i++)
-                {
-
-                    if (s_LocalInstance.Side.m_Slot[i].Card != null)
-                    {
-
-                        PlacementCardServerRpc(s_LocalInstance.Side.m_Slot[i].Card.m_Index, i, OwnerClientId);
-                    }
-                }
+                PlacementCardServerRpc(p_LocalClientID, p_CardNumber, p_SlotIndex);
             }
 
+            //if (IsHost)
+            //{
+            //    //parcours le slot du side 
+            //    for (int i = 0; i < s_LocalInstance.Side.m_Slot.Length; i++)
+            //    {
+            //        //si j'ai une carte sur le slot 
+            //        if (s_LocalInstance.Side.m_Slot[i].Card != null)
+            //        {
+            //            PlacementCardClientRpc(s_LocalInstance.Side.m_Slot[i].Card.m_Index, i, OwnerClientId);
+            //        }
+            //    }
+            //}
+            //else
+            //{
+            //    for (int i = 0; i < s_LocalInstance.Side.m_Slot.Length; i++)
+            //    {
+            //        if (s_LocalInstance.Side.m_Slot[i].Card != null)
+            //        {
+            //            PlacementCardServerRpc(s_LocalInstance.Side.m_Slot[i].Card.m_Index, i, OwnerClientId);
+            //        }
+            //    }
+            //}
         }
 
         [ServerRpc]
-        public void PlacementCardServerRpc(int p_IDCard,int p_SlotIndex, ulong p_IdSide)
+        public void PlacementCardServerRpc(ulong p_LocalClientID, int p_CardNumber, int p_SlotIndex)
         {
-            Debug.Log(IsClient);
-
-            PlacementCardClientRpc(p_IDCard, p_SlotIndex, p_IdSide);
+            PlacementCardClientRpc(p_LocalClientID, p_CardNumber, p_SlotIndex);
             //ici on va appeller la fonction de nos event de l'instance ce notre so_Board (m_BoardInstance)
         }
 
         [ClientRpc]
-        public void PlacementCardClientRpc(int p_IDCard, int p_SlotIndex, ulong p_IdSide)
+        public void PlacementCardClientRpc(ulong p_LocalClientID, int p_CardNumber, int p_SlotIndex)
         {
             //je parcours ma main, je check si je trouve l'ID enregistrer, si ouin je parcours mon slot[] quand je suis au même index que mon ,
             //je place ma carte dans ma variable card dans mon slot, et je remove ma carte de ma main.
-            s_LocalInstance.PutCardOnSlot(p_IDCard, p_SlotIndex, (int)p_IdSide);
+            s_LocalInstance.PutCardOnSlot(NetworkManager.Singleton.LocalClientId == p_LocalClientID, p_CardNumber, p_SlotIndex);
         }
 
         #endregion

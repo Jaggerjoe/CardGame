@@ -8,7 +8,7 @@ namespace NetWork
     public class UIBoard : MonoBehaviour
     {
         [SerializeField]
-        private Transform[] m_CardsData = new Transform[5];
+        private Transform[] m_SlotsTransforms = new Transform[5];
 
         [SerializeField]
         private Transform m_Hand = null;
@@ -34,7 +34,6 @@ namespace NetWork
         //va recuperer les info et les appliquer à l'UI
         public void ListenBoard()
         {
-            m_SoBoard.DropCardEvent.AddListener(GetCardOnSlot);
             m_SoBoard.AddCardHandEvent.AddListener(DrawUICardStartGame);
             m_SoBoard.InstantiateCardEvent.AddListener(DrawUICardStartGame);
         }
@@ -92,32 +91,39 @@ namespace NetWork
         }
 
         //je récupère la position de ma carte une fois posé pour l'appliquer a mon Board
-        public void GetCardOnSlot()
+        public void ApplyCardOnSlot(out SO_CardData p_CardAsset, out int p_SlotIndex)
         {
-            for (int j = 0; j < m_CardsData.Length; j++)
+            for (int j = 0; j < m_SlotsTransforms.Length; j++)
             {
                 //je récupère ma carte qui est en enfant de ma zone
-                if (m_CardsData[j].gameObject.transform.childCount != 0)
+                if (m_SlotsTransforms[j].gameObject.transform.childCount != 0)
                 {
                     //je recupere le transform de ma card se trouvant en enfant 
-                    Transform l_Trs = m_CardsData[j].GetComponentInChildren<DataCard>().transform;
+                    Transform l_Trs = m_SlotsTransforms[j].GetComponentInChildren<DataCard>().transform;
                     SO_CardData l_Card = l_Trs.GetComponent<DataCard>().Card;
                     //je remplit l'index avec la carte
-                    m_CardsData[j] = l_Trs;
+                    m_SlotsTransforms[j] = l_Trs;
 
-                    //je boucle sur mon side est donc sur mon slot
+                    //je boucle sur mon side et donc sur mon slot
                     for (int i = 0; i < m_SoBoard.Side.m_Slot.Length; i++)
                     {
-                        //si mon slot i est egale a la position de mon enfant card
+                        // si mon slot i est egale a la position de mon enfant card
                         if(i == j)
                         {
                             //alors je donnec ma card au slot et donc la retire de ma main 
-                            m_SoBoard.SetCardOnSlotAndRemoveCardOnHand(l_Card.m_Index, i);
+                            m_SoBoard.SetCardOnSlotAndRemoveCardFromHand(l_Card.m_Index, i);
                             Debug.Log($"ma carte est { m_SoBoard.Side.m_Slot[i].Card} a ma position {m_SoBoard.Side.m_Slot[i].ZoneCard} et {i}");
+                            p_CardAsset = l_Card;
+                            p_SlotIndex = i;
+                            return;
                         }
                     }
                 }
             }
+
+            p_CardAsset = null;
+            p_SlotIndex = -1;
+            return;
         }
        
         public void SetCardOnBoardUI()
