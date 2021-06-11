@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 153098277}
   - component: {fileID: 153098276}
   - component: {fileID: 153098275}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Zone4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -540,7 +540,6 @@ MonoBehaviour:
   m_HandOtherSide: {fileID: 1106806038}
   m_Card: {fileID: 6624339541686402417, guid: 89893544aeb4a204fb53986eff825274, type: 3}
   m_SoBoard: {fileID: 0}
-  m_RowLenght: 6
   m_Space: 5
 --- !u!1 &1057024351
 GameObject:
@@ -716,7 +715,7 @@ GameObject:
   - component: {fileID: 1101573961}
   - component: {fileID: 1101573960}
   - component: {fileID: 1101573959}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Zone2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -842,7 +841,7 @@ GameObject:
   - component: {fileID: 1126066386}
   - component: {fileID: 1126066385}
   - component: {fileID: 1126066384}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Zone1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1273,7 +1272,7 @@ GameObject:
   - component: {fileID: 1512955263}
   - component: {fileID: 1512955262}
   - component: {fileID: 1512955261}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Zone3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1561,7 +1560,7 @@ GameObject:
   - component: {fileID: 2017890934}
   - component: {fileID: 2017890933}
   - component: {fileID: 2017890932}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Zone5
   m_TagString: Untagged
   m_Icon: {fileID: 0}

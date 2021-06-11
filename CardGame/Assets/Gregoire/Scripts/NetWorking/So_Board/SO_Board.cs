@@ -96,12 +96,11 @@ namespace NetWork
 
         #region poser card on the slot
         //Toute les regle du jeu appeler dans l'action in the board dans le placementCard
-        public void PutCardOnSlot()
+        public void PutCardOnSlot(int p_CardNumber, int p_SlotIndex, int p_IdSide)
         {
+            //GetPlayerSide(p_IdSide);
 
-            //GetPlayerSide(p_SideID);
-            //On recupere l'id de la card que l'on a dans la main
-            //p_CardID = GetIDCard(p_CardID);
+            SetCardOnslotOtherSideAndemoveToHandOtherSide(p_CardNumber, p_SlotIndex);
 
             //Récupéré la carte
             //m_DropCard.Invoke();
@@ -144,6 +143,36 @@ namespace NetWork
             }
         }
         #endregion
+
+        public void SetCardOnslotOtherSideAndemoveToHandOtherSide(int p_CardNumber,int p_SlotIndex)
+        {
+            
+            //pour chaque element i inferieur a la main du side 2
+            for (int i = 0; i < Side2.m_Hand.Count; i++)
+            {
+                //si mon int pararmettre est egale au element i de ma main a leur index
+                if (p_CardNumber == Side2.m_Hand[i].m_Index)
+                {
+                    //alors pour chaque ellement de mon slot
+                    for (int j = 0; j < Side2.m_Slot.Length; j++)
+                    {
+                        //si mon parametre lsot est egale a mon element j
+                        if (p_SlotIndex == j)
+                        {
+                            //alors mon side a la position j de ma card est egale a la position i de mon side sur ma main
+                            Side2.m_Slot[j].Card = Side2.m_Hand[i];
+                            // et j'enleve l'element de ma main 
+                            Side2.m_Hand.RemoveAt(i);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void GetPlayerSide(int p_IdSide)
+        {
+            
+        }
 
         #region Accesseur
         public SideBoard Side

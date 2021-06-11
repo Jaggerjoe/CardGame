@@ -58,7 +58,6 @@ namespace NetWork
 
             for (int i = 0; i < m_SoBoard.Side.m_Hand.Count; i++)
             {
-                Debug.Log("coucou je suis appeller ");
                 TakeCardDeck();
 
                 //on instancie la prefab a la position de la main qui est GO_Vide in scene
@@ -73,7 +72,6 @@ namespace NetWork
 
             for (int i = 0; i < m_SoBoard.Side2.m_Hand.Count; i++)
             {
-                Debug.Log("coucou je suis appeller ");
                 TakeCardDeck();
 
                 //on instancie la prefab a la position de la main qui est GO_Vide in scene
@@ -101,15 +99,19 @@ namespace NetWork
                 //je récupère ma carte qui est en enfant de ma zone
                 if (m_CardsData[j].gameObject.transform.childCount != 0)
                 {
+                    //je recupere le transform de ma card se trouvant en enfant 
                     Transform l_Trs = m_CardsData[j].GetComponentInChildren<DataCard>().transform;
                     SO_CardData l_Card = l_Trs.GetComponent<DataCard>().Card;
                     //je remplit l'index avec la carte
                     m_CardsData[j] = l_Trs;
 
+                    //je boucle sur mon side est donc sur mon slot
                     for (int i = 0; i < m_SoBoard.Side.m_Slot.Length; i++)
                     {
+                        //si mon slot i est egale a la position de mon enfant card
                         if(i == j)
                         {
+                            //alors je donnec ma card au slot et donc la retire de ma main 
                             m_SoBoard.SetCardOnSlotAndRemoveCardOnHand(l_Card.m_Index, i);
                             Debug.Log($"ma carte est { m_SoBoard.Side.m_Slot[i].Card} a ma position {m_SoBoard.Side.m_Slot[i].ZoneCard} et {i}");
                         }
@@ -117,6 +119,7 @@ namespace NetWork
                 }
             }
         }
+       
         public void SetCardOnBoardUI()
         {
 
