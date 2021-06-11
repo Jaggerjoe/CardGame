@@ -77,15 +77,17 @@ namespace NetWork
             for (int i = 0; i < m_SoBoard.Side2.m_Hand.Count; i++)
             {
                 TakeCardDeck();
+                TakeCardDeck();
 
                 //on instancie la prefab a la position de la main qui est GO_Vide in scene
-                GameObject l_Card = Instantiate(m_Card, m_HandOtherSide);
+                GameObject l_Card = Instantiate(m_Card, new Vector3(m_HandOtherSide.position.x + (m_Space * (i % m_SoBoard.Side2.m_Hand.Count)), 0.1f, m_HandOtherSide.position.z), transform.rotation);
 
                 //on met la card en enfant de la main
                 l_Card.transform.SetParent(m_HandOtherSide);
                 //on recupere le compenent dataCard que a la prefab et on donne le so_card 
                 //situer a l'emplacement zero du deck qui est dans le side lui même dans le so_board
                 l_Card.GetComponent<DataCard>().Card = m_SoBoard.Side2.m_Hand[i];
+                //on instancie la prefab a la position de la main qui est GO_Vide in scene
 
             }
         }

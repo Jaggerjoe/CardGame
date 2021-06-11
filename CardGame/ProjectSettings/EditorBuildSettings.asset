@@ -9,20 +9,23 @@ EditorBuildSettings:
     path: 
     guid: 00000000000000000000000000000000
   - enabled: 0
-    path: Assets/Gregoire/Scene/Networking.unity
-    guid: a88be322da46aad49b4ca80ee10eaf47
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
-    path: Assets/Gregoire/Scene/ToolCard.unity
-    guid: a6bfe2fc1bb88354b8c5647b16cc68e2
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
-    path: Assets/Gregoire/Scene/carla.unity
-    guid: 5f690b1bec3a215409c335b8f54a3274
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
-    path: Assets/Gregoire/Scene/BoardScene.unity
-    guid: 5b49f3e687a82314d81785262f4c657b
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Gregoire/Scene/Menu.unity
-    guid: 6329ac48ee6993e4d909d5880d622bf5
+    path: Assets/Gregoire/Scene/MenuPasDErreur.unity
+    guid: 6a7e7a063cce0f847b85c2779c68c6b2
   - enabled: 1
     path: Assets/Gregoire/Scene/3DCardGame.unity
     guid: fe88b39b0c0595644899c36d766d3fc6
