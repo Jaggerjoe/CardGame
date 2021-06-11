@@ -17,22 +17,32 @@ MonoBehaviour:
     m_Deck: []
     m_Discard: []
     m_Slot:
-    - m_Card: {fileID: 0}
-    - m_Card: {fileID: 0}
-    - m_Card: {fileID: 0}
-    - m_Card: {fileID: 0}
-    - m_Card: {fileID: 0}
+    - m_Zone: 1
+      m_Card: {fileID: 0}
+    - m_Zone: 2
+      m_Card: {fileID: 0}
+    - m_Zone: 4
+      m_Card: {fileID: 0}
+    - m_Zone: 8
+      m_Card: {fileID: 0}
+    - m_Zone: 16
+      m_Card: {fileID: 0}
     m_Point: 0
   m_OtherSide:
     m_Hand: []
     m_Deck: []
     m_Discard: []
     m_Slot:
-    - m_Card: {fileID: 0}
-    - m_Card: {fileID: 0}
-    - m_Card: {fileID: 0}
-    - m_Card: {fileID: 0}
-    - m_Card: {fileID: 0}
+    - m_Zone: 1
+      m_Card: {fileID: 0}
+    - m_Zone: 2
+      m_Card: {fileID: 0}
+    - m_Zone: 4
+      m_Card: {fileID: 0}
+    - m_Zone: 8
+      m_Card: {fileID: 0}
+    - m_Zone: 16
+      m_Card: {fileID: 0}
     m_Point: 0
   m_AllCardsInstance:
   - {fileID: 11400000, guid: 934ccf80adcc8c1429a328056a348b45, type: 2}

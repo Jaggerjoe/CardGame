@@ -124,7 +124,7 @@ namespace NetWork
 
             //On va piocher jusqu'a avoir 6 card
         }
-        #endregion
+       
         //j'ajoute ma carte a mon slot et je la retire de ma main 
         public void SetCardOnSlotAndRemoveCardOnHand(int p_CardNumber, int p_SlotIndex)
         {
@@ -143,6 +143,7 @@ namespace NetWork
                 }
             }
         }
+        #endregion
 
         #region Accesseur
         public SideBoard Side

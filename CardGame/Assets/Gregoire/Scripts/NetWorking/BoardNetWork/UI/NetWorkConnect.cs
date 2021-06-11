@@ -4,7 +4,7 @@ using MLAPI.Connection;
 using MLAPI.Transports.UNET;
 using MLAPI.SceneManagement;
 using UnityEngine.UI;
-
+using MLAPI.Logging;
 
 public class NetWorkConnect : MonoBehaviour
 {
@@ -14,14 +14,7 @@ public class NetWorkConnect : MonoBehaviour
     private string m_IpAdressChanged;
     [SerializeField]
     UNetTransport m_Transport;
-    [SerializeField]
-    private Button m_JoinButton; 
-    [SerializeField]
-    private Button m_HostButton;
-    [SerializeField]
-    private bool m_IsHostConnect =false;
 
-    
     public void OnGUI()
     {
         using (new GUILayout.HorizontalScope())
@@ -46,25 +39,30 @@ public class NetWorkConnect : MonoBehaviour
         }
     }
 
-    public void Start()
+    //public void Start()
+    //{
+    //    Debug.Log("Je suis le buton la ");
+    //    if (m_IsHostConnect == true)
+    //    {
+    //        m_JoinButton.interactable = true;
+    //        m_HostButton.interactable = false;
+    //    }
+    //    m_IsHostConnect = true;
+    //}
+
+    private void Update()
     {
-        Debug.Log("Je suis le buton la ");
-        if (m_IsHostConnect == true)
-        {
-            m_JoinButton.interactable = true;
-            m_HostButton.interactable = false;
-        }
-        m_IsHostConnect = true;
+       
     }
 
     public void HostButton()
     {
-        NetworkManager.Singleton.ConnectionApprovalCallback += ApprovalCallback;
-        NetworkManager.Singleton.StartHost();
-        m_IsHostConnect = true;
+          NetworkManager.Singleton.ConnectionApprovalCallback += ApprovalCallback;
+            NetworkManager.Singleton.StartHost();
     }
 
-    private void ApprovalCallback(byte[] p_ConnectionData, ulong p_ClientID, NetworkManager.ConnectionApprovedDelegate p_Callback)
+    private void ApprovalCallback(byte[] p_ConnectionData, ulong p_ClientID, 
+        NetworkManager.ConnectionApprovedDelegate p_Callback)
     {
          bool l_Approve = System.Text.Encoding.ASCII.GetString(p_ConnectionData) == "passeword";
         p_Callback(true, null, l_Approve, Vector3.zero, Quaternion.identity);
@@ -73,12 +71,21 @@ public class NetWorkConnect : MonoBehaviour
     public void JoinButton()
     {
         m_Transport = NetworkManager.Singleton.GetComponent<UNetTransport>();
-        m_Transport.ConnectAddress = m_IpAdress;
+       if( m_Transport.ConnectAddress == m_IpAdress)
+       {
+            Debug.Log("join connect adress");
 
-        Debug.Log("join connect adress");
+            NetworkManager.Singleton.NetworkConfig.ConnectionData = System.Text.Encoding.ASCII.GetBytes("passeword");
+            NetworkManager.Singleton.StartClient();
+           
+       }
+       else
+        {
+            Debug.Log("connect adress no corresponding");
+          
+        }
 
-        NetworkManager.Singleton.NetworkConfig.ConnectionData = System.Text.Encoding.ASCII.GetBytes("passeword");
-        NetworkManager.Singleton.StartClient();
+      
     }
 
     private void StatusLabels()
@@ -87,8 +94,8 @@ public class NetWorkConnect : MonoBehaviour
                       "Host" : NetworkManager.Singleton.IsServer ? "Server" : "Client";
         
 
-        GUILayout.Label("Transport: " +
-            NetworkManager.Singleton.NetworkConfig.NetworkTransport.GetType().Name);
+        //GUILayout.Label("Transport: " +
+        //    NetworkManager.Singleton.NetworkConfig.NetworkTransport.GetType().Name);
         GUILayout.Label("Adress IP: " + m_Transport.ConnectAddress);
         GUILayout.Label("Mode: " + mode);
 
