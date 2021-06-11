@@ -39,6 +39,7 @@ namespace NetWork
        
         private UnityEvent m_DropCard = new UnityEvent();
 
+        private UnityEvent m_SetCardOnSlotOtherSideUI = new UnityEvent();
         //cette event va nous servir a compter les points une fois la carte poser
        
         private UnityEvent m_Point = new UnityEvent();
@@ -96,12 +97,23 @@ namespace NetWork
 
         #region poser card on the slot
         //Toute les regle du jeu appeler dans l'action in the board dans le placementCard
-        public void PutCardOnSlot()
+        public void PutCardOnSlot(bool p_IsOnMySide, int p_CardNumber, int p_SlotIndex)
         {
+            Debug.LogWarning($"TODO: Place card {p_CardNumber} on slot {p_SlotIndex} {(p_IsOnMySide ? "on my side" : "on the other side")}");
 
-            //GetPlayerSide(p_SideID);
-            //On recupere l'id de la card que l'on a dans la main
-            //p_CardID = GetIDCard(p_CardID);
+            if(p_IsOnMySide)
+            {
+                Debug.Log("je suis de mon côté");
+                SetCardOnSlotAndRemoveCardFromHand(p_CardNumber, p_SlotIndex);
+                ApplyCardOnSlotEvent.Invoke();
+            }
+            else
+            {
+                Debug.Log("je ne suis pas de mon côté");
+                SetCardOnslotOtherSideAndemoveToHandOtherSide(p_CardNumber, p_SlotIndex);
+                //sera le setCardUI dans uiBOard
+                m_SetCardOnSlotOtherSideUI.Invoke();
+            }
 
             //Récupéré la carte
             //m_DropCard.Invoke();
@@ -126,24 +138,58 @@ namespace NetWork
         }
        
         //j'ajoute ma carte a mon slot et je la retire de ma main 
-        public void SetCardOnSlotAndRemoveCardOnHand(int p_CardNumber, int p_SlotIndex)
+        public void SetCardOnSlotAndRemoveCardFromHand(int p_CardNumber, int p_SlotIndex)
         {
+            // pour chaque carte de MA main
             for (int i = 0; i < Side.m_Hand.Count; i++)
             {
+                // Si la carte placée est égale à l'id de la carte dans MA main
                 if(p_CardNumber == Side.m_Hand[i].m_Index)
                 {
+                    // Pour chaque slot
                     for (int j = 0; j < Side.m_Slot.Length; j++)
                     {
+                        // Si le slot actuel == le slot du tableau
                         if(j == p_SlotIndex)
                         {
                             Side.m_Slot[j].Card = Side.m_Hand[i];
                             Side.m_Hand.RemoveAt(i);
+                            return;
                         }
                     }
                 }
             }
         }
         #endregion
+
+        public void SetCardOnslotOtherSideAndemoveToHandOtherSide(int p_CardNumber,int p_SlotIndex)
+        {
+            //pour chaque element i inferieur a la main du side 2
+            for (int i = 0; i < Side2.m_Hand.Count; i++)
+            {
+                //si mon int pararmettre est egale au element i de ma main a leur index
+                if (p_CardNumber == Side2.m_Hand[i].m_Index)
+                {
+                    //alors pour chaque ellement de mon slot
+                    for (int j = 0; j < Side2.m_Slot.Length; j++)
+                    {
+                        //si mon parametre lsot est egale a mon element j
+                        if (p_SlotIndex == j)
+                        {
+                            //alors mon side a la position j de ma card est egale a la position i de mon side sur ma main
+                            Side2.m_Slot[j].Card = Side2.m_Hand[i];
+                            // et j'enleve l'element de ma main 
+                            Side2.m_Hand.RemoveAt(i);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void GetPlayerSide(int p_IdSide)
+        {
+            
+        }
 
         #region Accesseur
         public SideBoard Side
@@ -177,10 +223,16 @@ namespace NetWork
             get { return m_AddCardHand; }
             set { m_AddCardHand = value; }
         }
-        public UnityEvent DropCardEvent
+        public UnityEvent ApplyCardOnSlotEvent
         {
             get { return m_DropCard; }
             set { m_DropCard = value; }
+        }
+        
+        public UnityEvent ApplyCardOnSlotOtherSidevent
+        {
+            get { return m_SetCardOnSlotOtherSideUI; }
+            set { m_SetCardOnSlotOtherSideUI = value; }
         }
 
         #endregion

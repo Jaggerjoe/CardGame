@@ -29,13 +29,14 @@ public class WindowCustomEditor : EditorWindow
         GetTexture();
         for (int i = 0; i < asset.Length; i++)
         {
-            string l_NameCard = NacifyText(asset[i]);
+            string l_NameCard = NicifyText(asset[i]);
             SO_CardData l_Asset = null;
 
             for (int k = 0; k < m_SetAssetPath.Count; k++)
             {
                 if (m_SetAssetPath[k].Contains(l_NameCard))
                 {
+                    Debug.Log("LOADING ASSET AT PATH: " + m_SetAssetPath[k]);
                     l_Asset = (SO_CardData)AssetDatabase.LoadAssetAtPath(m_SetAssetPath[k], typeof(SO_CardData));
                     break;
                 }
@@ -49,22 +50,22 @@ public class WindowCustomEditor : EditorWindow
             l_Asset.m_CardNames = l_NameCard;
             i++;
 
-            string l_AffectCard = NacifyText(asset[i]);
+            string l_AffectCard = NicifyText(asset[i]);
             l_Asset.m_EffectCardText = l_AffectCard;
             i++;
 
-            string l_PointCard = NacifyText(asset[i]);
+            string l_PointCard = NicifyText(asset[i]);
             if (int.TryParse(l_PointCard, out Number))
             {
                 l_Asset.m_PointsCard = Number;
             }
             i++;
 
-            string l_SignCombo = NacifyText(asset[i]);
+            string l_SignCombo = NicifyText(asset[i]);
             l_Asset.m_Sign = l_SignCombo;
             i++;
 
-            string l_PointCombo = NacifyText(asset[i]);
+            string l_PointCombo = NicifyText(asset[i]);
             if (int.TryParse(l_PointCombo, out Number))
             {
                 l_Asset.m_PointCombo = Number;
@@ -76,7 +77,7 @@ public class WindowCustomEditor : EditorWindow
             for (int j = 0; j < zonesString.Length; j++)
             {
                 //convert
-                string l_ZonesCard = NacifyText(zonesString[j]);
+                string l_ZonesCard = NicifyText(zonesString[j]);
                 int l_Zone = 0;
                 if (int.TryParse(l_ZonesCard, out Number))
                 {
@@ -111,7 +112,7 @@ public class WindowCustomEditor : EditorWindow
             }
 
             i++;
-            string l_IndexCard = NacifyText(asset[i]);
+            string l_IndexCard = NicifyText(asset[i]);
             if (int.TryParse(l_IndexCard, out Number))
             {
                 l_Asset.m_Index = Number;
@@ -127,7 +128,7 @@ public class WindowCustomEditor : EditorWindow
             }
 
             i++;
-            string l_CardTxrName = NacifyText(asset[i]);
+            string l_CardTxrName = NicifyText(asset[i]);
             for (int k = 0; k < m_GetTextures.Count; k++)
             {
                 if (m_GetTextures[k].name == l_CardTxrName)
@@ -137,9 +138,13 @@ public class WindowCustomEditor : EditorWindow
                 }
             }
 
-            AssetDatabase.SaveAssets();
-            AddToLosit(l_Asset);
+            SerializedObject obj = new SerializedObject(l_Asset);
+            obj.ApplyModifiedProperties();
+            AssetDatabase.ImportAsset(AssetDatabase.GetAssetPath(l_Asset));
+            AddToList(l_Asset);
         }
+
+        AssetDatabase.SaveAssets();
     }
 
 #if UNITY_EDITOR
@@ -163,6 +168,7 @@ public class WindowCustomEditor : EditorWindow
         foreach (var item in AssetsArray)
         {
             var path = AssetDatabase.GUIDToAssetPath(item);
+            Debug.Log("PATH: " + path);
             if(!m_SetAssetPath.Contains(path))
             {
                 m_SetAssetPath.Add(path);
@@ -204,7 +210,7 @@ public class WindowCustomEditor : EditorWindow
         }
     }
 
-    private string NacifyText(string P_Text)
+    private string NicifyText(string P_Text)
     {
         P_Text = P_Text.Replace("\"", "");
         return P_Text;
@@ -235,7 +241,7 @@ public class WindowCustomEditor : EditorWindow
         m_SetAssetPath.Clear();
     }
 
-    private void AddToLosit(SO_CardData p_Asset)
+    private void AddToList(SO_CardData p_Asset)
     {
         if (m_DeckCards == null)
         {
