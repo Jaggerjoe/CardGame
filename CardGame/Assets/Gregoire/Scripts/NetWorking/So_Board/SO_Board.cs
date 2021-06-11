@@ -39,6 +39,7 @@ namespace NetWork
        
         private UnityEvent m_DropCard = new UnityEvent();
 
+        private UnityEvent m_SetCardOnSlotOtherSideUI = new UnityEvent();
         //cette event va nous servir a compter les points une fois la carte poser
        
         private UnityEvent m_Point = new UnityEvent();
@@ -100,9 +101,19 @@ namespace NetWork
         {
             Debug.LogWarning($"TODO: Place card {p_CardNumber} on slot {p_SlotIndex} {(p_IsOnMySide ? "on my side" : "on the other side")}");
 
-            //GetPlayerSide(p_IdSide);
-
-            SetCardOnslotOtherSideAndemoveToHandOtherSide(p_CardNumber, p_SlotIndex);
+            if(p_IsOnMySide)
+            {
+                Debug.Log("je suis de mon côté");
+                SetCardOnSlotAndRemoveCardFromHand(p_CardNumber, p_SlotIndex);
+                ApplyCardOnSlotEvent.Invoke();
+            }
+            else
+            {
+                Debug.Log("je ne suis pas de mon côté");
+                SetCardOnslotOtherSideAndemoveToHandOtherSide(p_CardNumber, p_SlotIndex);
+                //sera le setCardUI dans uiBOard
+                m_SetCardOnSlotOtherSideUI.Invoke();
+            }
 
             //Récupéré la carte
             //m_DropCard.Invoke();
@@ -153,7 +164,6 @@ namespace NetWork
 
         public void SetCardOnslotOtherSideAndemoveToHandOtherSide(int p_CardNumber,int p_SlotIndex)
         {
-            
             //pour chaque element i inferieur a la main du side 2
             for (int i = 0; i < Side2.m_Hand.Count; i++)
             {
@@ -213,10 +223,16 @@ namespace NetWork
             get { return m_AddCardHand; }
             set { m_AddCardHand = value; }
         }
-        public UnityEvent DropCardEvent
+        public UnityEvent ApplyCardOnSlotEvent
         {
             get { return m_DropCard; }
             set { m_DropCard = value; }
+        }
+        
+        public UnityEvent ApplyCardOnSlotOtherSidevent
+        {
+            get { return m_SetCardOnSlotOtherSideUI; }
+            set { m_SetCardOnSlotOtherSideUI = value; }
         }
 
         #endregion

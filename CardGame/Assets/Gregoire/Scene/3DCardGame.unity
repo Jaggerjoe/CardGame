@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 153098277}
   - component: {fileID: 153098276}
   - component: {fileID: 153098275}
+  - component: {fileID: 153098278}
   m_Layer: 0
   m_Name: Zone4
   m_TagString: Untagged
@@ -219,6 +220,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 153098273}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &153098278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153098273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55483fb4508c20d4e9cd9a1033c607f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SlotIndex: 3
+  m_Card: {fileID: 0}
 --- !u!1 &752678835
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,6 +347,7 @@ GameObject:
   - component: {fileID: 842249772}
   - component: {fileID: 842249771}
   - component: {fileID: 842249770}
+  - component: {fileID: 842249769}
   m_Layer: 6
   m_Name: Zone2
   m_TagString: Untagged
@@ -353,6 +369,20 @@ Transform:
   m_Father: {fileID: 1023303897}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 180, y: 180, z: 180}
+--- !u!114 &842249769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 842249767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55483fb4508c20d4e9cd9a1033c607f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SlotIndex: 1
+  m_Card: {fileID: 0}
 --- !u!64 &842249770
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -531,11 +561,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SlotsTransforms:
-  - {fileID: 1057024356}
-  - {fileID: 842249768}
-  - {fileID: 1147562040}
-  - {fileID: 1528451705}
-  - {fileID: 1866196100}
+  - {fileID: 1057024352}
+  - {fileID: 842249769}
+  - {fileID: 1147562041}
+  - {fileID: 1528451706}
+  - {fileID: 1866196101}
+  m_SlotsTransformsOtherSide:
+  - {fileID: 1126066387}
+  - {fileID: 1101573962}
+  - {fileID: 1512955264}
+  - {fileID: 153098278}
+  - {fileID: 2017890935}
   m_Hand: {fileID: 1457941169}
   m_HandOtherSide: {fileID: 1106806038}
   m_Card: {fileID: 6624339541686402417, guid: 89893544aeb4a204fb53986eff825274, type: 3}
@@ -553,6 +589,7 @@ GameObject:
   - component: {fileID: 1057024355}
   - component: {fileID: 1057024354}
   - component: {fileID: 1057024353}
+  - component: {fileID: 1057024352}
   m_Layer: 6
   m_Name: Zone1
   m_TagString: Untagged
@@ -560,6 +597,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1057024352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057024351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55483fb4508c20d4e9cd9a1033c607f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SlotIndex: 0
+  m_Card: {fileID: 0}
 --- !u!64 &1057024353
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -715,6 +766,7 @@ GameObject:
   - component: {fileID: 1101573961}
   - component: {fileID: 1101573960}
   - component: {fileID: 1101573959}
+  - component: {fileID: 1101573962}
   m_Layer: 0
   m_Name: Zone2
   m_TagString: Untagged
@@ -799,6 +851,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1101573957}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1101573962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1101573957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55483fb4508c20d4e9cd9a1033c607f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SlotIndex: 1
+  m_Card: {fileID: 0}
 --- !u!1 &1106806037
 GameObject:
   m_ObjectHideFlags: 0
@@ -841,6 +907,7 @@ GameObject:
   - component: {fileID: 1126066386}
   - component: {fileID: 1126066385}
   - component: {fileID: 1126066384}
+  - component: {fileID: 1126066387}
   m_Layer: 0
   m_Name: Zone1
   m_TagString: Untagged
@@ -925,6 +992,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1126066382}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1126066387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1126066382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55483fb4508c20d4e9cd9a1033c607f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SlotIndex: 0
+  m_Card: {fileID: 0}
 --- !u!1 &1147562039
 GameObject:
   m_ObjectHideFlags: 0
@@ -937,6 +1018,7 @@ GameObject:
   - component: {fileID: 1147562044}
   - component: {fileID: 1147562043}
   - component: {fileID: 1147562042}
+  - component: {fileID: 1147562041}
   m_Layer: 6
   m_Name: Zone3
   m_TagString: Untagged
@@ -958,6 +1040,20 @@ Transform:
   m_Father: {fileID: 1023303897}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 180, y: 180, z: 180}
+--- !u!114 &1147562041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1147562039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55483fb4508c20d4e9cd9a1033c607f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SlotIndex: 2
+  m_Card: {fileID: 0}
 --- !u!64 &1147562042
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1272,6 +1368,7 @@ GameObject:
   - component: {fileID: 1512955263}
   - component: {fileID: 1512955262}
   - component: {fileID: 1512955261}
+  - component: {fileID: 1512955264}
   m_Layer: 0
   m_Name: Zone3
   m_TagString: Untagged
@@ -1356,6 +1453,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1512955259}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1512955264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512955259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55483fb4508c20d4e9cd9a1033c607f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SlotIndex: 2
+  m_Card: {fileID: 0}
 --- !u!1 &1528451704
 GameObject:
   m_ObjectHideFlags: 0
@@ -1368,6 +1479,7 @@ GameObject:
   - component: {fileID: 1528451709}
   - component: {fileID: 1528451708}
   - component: {fileID: 1528451707}
+  - component: {fileID: 1528451706}
   m_Layer: 6
   m_Name: Zone4
   m_TagString: Untagged
@@ -1389,6 +1501,20 @@ Transform:
   m_Father: {fileID: 1023303897}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 180, y: 180, z: 180}
+--- !u!114 &1528451706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1528451704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55483fb4508c20d4e9cd9a1033c607f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SlotIndex: 3
+  m_Card: {fileID: 0}
 --- !u!64 &1528451707
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1464,6 +1590,7 @@ GameObject:
   - component: {fileID: 1866196104}
   - component: {fileID: 1866196103}
   - component: {fileID: 1866196102}
+  - component: {fileID: 1866196101}
   m_Layer: 6
   m_Name: Zone5
   m_TagString: Untagged
@@ -1485,6 +1612,20 @@ Transform:
   m_Father: {fileID: 1023303897}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 180, y: 180, z: 180}
+--- !u!114 &1866196101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1866196099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55483fb4508c20d4e9cd9a1033c607f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SlotIndex: 4
+  m_Card: {fileID: 0}
 --- !u!64 &1866196102
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1560,6 +1701,7 @@ GameObject:
   - component: {fileID: 2017890934}
   - component: {fileID: 2017890933}
   - component: {fileID: 2017890932}
+  - component: {fileID: 2017890935}
   m_Layer: 0
   m_Name: Zone5
   m_TagString: Untagged
@@ -1644,3 +1786,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2017890930}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2017890935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2017890930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55483fb4508c20d4e9cd9a1033c607f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SlotIndex: 4
+  m_Card: {fileID: 0}

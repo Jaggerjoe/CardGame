@@ -8,7 +8,10 @@ namespace NetWork
     public class UIBoard : MonoBehaviour
     {
         [SerializeField]
-        private Transform[] m_SlotsTransforms = new Transform[5];
+        private SlotInfo[] m_SlotsTransforms = new SlotInfo[5];
+        
+        [SerializeField]
+        private SlotInfo[] m_SlotInfoOtherSide = new SlotInfo[5];
 
         [SerializeField]
         private Transform m_Hand = null;
@@ -34,8 +37,10 @@ namespace NetWork
         //va recuperer les info et les appliquer à l'UI
         public void ListenBoard()
         {
+            m_SoBoard.ApplyCardOnSlotEvent.AddListener(ApplyCardOnSlot);
             m_SoBoard.AddCardHandEvent.AddListener(DrawUICardStartGame);
             m_SoBoard.InstantiateCardEvent.AddListener(DrawUICardStartGame);
+            m_SoBoard.ApplyCardOnSlotOtherSidevent.AddListener(SetCardUI);
         }
 
         //je recupère l'instance de mon board qui a été crée au moment de la connexion de mon joueur.
@@ -91,7 +96,7 @@ namespace NetWork
         }
 
         //je récupère la position de ma carte une fois posé pour l'appliquer a mon Board
-        public void ApplyCardOnSlot(out SO_CardData p_CardAsset, out int p_SlotIndex)
+        public void ApplyCardOnSlot()
         {
             for (int j = 0; j < m_SlotsTransforms.Length; j++)
             {
@@ -101,34 +106,48 @@ namespace NetWork
                     //je recupere le transform de ma card se trouvant en enfant 
                     Transform l_Trs = m_SlotsTransforms[j].GetComponentInChildren<DataCard>().transform;
                     SO_CardData l_Card = l_Trs.GetComponent<DataCard>().Card;
-                    //je remplit l'index avec la carte
-                    m_SlotsTransforms[j] = l_Trs;
-
-                    //je boucle sur mon side et donc sur mon slot
-                    for (int i = 0; i < m_SoBoard.Side.m_Slot.Length; i++)
+                   
+                    //je rempli le so_card du dataCArd avec le so_card de mon slot info sur mon board
+                    m_SlotsTransforms[j].GetComponent<SlotInfo>().m_Card = l_Card;
+                }
+            }
+            return;
+        }
+       
+        public void SetCardUI()
+        {
+            //je veux afficher la carte de mon adversaire sur son slot ou elle a été posé sur mon instance.
+            for (int i = 0; i < m_SoBoard.Side2.m_Slot.Length; i++)
+            {
+                //si je trouve un So_Card
+                if(m_SoBoard.Side2.m_Slot[i].Card)
+                {
+                    //alor pour chaque slot info
+                    for (int j = 0; j < m_SlotInfoOtherSide.Length; j++)
                     {
-                        // si mon slot i est egale a la position de mon enfant card
-                        if(i == j)
+                        //si l'element j du slot a info ne contient de data card
+                        if (m_SlotInfoOtherSide[j].GetComponent<SlotInfo>().m_Card == null)
                         {
-                            //alors je donnec ma card au slot et donc la retire de ma main 
-                            m_SoBoard.SetCardOnSlotAndRemoveCardFromHand(l_Card.m_Index, i);
-                            Debug.Log($"ma carte est { m_SoBoard.Side.m_Slot[i].Card} a ma position {m_SoBoard.Side.m_Slot[i].ZoneCard} et {i}");
-                            p_CardAsset = l_Card;
-                            p_SlotIndex = i;
-                            return;
+                            
+                            if(i == j)
+                            {
+                                //alors mon dataCard de mon slot info rempli  mon slot sur mon board a son element i par un dataCArd
+                                m_SlotInfoOtherSide[j].GetComponent<SlotInfo>().m_Card = m_SoBoard.Side2.m_Slot[i].Card;
+                                // j'instancie ma card adverse sur sa position et rotation
+                                GameObject l_Obj = Instantiate(m_Card, m_SlotInfoOtherSide[j].transform.position + new Vector3(0, .1f, 0), m_SlotInfoOtherSide[j].transform.rotation); 
+                                //je mets ma card en enfant de la zone droper 
+                                l_Obj.transform.parent = m_SlotInfoOtherSide[j].transform;
+                                //je vais recup mon datacard pour aller chercher mon so_card, pour remplir avec le so_Card du slot info
+                                l_Obj.GetComponent<DataCard>().Card = m_SlotInfoOtherSide[j].GetComponent<SlotInfo>().m_Card;
+                                //j'appel la fonction creat asset pour pouvoir mettre les info text.
+                                l_Obj.GetComponent<DataCard>().CreateAssetCad();
+                                //je ne parcours pas toute la boucle
+                                return;
+                            }
                         }
                     }
                 }
             }
-
-            p_CardAsset = null;
-            p_SlotIndex = -1;
-            return;
-        }
-       
-        public void SetCardOnBoardUI()
-        {
-
         }
     }
 }

@@ -137,24 +137,6 @@ namespace NetWork
         #endregion
 
         
-        //public void TEst()
-        //{
-        //    if(IsOwner)
-        //    {
-        //        Debug.Log("is owner: " + IsOwner);
-
-        //    }
-        //    else if (IsServer)
-        //    {
-
-        //        Debug.Log("ishost: " + OwnerClientId);
-        //    }
-        //    else
-        //    {
-        //        Debug.Log("isclient: " + OwnerClientId);
-
-        //    }
-        //}
         #region Pioche Card
         [ServerRpc]
         public void DrawCardServerRpc()
@@ -256,9 +238,6 @@ namespace NetWork
         //car c'est la generic et qu'elle fait le check
         public void PlacementCard(ulong p_LocalClientID, int p_CardNumber, int p_SlotIndex)
         {
-            if (p_SlotIndex < 0)
-                return;
-
             if(IsHost)
             {
                 PlacementCardClientRpc(p_LocalClientID, p_CardNumber, p_SlotIndex);
@@ -267,29 +246,6 @@ namespace NetWork
             {
                 PlacementCardServerRpc(p_LocalClientID, p_CardNumber, p_SlotIndex);
             }
-
-            //if (IsHost)
-            //{
-            //    //parcours le slot du side 
-            //    for (int i = 0; i < s_LocalInstance.Side.m_Slot.Length; i++)
-            //    {
-            //        //si j'ai une carte sur le slot 
-            //        if (s_LocalInstance.Side.m_Slot[i].Card != null)
-            //        {
-            //            PlacementCardClientRpc(s_LocalInstance.Side.m_Slot[i].Card.m_Index, i, OwnerClientId);
-            //        }
-            //    }
-            //}
-            //else
-            //{
-            //    for (int i = 0; i < s_LocalInstance.Side.m_Slot.Length; i++)
-            //    {
-            //        if (s_LocalInstance.Side.m_Slot[i].Card != null)
-            //        {
-            //            PlacementCardServerRpc(s_LocalInstance.Side.m_Slot[i].Card.m_Index, i, OwnerClientId);
-            //        }
-            //    }
-            //}
         }
 
         [ServerRpc]

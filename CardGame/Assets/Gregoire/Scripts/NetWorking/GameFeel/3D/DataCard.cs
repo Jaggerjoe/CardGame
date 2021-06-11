@@ -26,7 +26,7 @@ public class DataCard : MonoBehaviour
         CreateAssetCad();
     }
 
-    private void CreateAssetCad()
+    public void CreateAssetCad()
     {
         if (m_DataCard != null)
         {
