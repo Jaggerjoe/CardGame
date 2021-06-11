@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 772685923269519745}
   - component: {fileID: 1910554015889363292}
   - component: {fileID: 197190352671739619}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 7436946025518785675}
   - component: {fileID: 5856350694101179365}
   - component: {fileID: 4740576018115983944}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Card name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 8781270554538384682}
   - component: {fileID: 4659522591903351840}
   - component: {fileID: 2465975941497164717}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PointCombo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -300,7 +300,7 @@ GameObject:
   - component: {fileID: 6624339541686402382}
   - component: {fileID: 6624339541686402383}
   - component: {fileID: -3109546928475896141}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PF_Card3D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -315,7 +315,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6624339541686402417}
   m_LocalRotation: {x: -0.12186928, y: 0, z: 0, w: 0.9925462}
-  m_LocalPosition: {x: 0, y: -4.3, z: -0.98}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5215841, y: 1, z: 0.72016805}
   m_Children:
   - {fileID: 7436946025518785675}
@@ -400,7 +400,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c740aa69d75781b45a61fa2d445586fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CardZone: 5
+  m_Layer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &6624339541686402383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -446,7 +448,7 @@ GameObject:
   - component: {fileID: 8224467975237114789}
   - component: {fileID: 5737289992626337356}
   - component: {fileID: 2656405740710501759}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Signe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
