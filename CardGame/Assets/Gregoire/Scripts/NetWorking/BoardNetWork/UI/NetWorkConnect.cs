@@ -22,46 +22,46 @@ public class NetWorkConnect : MonoBehaviour
     private bool m_IsHostConnect =false;
 
     
-    public void OnGUI()
-    {
-        using (new GUILayout.HorizontalScope())
-        {
+    //public void OnGUI()
+    //{
+    //    using (new GUILayout.HorizontalScope())
+    //    {
 
-            if (!NetworkManager.Singleton.IsClient && !NetworkManager.Singleton.IsServer)
-            {
-                GUILayout.Label("Not connected...");
-                return;
-            }
-            else if (NetworkManager.Singleton.IsHost)
-            {
-                GUILayout.Space(800);
-                using (new GUILayout.HorizontalScope())
-                {
-                    using (new GUILayout.VerticalScope(GUI.skin.box))
-                    {
-                        StatusLabels();
-                    }
-                }
-            }
-        }
-    }
+    //        if (!NetworkManager.Singleton.IsClient && !NetworkManager.Singleton.IsServer)
+    //        {
+    //            GUILayout.Label("Not connected...");
+    //            return;
+    //        }
+    //        else if (NetworkManager.Singleton.IsHost)
+    //        {
+    //            GUILayout.Space(800);
+    //            using (new GUILayout.HorizontalScope())
+    //            {
+    //                using (new GUILayout.VerticalScope(GUI.skin.box))
+    //                {
+    //                    StatusLabels();
+    //                }
+    //            }
+    //        }
+    //    }
+    //}
 
-    public void Start()
-    {
-        Debug.Log("Je suis le buton la ");
-        if (m_IsHostConnect == true)
-        {
-            m_JoinButton.interactable = true;
-            m_HostButton.interactable = false;
-        }
-        m_IsHostConnect = true;
-    }
+    //public void Start()
+    //{
+    //    Debug.Log("Je suis le buton la ");
+    //    if (m_IsHostConnect == true)
+    //    {
+    //        m_JoinButton.interactable = true;
+    //        m_HostButton.interactable = false;
+    //    }
+    //    m_IsHostConnect = true;
+    //}
 
     public void HostButton()
     {
         NetworkManager.Singleton.ConnectionApprovalCallback += ApprovalCallback;
         NetworkManager.Singleton.StartHost();
-        m_IsHostConnect = true;
+        //m_IsHostConnect = true;
     }
 
     private void ApprovalCallback(byte[] p_ConnectionData, ulong p_ClientID, NetworkManager.ConnectionApprovedDelegate p_Callback)

@@ -64,9 +64,15 @@ public class DragCard : MonoBehaviour
                     this.transform.rotation = l_Hits[i].transform.rotation;
                     m_UIBoard.GetCardOnSlot();
                     m_ActionInTheBoard.PlacementCard();
+                   // m_ActionInTheBoard.TEst();
 
                     return;
                 }
+            }
+            else
+            {
+                Debug.Log("me suis tromper de coter");
+                return;
             }
         }
         this.transform.position = m_OriginalPos;
