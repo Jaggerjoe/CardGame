@@ -575,7 +575,7 @@ MonoBehaviour:
   m_Hand: {fileID: 1457941169}
   m_HandOtherSide: {fileID: 1106806038}
   m_Card: {fileID: 6624339541686402417, guid: 89893544aeb4a204fb53986eff825274, type: 3}
-  m_SoBoard: {fileID: 0}
+  m_SoBoard: {fileID: 11400000, guid: 31475fa8f69e5e948ba40dcd59ab355f, type: 2}
   m_Space: 6
 --- !u!1 &1057024351
 GameObject:
