@@ -37,6 +37,7 @@ namespace NetWork
         //va recuperer les info et les appliquer à l'UI
         public void ListenBoard()
         {
+            Debug.Log("ListenBoard");
             m_SoBoard.ApplyCardOnSlotEvent.AddListener(ApplyCardOnSlot);
             m_SoBoard.AddCardHandEvent.AddListener(DrawUICardStartGame);
             m_SoBoard.InstantiateCardEvent.AddListener(DrawUICardStartGame);
@@ -46,12 +47,17 @@ namespace NetWork
         //je recupère l'instance de mon board qui a été crée au moment de la connexion de mon joueur.
         private void GetInstanceOfTheBoard()
         {
-            if(m_SoBoard == null)
+            Debug.Log("coucu");
+            if (m_SoBoard != null)
             {
+                Debug.Log("coucurrr");
                 if (FindObjectOfType<SO_Board>())
                 {
+                    Debug.Log("coucu je sui find");
                     m_SoBoard = FindObjectOfType<ActionInTheBoard>().BoardInstance;
+                    Debug.Log("couculllll");
                     ListenBoard();
+                    Debug.Log("coucu je sui null board");
                 }
             }
         }
